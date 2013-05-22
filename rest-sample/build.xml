@@ -64,7 +64,8 @@
 	<!-- Public Targets -->
 	<!--=======================================================================================================================-->
 
-	<target name="build"			description="Builds all projects"	depends="build-all-step"/>
+	<target name="clean"			description="Cleans project"	depends="clean-step"/>
+	<target name="build"			description="Builds project"	depends="build-step"/>
 	<target name="deploy"			description="Deploys all deployable projects"	depends="undeploy-step, deploy-step"/>
 
 	<target name="tomcat-start"			description="Cold Tomcat start"			depends="tomcat-start-step"/>
@@ -100,9 +101,15 @@
 
 	<!-- Project(s) clean-build steps (relies on Maven tasks) -->
 	<!--=======================================================================================================================-->
-	<target name="build-all-step">
+	<target name="build-step">
 		<exec executable="${build.executable}" failonerror="true" dir="${dir.root}">
-			<arg line="${build.argline}"/>
+			<arg line="${build.install.argline}"/>
+		</exec>
+	</target>
+
+	<target name="clean-step">
+		<exec executable="${build.executable}" failonerror="true" dir="${dir.root}">
+			<arg line="${build.clean.argline}"/>
 		</exec>
 	</target>
 
