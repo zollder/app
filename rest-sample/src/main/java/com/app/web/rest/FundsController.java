@@ -1,4 +1,4 @@
-package com.app.webservices.rest;
+package com.app.web.rest;
 
 import java.util.List;
 
@@ -23,6 +23,7 @@ import com.app.services.FundService;
 @Controller
 public class FundsController
 {
+	// --------------------------------------------------------------------------------------------------------------------------------
 	@Autowired
 	private FundService fundService_i;
 
