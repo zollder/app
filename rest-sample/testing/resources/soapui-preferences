@@ -1,0 +1,8 @@
+test.http.host=http://127.0.0.1:1040/sbe-ws
+test.http.host.ube=http://127.0.0.1:1040/ube
+test.http.host.sbe=http://127.0.0.1:1040/sbe
+test.http.host.rack=https://184.106.26.109:1041/sbe-ws
+test.http.host.ube.rack=https://184.106.26.109:1041/ube
+test.http.host.aws=https://ec2-107-21-140-55.compute-1.amazonaws.com:8443/sbe-ws
+test.http.host.aws_http=http://ec2-107-21-140-55.compute-1.amazonaws.com/sbe-ws
+test.http.host.ube.aws=https://ec2-107-21-140-55.compute-1.amazonaws.com:8443/ube

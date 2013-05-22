@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<project name="testing" default="quick-test" basedir=".">
+	<description>Runs soapUI integration tests</description>
+
+	<echo/>
+	<echo>---------------------------------------------------------</echo>
+	<echo>Project: SoapUI Integration Tests.</echo>
+	<echo>---------------------------------------------------------</echo>
+
+	<!-- Determine this script's absolute directory whether the file was imported or not -->
+	<dirname property="dir.testing" file="${ant.file.${ant.project.name}}"/>
+
+	<!-- import code build.xml -->
+	<import file="${dir.testing}/../build.xml"/>
+
+</project>

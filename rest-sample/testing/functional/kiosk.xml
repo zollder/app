@@ -1,0 +1,1899 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="kiosk" resourceRoot="" soapui-version="4.5.1" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:testSuite name="Services">
+    <con:settings>
+      <con:setting id="IncludeOverview">true</con:setting>
+      <con:setting id="IncludeResults">true</con:setting>
+      <con:setting id="FlowLayout">false</con:setting>
+      <con:setting id="ErrorDetails">true</con:setting>
+      <con:setting id="IncludeCoverage">true</con:setting>
+      <con:setting id="GeneratableJUnitReport@Style">Multiple Pages</con:setting>
+      <con:setting id="GeneratableJUnitReport@Folder"/>
+    </con:settings>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="true" maxResults="0" name="KioskWS_services" searchProperties="true" id="c660b789-d432-40ff-aedf-b9d1f6fd786e">
+      <con:settings/>
+      <con:testStep type="properties" name="properties" id="335a9d86-8bef-4093-94b6-f118d2b94d26">
+        <con:settings/>
+        <con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:properties>
+            <con:property>
+              <con:name>login.username</con:name>
+              <con:value>user1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>login.password</con:name>
+              <con:value>Super@234</con:value>
+            </con:property>
+            <con:property>
+              <con:name>bike.startTime</con:name>
+              <con:value>2013-04-10 13:33:03</con:value>
+            </con:property>
+            <con:property>
+              <con:name>bike.stopTime</con:name>
+              <con:value>2013-04-10 14:03:03</con:value>
+            </con:property>
+            <con:property>
+              <con:name>bike.obcn</con:name>
+              <con:value>obcn-new-bike</con:value>
+            </con:property>
+            <con:property>
+              <con:name>bike.triangle.msnemb</con:name>
+              <con:value>msnemb-tri201</con:value>
+            </con:property>
+            <con:property>
+              <con:name>bike.gpswMac</con:name>
+              <con:value>mac-gps200</con:value>
+            </con:property>
+            <con:property>
+              <con:name>keyrental.key.msnemb</con:name>
+              <con:value>msnemb-key1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>keyrental.dock.msnemb</con:name>
+              <con:value>msnemb-dp1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>keyrental.bike.msn_emb</con:name>
+              <con:value>msnemb-bike1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>keyrental.bike.gpsData</con:name>
+              <con:value>$GPRMC,162213.000,A,3503.2435,N,08518.6543,W,1.59,186.12,170612,,,A*7E</con:value>
+            </con:property>
+            <con:property>
+              <con:name>kiosk.msnemb</con:name>
+              <con:value>msnemb-kiosk1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>station.id</con:name>
+              <con:value>1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>station.full.id</con:name>
+              <con:value>2</con:value>
+            </con:property>
+            <con:property>
+              <con:name>ccrental.customer.id</con:name>
+              <con:value>247</con:value>
+            </con:property>
+            <con:property>
+              <con:name>ccrental.planid</con:name>
+              <con:value>180</con:value>
+            </con:property>
+            <con:property>
+              <con:name>ccrental.track1</con:name>
+              <con:value>%B4000000001000002^VIKASH^1501000SDD?</con:value>
+            </con:property>
+            <con:property>
+              <con:name>ccrental.track2</con:name>
+              <con:value>;4000000001000002=1501000SDD?</con:value>
+            </con:property>
+            <con:property>
+              <con:name>ccrental.dock.msnemb</con:name>
+              <con:value>msnemb-dp1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>ccrental.bike.msn_emb</con:name>
+              <con:value>msnemb-bike1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>ccrental.bike.gpsData</con:name>
+              <con:value>$GPRMC,162213.000,A,3503.2435,N,08518.6543,W,1.59,186.12,170612,,,A*7E</con:value>
+            </con:property>
+            <con:property>
+              <con:name>ccrental.station.id</con:name>
+              <con:value>1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>ccrental.customer.number_of_trips</con:name>
+              <con:value>1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>heartbeat.kiosk.msnemb</con:name>
+              <con:value>msnemb-kiosk1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>heartbeat.kiosk.uaid</con:name>
+              <con:value>kiosk1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>heartbeat.station.uaid</con:name>
+              <con:value>station1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>heartbeat.dock.msnemb</con:name>
+              <con:value>msnemb-dp1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>heartbeat.bike.msn_emb</con:name>
+              <con:value>msnemb-bike1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>requestType</con:name>
+              <con:value>T</con:value>
+            </con:property>
+            <con:property>
+              <con:name>scu.msnemb</con:name>
+              <con:value>msnemb-scu1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>gift.redemptionNo</con:name>
+              <con:value>1</con:value>
+            </con:property>
+            <con:property>
+              <con:name>gift.number_of_bikes</con:name>
+              <con:value>1</con:value>
+            </con:property>
+          </con:properties>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="set startTime" id="5acde369-b009-4471-a36a-146d0396a252">
+        <con:settings/>
+        <con:config>
+          <script>// initialize steps
+props = testRunner.testCase.getTestStepByName( "properties" )
+
+// setup start time
+sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+startTime = sdf.format(new Date())
+props.setPropertyValue("bike.startTime", startTime)
+log.info(startTime)
+props.setPropertyValue("bike.stopTime", "")</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="groovy" name="set stopTime">
+        <con:settings/>
+        <con:config>
+          <script>// initialize steps
+props = testRunner.testCase.getTestStepByName( "properties" )
+
+// setup stop time
+sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+
+date = new Date()
+date.setMinutes(date.getMinutes()+30)
+
+stopTime = sdf.format(date)
+props.setPropertyValue("bike.stopTime", stopTime)
+log.info(stopTime)</script>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="keyValidate" id="679e8216-4253-4db8-8c5d-14aaa0c542fd">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="keyValidate" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/keyvalidate</con:endpoint>
+          <con:request>&lt;keyvalidate> 
+   &lt;msnemb>${keyrental.key.msnemb}&lt;/msnemb>
+&lt;/keyvalidate></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="isvalid = &quot;true&quot;">
+            <con:configuration>
+              <path>*/isvalid</path>
+              <content>true</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="rentBike (with key)">
+        <con:settings/>
+        <con:config method="PUT" xsi:type="con:HttpRequest" name="rentBike (with key)" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/bike/rentbike</con:endpoint>
+          <con:request><![CDATA[<rentBike>
+	<bikeid>${keyrental.bike.msn_emb}</bikeid>
+	<userid></userid>
+	<keyid>${keyrental.key.msnemb}</keyid>
+	<dockid>${keyrental.dock.msnemb}</dockid>
+	<starttime>2013-02-27 14:55:54</starttime>
+</rentBike>]]></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;Bike Rented&quot;">
+            <con:configuration>
+              <path>*/message</path>
+              <content>Bike is taken</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="getSubscriberOpenRental" id="887ed9bf-ef65-4cd6-8d63-fe63059b6114">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="getSubscriberOpenRental" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/${keyrental.key.msnemb}/getSubscriberOpenRental</con:endpoint>
+          <con:request>&lt;keyvalidate> 
+   &lt;msnemb>msnemb-key1&lt;/msnemb>
+&lt;/keyvalidate></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;Success.&quot;">
+            <con:configuration>
+              <path>*/message</path>
+              <content>Success.</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="getNearbyStations">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="getNearbyStations" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/station/${station.id}/${requestType}/nearby</con:endpoint>
+          <con:request>&lt;keyvalidate> 
+   &lt;msnemb>msnemb-key1&lt;/msnemb>
+&lt;/keyvalidate></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;successful&quot;">
+            <con:configuration>
+              <path>*/message</path>
+              <content>successful</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Global HTTP Settings</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="timeCredit (key)" id="3b97c817-b31a-4a3f-b8ff-409f243cff67">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="timeCredit (key)" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/timecredit</con:endpoint>
+          <con:request><![CDATA[<timecredit>
+	<stationid>${station.full.id}</stationid>
+	<keyid>${keyrental.key.msnemb}</keyid>
+	<track1></track1>
+	<track2></track2>
+	<accesscode></accesscode>
+	<type></type>
+</timecredit>]]></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;Time Credited&quot;">
+            <con:configuration>
+              <path>*/message</path>
+              <content>Time Credited</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="returnBike (key)" id="71a6c31e-5f1d-4b27-b2a7-44b62806bf64">
+        <con:settings/>
+        <con:config method="PUT" xsi:type="con:HttpRequest" name="returnBike (key)" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/bike/returnbike</con:endpoint>
+          <con:request><![CDATA[<returnBike>
+	<bikeid>${keyrental.bike.msn_emb}</bikeid>
+	<gpsdata>${keyrental.bike.gpsData}</gpsdata>
+	<dockid>${keyrental.dock.msnemb}</dockid>
+	<stoptime>${bike.stopTime}</stoptime>
+</returnBike>]]></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;Bike Returned&quot;">
+            <con:configuration>
+              <path>*/message</path>
+              <content>Bike Returned</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="validateCreditCard">
+        <con:settings/>
+        <con:config method="PUT" xsi:type="con:HttpRequest" name="validateCreditCard" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/validatecreditcard</con:endpoint>
+          <con:request><![CDATA[<ccard> 
+	<track1>${ccrental.track1}</track1>
+	<track2>${ccrental.track2}</track2>
+	<accesscode></accesscode>
+	<type></type>
+</ccard>]]></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;valid credit card&quot;">
+            <con:configuration>
+              <path>*/message</path>
+              <content>valid credit card</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="isValid = &quot;true&quot;">
+            <con:configuration>
+              <path>*/isValid</path>
+              <content>true</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="getSubscriptionPlans" id="8cc6b576-1299-4a62-a3cb-02dba18d783c">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="getSubscriptionPlans" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/getAvailablePlans</con:endpoint>
+          <con:request>&lt;keyvalidate> 
+   &lt;msnemb>msnemb-key1&lt;/msnemb>
+&lt;/keyvalidate></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;Successful&quot;">
+            <con:configuration>
+              <path>*/message</path>
+              <content>Successful</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="planId = &quot;180&quot;">
+            <con:configuration>
+              <path>*/Plan/planId</path>
+              <content>180</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="subscribePlan" id="3d446bb9-7f2d-437d-ba9d-538c8544ebca">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="subscribePlan" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/subscribeplan</con:endpoint>
+          <con:request><![CDATA[<PaymentOrder> 
+	<phoneNo></phoneNo>
+	<zipCode></zipCode>
+	<redemptionNo></redemptionNo>
+	<holdamount>101.00</holdamount>
+	<planid>${ccrental.planid}</planid>
+	<numberofbikes>1</numberofbikes>
+	<track1>${ccrental.track1}</track1>
+	<track2>${ccrental.track2}</track2>
+</PaymentOrder>]]></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;Successful&quot;" disabled="true">
+            <con:configuration>
+              <path>*/message</path>
+              <content>Your transaction is successful</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="transfer" name="PropertyTransfer 1">
+        <con:settings/>
+        <con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false">
+            <con:name>customerId</con:name>
+            <con:sourceType>ResponseAsXml</con:sourceType>
+            <con:sourceStep>subscribePlan</con:sourceStep>
+            <con:sourcePath>//response[1]/customerId[1]</con:sourcePath>
+            <con:targetType>ccrental.customer.id</con:targetType>
+            <con:targetStep>properties</con:targetStep>
+            <con:targetPath/>
+          </con:transfers>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="rentBike (cc)" id="d76aa335-29eb-4aa2-91cd-16d24dbca2ba">
+        <con:settings/>
+        <con:config method="PUT" xsi:type="con:HttpRequest" name="rentBike (cc)" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/bike/rentbike</con:endpoint>
+          <con:request><![CDATA[<rentBike>
+	<bikeid>${ccrental.bike.msn_emb}</bikeid>
+	<userid>${ccrental.customer.id}</userid>
+	<keyid></keyid>
+	<dockid>${ccrental.dock.msnemb}</dockid>
+	<starttime>${bike.startTime}</starttime>
+</rentBike>]]></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;Bike Rented&quot;">
+            <con:configuration>
+              <path>*/message</path>
+              <content>Bike is taken</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="getMoreBikeRequired" id="e2cdbfdb-8bb7-4def-9ab4-51a9f9aa9b35">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="getMoreBikeRequired" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/moreBikeRequired</con:endpoint>
+          <con:request><![CDATA[<morebikerequired>
+	<noofbike>1</noofbike>
+	<track1>${ccrental.track1}</track1>
+	<track2>${ccrental.track2}</track2>
+	<redemptionNo></redemptionNo>
+</morebikerequired>]]></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;success.&quot;">
+            <con:configuration>
+              <path>*/message</path>
+              <content>success.</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="at least 1 bike rented">
+            <con:configuration>
+              <path>count(//morebikerequired/noofbike)>0</path>
+              <content>true</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="getRentalReceipt" id="5e49a61f-6c85-495d-9b4a-4cb38df93a4c">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="getRentalReceipt" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/getRentalReciept</con:endpoint>
+          <con:request><![CDATA[<rental>
+	<userid>${ccrental.customer.id}</userid>
+	<keyid></keyid>
+	<stxid>${ccrental.station.id}</stxid>
+</rental>]]></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;Success&quot;">
+            <con:configuration>
+              <path>*/message</path>
+              <content>Success</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="timeCredit (cc)">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="timeCredit (cc)" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/timecredit</con:endpoint>
+          <con:request><![CDATA[<timecredit>
+	<stationid>${station.full.id}</stationid>
+	<keyid></keyid>
+	<track1>${ccrental.track1}</track1>
+	<track2>${ccrental.track2}</track2>
+	<accesscode></accesscode>
+	<type>2</type>
+</timecredit>]]></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;Time credited&quot;">
+            <con:configuration>
+              <path>*/message</path>
+              <content>Time Credited</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="getOpenRentalReceipt" id="f9f33afa-18df-4001-b902-af22172b09c9">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="getOpenRentalReceipt" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/openrental/${ccrental.customer.id}</con:endpoint>
+          <con:request><![CDATA[<heartbeat>
+	<msnbc>${heartbeat.kiosk.msnemb}</msnbc>
+	<dateTime>${bike.startTime}</dateTime>
+	<atKSKId>${heartbeat.kiosk.uaid}</atKSKId>
+	<atSTXId>${heartbeat.station.uaid}</atSTXId>
+	<ccrOprStatus>0</ccrOprStatus>
+	<ksrOperStatus>0</ksrOperStatus>
+	<doorSensorstatus>0</doorSensorstatus>
+	<pdmBatteryVoltage>0.2</pdmBatteryVoltage>
+	<pdmScmOutputVoltage>120</pdmScmOutputVoltage>
+	<pdmPrinterVoltageStepup>0.1</pdmPrinterVoltageStepup>
+	<pdmOperationalstatus>0</pdmOperationalstatus>
+	<ptrPaperSensor>0</ptrPaperSensor>
+	<ptrPaperJam>0</ptrPaperJam>
+	<ptrOperationalStatus>0</ptrOperationalStatus>
+	<scmOperationalStatus>0</scmOperationalStatus>
+	<scmPvTubeVoltageInput>0.5</scmPvTubeVoltageInput>
+	<scmPvTubeCurrentInput>0.25</scmPvTubeCurrentInput>
+	<scmOutputVoltage>28</scmOutputVoltage>
+	<scmOutputCurrent>0.4</scmOutputCurrent>
+	<scmTemperature>189</scmTemperature>
+	<scmEfficiencyRating>1</scmEfficiencyRating>
+	<scuOperationalStatus>0</scuOperationalStatus>
+	<scuDisplayUnitOperationalStatus>0</scuDisplayUnitOperationalStatus>
+	<scuDisplayUnitTemp>450</scuDisplayUnitTemp>
+	<wimSignalStrength>88</wimSignalStrength>
+	<wimOperationalstatus>0</wimOperationalstatus>
+	<gsmConStatus>0</gsmConStatus>
+	<gsmSignalStrength>98</gsmSignalStrength>
+	<bdpBkServiceRequired>false</bdpBkServiceRequired>
+	<stationLockdown>false</stationLockdown>
+	<bdp>
+		<bdpMsnemb>${heartbeat.dock.msnemb}</bdpMsnemb>
+		<bdpStatus>1</bdpStatus>
+		<bikeMsnemb>${heartbeat.bike.msn_emb}</bikeMsnemb>
+		<bikeStatus>10</bikeStatus>
+	</bdp>
+</heartbeat>]]></con:request>
+          <con:assertion type="XPath Match" name="message = success">
+            <con:configuration>
+              <path>//openreceipt/message</path>
+              <content>success</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>//openreceipt/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="tripexist = 1">
+            <con:configuration>
+              <path>//openreceipt/tripexist</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="returnBike (cc)">
+        <con:settings/>
+        <con:config method="PUT" xsi:type="con:HttpRequest" name="returnBike (cc)" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/bike/returnbike</con:endpoint>
+          <con:request><![CDATA[<returnBike>
+	<bikeid>${ccrental.bike.msn_emb}</bikeid>
+	<gpsdata>${ccrental.bike.gpsData}</gpsdata>
+	<dockid>${ccrental.dock.msnemb}</dockid>
+	<stoptime>${bike.stopTime}</stoptime>
+</returnBike>]]></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;Bike Returned&quot;">
+            <con:configuration>
+              <path>*/message</path>
+              <content>Bike Returned</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="getLastClosedTrip" id="b5ffe9da-6232-45b2-8878-ff6d59663ebd">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="getLastClosedTrip" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/closetrip/${ccrental.customer.id}/${ccrental.customer.number_of_trips}</con:endpoint>
+          <con:request><![CDATA[<heartbeat>
+	<msnbc>${heartbeat.kiosk.msnemb}</msnbc>
+	<dateTime>${bike.startTime}</dateTime>
+	<atKSKId>${heartbeat.kiosk.uaid}</atKSKId>
+	<atSTXId>${heartbeat.station.uaid}</atSTXId>
+	<ccrOprStatus>0</ccrOprStatus>
+	<ksrOperStatus>0</ksrOperStatus>
+	<doorSensorstatus>0</doorSensorstatus>
+	<pdmBatteryVoltage>0.2</pdmBatteryVoltage>
+	<pdmScmOutputVoltage>120</pdmScmOutputVoltage>
+	<pdmPrinterVoltageStepup>0.1</pdmPrinterVoltageStepup>
+	<pdmOperationalstatus>0</pdmOperationalstatus>
+	<ptrPaperSensor>0</ptrPaperSensor>
+	<ptrPaperJam>0</ptrPaperJam>
+	<ptrOperationalStatus>0</ptrOperationalStatus>
+	<scmOperationalStatus>0</scmOperationalStatus>
+	<scmPvTubeVoltageInput>0.5</scmPvTubeVoltageInput>
+	<scmPvTubeCurrentInput>0.25</scmPvTubeCurrentInput>
+	<scmOutputVoltage>28</scmOutputVoltage>
+	<scmOutputCurrent>0.4</scmOutputCurrent>
+	<scmTemperature>189</scmTemperature>
+	<scmEfficiencyRating>1</scmEfficiencyRating>
+	<scuOperationalStatus>0</scuOperationalStatus>
+	<scuDisplayUnitOperationalStatus>0</scuDisplayUnitOperationalStatus>
+	<scuDisplayUnitTemp>450</scuDisplayUnitTemp>
+	<wimSignalStrength>88</wimSignalStrength>
+	<wimOperationalstatus>0</wimOperationalstatus>
+	<gsmConStatus>0</gsmConStatus>
+	<gsmSignalStrength>98</gsmSignalStrength>
+	<bdpBkServiceRequired>false</bdpBkServiceRequired>
+	<stationLockdown>false</stationLockdown>
+	<bdp>
+		<bdpMsnemb>${heartbeat.dock.msnemb}</bdpMsnemb>
+		<bdpStatus>1</bdpStatus>
+		<bikeMsnemb>${heartbeat.bike.msn_emb}</bikeMsnemb>
+		<bikeStatus>10</bikeStatus>
+	</bdp>
+</heartbeat>]]></con:request>
+          <con:assertion type="XPath Match" name="message = success">
+            <con:configuration>
+              <path>//triplist/message</path>
+              <content>success</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>//triplist/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="getFeeSum">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="getFeeSum" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/feesum/${ccrental.planid}/${ccrental.customer.number_of_trips}</con:endpoint>
+          <con:request><![CDATA[<heartbeat>
+	<msnbc>${heartbeat.kiosk.msnemb}</msnbc>
+	<dateTime>${bike.startTime}</dateTime>
+	<atKSKId>${heartbeat.kiosk.uaid}</atKSKId>
+	<atSTXId>${heartbeat.station.uaid}</atSTXId>
+	<ccrOprStatus>0</ccrOprStatus>
+	<ksrOperStatus>0</ksrOperStatus>
+	<doorSensorstatus>0</doorSensorstatus>
+	<pdmBatteryVoltage>0.2</pdmBatteryVoltage>
+	<pdmScmOutputVoltage>120</pdmScmOutputVoltage>
+	<pdmPrinterVoltageStepup>0.1</pdmPrinterVoltageStepup>
+	<pdmOperationalstatus>0</pdmOperationalstatus>
+	<ptrPaperSensor>0</ptrPaperSensor>
+	<ptrPaperJam>0</ptrPaperJam>
+	<ptrOperationalStatus>0</ptrOperationalStatus>
+	<scmOperationalStatus>0</scmOperationalStatus>
+	<scmPvTubeVoltageInput>0.5</scmPvTubeVoltageInput>
+	<scmPvTubeCurrentInput>0.25</scmPvTubeCurrentInput>
+	<scmOutputVoltage>28</scmOutputVoltage>
+	<scmOutputCurrent>0.4</scmOutputCurrent>
+	<scmTemperature>189</scmTemperature>
+	<scmEfficiencyRating>1</scmEfficiencyRating>
+	<scuOperationalStatus>0</scuOperationalStatus>
+	<scuDisplayUnitOperationalStatus>0</scuDisplayUnitOperationalStatus>
+	<scuDisplayUnitTemp>450</scuDisplayUnitTemp>
+	<wimSignalStrength>88</wimSignalStrength>
+	<wimOperationalstatus>0</wimOperationalstatus>
+	<gsmConStatus>0</gsmConStatus>
+	<gsmSignalStrength>98</gsmSignalStrength>
+	<bdpBkServiceRequired>false</bdpBkServiceRequired>
+	<stationLockdown>false</stationLockdown>
+	<bdp>
+		<bdpMsnemb>${heartbeat.dock.msnemb}</bdpMsnemb>
+		<bdpStatus>1</bdpStatus>
+		<bikeMsnemb>${heartbeat.bike.msn_emb}</bikeMsnemb>
+		<bikeStatus>10</bikeStatus>
+	</bdp>
+</heartbeat>]]></con:request>
+          <con:assertion type="XPath Match" name="message = success">
+            <con:configuration>
+              <path>//receipt/message</path>
+              <content>success</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>//receipt/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="getFeeSumAndRedemption" id="c9f13830-2d42-4ea7-afff-1a1c3960b124">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="getFeeSumAndRedemption" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/feesum/${ccrental.planid}/${gift.number_of_bikes}/${gift.redemptionNo}</con:endpoint>
+          <con:request><![CDATA[<heartbeat>
+	<msnbc>${heartbeat.kiosk.msnemb}</msnbc>
+	<dateTime>${bike.startTime}</dateTime>
+	<atKSKId>${heartbeat.kiosk.uaid}</atKSKId>
+	<atSTXId>${heartbeat.station.uaid}</atSTXId>
+	<ccrOprStatus>0</ccrOprStatus>
+	<ksrOperStatus>0</ksrOperStatus>
+	<doorSensorstatus>0</doorSensorstatus>
+	<pdmBatteryVoltage>0.2</pdmBatteryVoltage>
+	<pdmScmOutputVoltage>120</pdmScmOutputVoltage>
+	<pdmPrinterVoltageStepup>0.1</pdmPrinterVoltageStepup>
+	<pdmOperationalstatus>0</pdmOperationalstatus>
+	<ptrPaperSensor>0</ptrPaperSensor>
+	<ptrPaperJam>0</ptrPaperJam>
+	<ptrOperationalStatus>0</ptrOperationalStatus>
+	<scmOperationalStatus>0</scmOperationalStatus>
+	<scmPvTubeVoltageInput>0.5</scmPvTubeVoltageInput>
+	<scmPvTubeCurrentInput>0.25</scmPvTubeCurrentInput>
+	<scmOutputVoltage>28</scmOutputVoltage>
+	<scmOutputCurrent>0.4</scmOutputCurrent>
+	<scmTemperature>189</scmTemperature>
+	<scmEfficiencyRating>1</scmEfficiencyRating>
+	<scuOperationalStatus>0</scuOperationalStatus>
+	<scuDisplayUnitOperationalStatus>0</scuDisplayUnitOperationalStatus>
+	<scuDisplayUnitTemp>450</scuDisplayUnitTemp>
+	<wimSignalStrength>88</wimSignalStrength>
+	<wimOperationalstatus>0</wimOperationalstatus>
+	<gsmConStatus>0</gsmConStatus>
+	<gsmSignalStrength>98</gsmSignalStrength>
+	<bdpBkServiceRequired>false</bdpBkServiceRequired>
+	<stationLockdown>false</stationLockdown>
+	<bdp>
+		<bdpMsnemb>${heartbeat.dock.msnemb}</bdpMsnemb>
+		<bdpStatus>1</bdpStatus>
+		<bikeMsnemb>${heartbeat.bike.msn_emb}</bikeMsnemb>
+		<bikeStatus>10</bikeStatus>
+	</bdp>
+</heartbeat>]]></con:request>
+          <con:assertion type="XPath Match" name="message = success">
+            <con:configuration>
+              <path>//receipt/message</path>
+              <content>success</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>//receipt/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="getLastReceipt" id="8c722f3e-448b-48cb-9417-916e6c71f2a4">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="getLastReceipt" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/lastreceipt/${ccrental.customer.id}</con:endpoint>
+          <con:request><![CDATA[<heartbeat>
+	<msnbc>${heartbeat.kiosk.msnemb}</msnbc>
+	<dateTime>${bike.startTime}</dateTime>
+	<atKSKId>${heartbeat.kiosk.uaid}</atKSKId>
+	<atSTXId>${heartbeat.station.uaid}</atSTXId>
+	<ccrOprStatus>0</ccrOprStatus>
+	<ksrOperStatus>0</ksrOperStatus>
+	<doorSensorstatus>0</doorSensorstatus>
+	<pdmBatteryVoltage>0.2</pdmBatteryVoltage>
+	<pdmScmOutputVoltage>120</pdmScmOutputVoltage>
+	<pdmPrinterVoltageStepup>0.1</pdmPrinterVoltageStepup>
+	<pdmOperationalstatus>0</pdmOperationalstatus>
+	<ptrPaperSensor>0</ptrPaperSensor>
+	<ptrPaperJam>0</ptrPaperJam>
+	<ptrOperationalStatus>0</ptrOperationalStatus>
+	<scmOperationalStatus>0</scmOperationalStatus>
+	<scmPvTubeVoltageInput>0.5</scmPvTubeVoltageInput>
+	<scmPvTubeCurrentInput>0.25</scmPvTubeCurrentInput>
+	<scmOutputVoltage>28</scmOutputVoltage>
+	<scmOutputCurrent>0.4</scmOutputCurrent>
+	<scmTemperature>189</scmTemperature>
+	<scmEfficiencyRating>1</scmEfficiencyRating>
+	<scuOperationalStatus>0</scuOperationalStatus>
+	<scuDisplayUnitOperationalStatus>0</scuDisplayUnitOperationalStatus>
+	<scuDisplayUnitTemp>450</scuDisplayUnitTemp>
+	<wimSignalStrength>88</wimSignalStrength>
+	<wimOperationalstatus>0</wimOperationalstatus>
+	<gsmConStatus>0</gsmConStatus>
+	<gsmSignalStrength>98</gsmSignalStrength>
+	<bdpBkServiceRequired>false</bdpBkServiceRequired>
+	<stationLockdown>false</stationLockdown>
+	<bdp>
+		<bdpMsnemb>${heartbeat.dock.msnemb}</bdpMsnemb>
+		<bdpStatus>1</bdpStatus>
+		<bikeMsnemb>${heartbeat.bike.msn_emb}</bikeMsnemb>
+		<bikeStatus>10</bikeStatus>
+	</bdp>
+</heartbeat>]]></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>//receipt/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = success">
+            <con:configuration>
+              <path>//receipt/message</path>
+              <content>success</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="getMonthlyBillingStatement" id="f41cff6a-ef96-412a-88b1-035cd578ec10">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="getMonthlyBillingStatement" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/monthbill/${ccrental.customer.id}</con:endpoint>
+          <con:request><![CDATA[<heartbeat>
+	<msnbc>${heartbeat.kiosk.msnemb}</msnbc>
+	<dateTime>${bike.startTime}</dateTime>
+	<atKSKId>${heartbeat.kiosk.uaid}</atKSKId>
+	<atSTXId>${heartbeat.station.uaid}</atSTXId>
+	<ccrOprStatus>0</ccrOprStatus>
+	<ksrOperStatus>0</ksrOperStatus>
+	<doorSensorstatus>0</doorSensorstatus>
+	<pdmBatteryVoltage>0.2</pdmBatteryVoltage>
+	<pdmScmOutputVoltage>120</pdmScmOutputVoltage>
+	<pdmPrinterVoltageStepup>0.1</pdmPrinterVoltageStepup>
+	<pdmOperationalstatus>0</pdmOperationalstatus>
+	<ptrPaperSensor>0</ptrPaperSensor>
+	<ptrPaperJam>0</ptrPaperJam>
+	<ptrOperationalStatus>0</ptrOperationalStatus>
+	<scmOperationalStatus>0</scmOperationalStatus>
+	<scmPvTubeVoltageInput>0.5</scmPvTubeVoltageInput>
+	<scmPvTubeCurrentInput>0.25</scmPvTubeCurrentInput>
+	<scmOutputVoltage>28</scmOutputVoltage>
+	<scmOutputCurrent>0.4</scmOutputCurrent>
+	<scmTemperature>189</scmTemperature>
+	<scmEfficiencyRating>1</scmEfficiencyRating>
+	<scuOperationalStatus>0</scuOperationalStatus>
+	<scuDisplayUnitOperationalStatus>0</scuDisplayUnitOperationalStatus>
+	<scuDisplayUnitTemp>450</scuDisplayUnitTemp>
+	<wimSignalStrength>88</wimSignalStrength>
+	<wimOperationalstatus>0</wimOperationalstatus>
+	<gsmConStatus>0</gsmConStatus>
+	<gsmSignalStrength>98</gsmSignalStrength>
+	<bdpBkServiceRequired>false</bdpBkServiceRequired>
+	<stationLockdown>false</stationLockdown>
+	<bdp>
+		<bdpMsnemb>${heartbeat.dock.msnemb}</bdpMsnemb>
+		<bdpStatus>1</bdpStatus>
+		<bikeMsnemb>${heartbeat.bike.msn_emb}</bikeMsnemb>
+		<bikeStatus>10</bikeStatus>
+	</bdp>
+</heartbeat>]]></con:request>
+          <con:assertion type="XPath Match" name="message = success">
+            <con:configuration>
+              <path>//monthbill/message</path>
+              <content>success</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>//monthbill/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="plan name = &quot;24 Hour Subscription&quot;">
+            <con:configuration>
+              <path>//monthbill/planName</path>
+              <content>24 Hour Subscription</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="validateKiosk" id="5a75c453-48bd-46bc-b1f3-1987ee84ae9b">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="validateKiosk" postQueryString="false" mediaType="application/xml" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/validateKiosk</con:endpoint>
+          <con:request>&lt;logindata>
+    &lt;msnemb>${kiosk.msnemb}&lt;/msnemb>
+&lt;/logindata></con:request>
+          <con:assertion type="XPath Match" name="message = &quot;successful&quot;">
+            <con:configuration>
+              <path>//message</path>
+              <content>Successful</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>//statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="stationid = 1">
+            <con:configuration>
+              <path>//statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${kiosk.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="updateHeartbeat" id="ff9f7042-ba4f-437e-a043-8021225671b8">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="updateHeartbeat" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/updateHeartbeat</con:endpoint>
+          <con:request><![CDATA[<heartbeat>
+	<msnbc>${heartbeat.kiosk.msnemb}</msnbc>
+	<dateTime>${bike.startTime}</dateTime>
+	<atKSKId>${heartbeat.kiosk.uaid}</atKSKId>
+	<atSTXId>${heartbeat.station.uaid}</atSTXId>
+	<ccrOprStatus>0</ccrOprStatus>
+	<ksrOperStatus>0</ksrOperStatus>
+	<doorSensorstatus>0</doorSensorstatus>
+	<pdmBatteryVoltage>0.2</pdmBatteryVoltage>
+	<pdmScmOutputVoltage>120</pdmScmOutputVoltage>
+	<pdmPrinterVoltageStepup>0.1</pdmPrinterVoltageStepup>
+	<pdmOperationalstatus>0</pdmOperationalstatus>
+	<ptrPaperSensor>0</ptrPaperSensor>
+	<ptrPaperJam>0</ptrPaperJam>
+	<ptrOperationalStatus>0</ptrOperationalStatus>
+	<scmOperationalStatus>0</scmOperationalStatus>
+	<scmPvTubeVoltageInput>0.5</scmPvTubeVoltageInput>
+	<scmPvTubeCurrentInput>0.25</scmPvTubeCurrentInput>
+	<scmOutputVoltage>28</scmOutputVoltage>
+	<scmOutputCurrent>0.4</scmOutputCurrent>
+	<scmTemperature>189</scmTemperature>
+	<scmEfficiencyRating>1</scmEfficiencyRating>
+	<scuOperationalStatus>0</scuOperationalStatus>
+	<scuDisplayUnitOperationalStatus>0</scuDisplayUnitOperationalStatus>
+	<scuDisplayUnitTemp>450</scuDisplayUnitTemp>
+	<wimSignalStrength>88</wimSignalStrength>
+	<wimOperationalstatus>0</wimOperationalstatus>
+	<gsmConStatus>0</gsmConStatus>
+	<gsmSignalStrength>98</gsmSignalStrength>
+	<bdpBkServiceRequired>false</bdpBkServiceRequired>
+	<stationLockdown>false</stationLockdown>
+	<bdp>
+		<bdpMsnemb>${heartbeat.dock.msnemb}</bdpMsnemb>
+		<bdpStatus>1</bdpStatus>
+		<bikeMsnemb>${heartbeat.bike.msn_emb}</bikeMsnemb>
+		<bikeStatus>10</bikeStatus>
+	</bdp>
+</heartbeat>]]></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;success&quot;">
+            <con:configuration>
+              <path>*/message</path>
+              <content>success</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="stationStatus = &quot;In Service&quot;">
+            <con:configuration>
+              <path>*/stationStatus</path>
+              <content>In Service</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="getStationInfo" id="fd95a9ee-7a42-47ac-acef-a96cb56e687c">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="getStationInfo" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/${station.id}/getStationInfo</con:endpoint>
+          <con:request><![CDATA[<key> 
+	<msnbc>${kiosk.newKey.msnbc}</msnbc>
+	<batchId>${kiosk.newKey.batch.id}</batchId>
+	<msnemb>${kiosk.newKey.msnemb}</msnemb>
+	<createdBy>${kiosk.newKey.createdBy.id}</createdBy>
+</key>]]></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;Key registered succesfully&quot;">
+            <con:configuration>
+              <path>*/message</path>
+              <content>successful</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="valid kiosk uaid returned">
+            <con:configuration>
+              <path>//station/kiosk/id</path>
+              <content>${station.id}</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="getConfigurations" id="a461e16f-8295-44f1-8150-5ac5d8413f25">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="getConfigurations" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/${kiosk.msnemb}/configurations</con:endpoint>
+          <con:request><![CDATA[<key> 
+	<msnbc>${kiosk.newKey.msnbc}</msnbc>
+	<batchId>${kiosk.newKey.batch.id}</batchId>
+	<msnemb>${kiosk.newKey.msnemb}</msnemb>
+	<createdBy>${kiosk.newKey.createdBy.id}</createdBy>
+</key>]]></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = successful">
+            <con:configuration>
+              <path>*/message</path>
+              <content>successful</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="processCachedEvents">
+        <con:settings/>
+        <con:config method="PUT" xsi:type="con:HttpRequest" name="processCachedEvents" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/processCachedEvents</con:endpoint>
+          <con:request>{
+    "events":
+    [
+        {
+            "dockMsnemb": "${keyrental.dock.msnemb}",
+            "eventType": "REN",
+            "keyMsnemb": "${keyrental.key.msnemb}",
+            "msnemb": "${keyrental.bike.msn_emb}",
+            "starttime": "2013-03-11 01:00:00",
+            "userid": 1
+        },
+        {
+            "dockMsnemb": "${keyrental.dock.msnemb}",
+            "eventType": "RET",
+            "msnemb": "${keyrental.bike.msn_emb}",
+            "stoptime": "2013-03-11 01:30:00"
+        },
+        {
+            "dockMsnemb": "${keyrental.dock.msnemb}",
+            "eventType": "REN",
+            "keyMsnemb": "${keyrental.key.msnemb}",
+            "msnemb": "${keyrental.bike.msn_emb}",
+            "starttime": "2013-03-11 01:31:00",
+            "userid": 1
+        },
+        {
+            "dockMsnemb": "${keyrental.dock.msnemb}",
+            "eventType": "RET",
+            "msnemb": "${keyrental.bike.msn_emb}",
+            "stoptime": "2013-03-11 02:00:00"
+        },
+        {
+            "dockMsnemb": "${keyrental.dock.msnemb}",
+            "eventType": "REN",
+            "keyMsnemb": "${keyrental.key.msnemb}",
+            "msnemb": "${keyrental.bike.msn_emb}",
+            "starttime": "2013-03-11 02:01:00",
+            "userid": 1
+        },
+        {
+            "dockMsnemb": "${keyrental.dock.msnemb}",
+            "eventType": "RET",
+            "msnemb": "${keyrental.bike.msn_emb}",
+            "stoptime": "2013-03-11 02:30:00"
+        }
+    ]
+}</con:request>
+          <con:assertion type="GroovyScriptAssertion" name="http status code = 200">
+            <con:configuration>
+              <scriptText>assert messageExchange.responseStatusCode == 200</scriptText>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="response.statuscode = &quot;0&quot;">
+            <con:configuration>
+              <path>//response/statuscode</path>
+              <content>0</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="Valid HTTP Status Codes" name="valid http status code (200)">
+            <con:configuration>
+              <codes>200</codes>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="createScuDpAssociation">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="createScuDpAssociation" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/createScuDpAssociation</con:endpoint>
+          <con:request><![CDATA[<request>
+	<scu>${scu.msnemb}</scu>
+	<detail>
+		<dockingPoint>msnemb-dp1</dockingPoint>
+		<bike>msnemb-bike1</bike>
+	</detail>
+	<detail>
+		<dockingPoint>msnemb-dp2</dockingPoint>
+		<bike>msnemb-bike2</bike>
+	</detail>
+	<detail>
+		<dockingPoint>msnemb-dp3</dockingPoint>
+		<bike>msnemb-bike3</bike>
+	</detail>
+	<detail>
+		<dockingPoint>msnemb-dp4</dockingPoint>
+		<bike>msnemb-bike4</bike>
+	</detail>
+	<detail>
+		<dockingPoint>msnemb-dp5</dockingPoint>
+		<bike>msnemb-bike5</bike>
+	</detail>
+</request>]]></con:request>
+          <con:assertion type="XPath Match" name="message = &quot;Success&quot;">
+            <con:configuration>
+              <path>//response/message</path>
+              <content>Success</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="status code = &quot;1&quot;">
+            <con:configuration>
+              <path>//response/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="getCurrentUser">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="getCurrentUser" postQueryString="false" mediaType="application/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/tar/getCurrentUser</con:endpoint>
+          <con:request><![CDATA[<heartbeat>
+	<msnbc>${heartbeat.kiosk.msnemb}</msnbc>
+	<dateTime>${bike.startTime}</dateTime>
+	<atKSKId>${heartbeat.kiosk.uaid}</atKSKId>
+	<atSTXId>${heartbeat.station.uaid}</atSTXId>
+	<ccrOprStatus>0</ccrOprStatus>
+	<ksrOperStatus>0</ksrOperStatus>
+	<doorSensorstatus>0</doorSensorstatus>
+	<pdmBatteryVoltage>0.2</pdmBatteryVoltage>
+	<pdmScmOutputVoltage>120</pdmScmOutputVoltage>
+	<pdmPrinterVoltageStepup>0.1</pdmPrinterVoltageStepup>
+	<pdmOperationalstatus>0</pdmOperationalstatus>
+	<ptrPaperSensor>0</ptrPaperSensor>
+	<ptrPaperJam>0</ptrPaperJam>
+	<ptrOperationalStatus>0</ptrOperationalStatus>
+	<scmOperationalStatus>0</scmOperationalStatus>
+	<scmPvTubeVoltageInput>0.5</scmPvTubeVoltageInput>
+	<scmPvTubeCurrentInput>0.25</scmPvTubeCurrentInput>
+	<scmOutputVoltage>28</scmOutputVoltage>
+	<scmOutputCurrent>0.4</scmOutputCurrent>
+	<scmTemperature>189</scmTemperature>
+	<scmEfficiencyRating>1</scmEfficiencyRating>
+	<scuOperationalStatus>0</scuOperationalStatus>
+	<scuDisplayUnitOperationalStatus>0</scuDisplayUnitOperationalStatus>
+	<scuDisplayUnitTemp>450</scuDisplayUnitTemp>
+	<wimSignalStrength>88</wimSignalStrength>
+	<wimOperationalstatus>0</wimOperationalstatus>
+	<gsmConStatus>0</gsmConStatus>
+	<gsmSignalStrength>98</gsmSignalStrength>
+	<bdpBkServiceRequired>false</bdpBkServiceRequired>
+	<stationLockdown>false</stationLockdown>
+	<bdp>
+		<bdpMsnemb>${heartbeat.dock.msnemb}</bdpMsnemb>
+		<bdpStatus>1</bdpStatus>
+		<bikeMsnemb>${heartbeat.bike.msn_emb}</bikeMsnemb>
+		<bikeStatus>10</bikeStatus>
+	</bdp>
+</heartbeat>]]></con:request>
+          <con:assertion type="XPath Match" name="firstname = firstname1">
+            <con:configuration>
+              <path>//user/firstname</path>
+              <content>firstname1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="username = user1">
+            <con:configuration>
+              <path>//user/username</path>
+              <content>user1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="httprequest" name="validateGiftCertificate" id="bf010173-19fa-4baf-b5f4-0aa02758a4ca">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="validateGiftCertificate" postQueryString="false" mediaType="application/xml" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host}/kiosk/ws/validategiftCertificate</con:endpoint>
+          <con:request>&lt;certificate> 
+	&lt;redemptionNo>${gift.redemptionNo}&lt;/redemptionNo>
+&lt;/certificate></con:request>
+          <con:assertion type="XPath Match" name="statuscode = 1">
+            <con:configuration>
+              <path>*/statuscode</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="message = &quot;Valid gift coupon&quot;">
+            <con:configuration>
+              <path>*/message</path>
+              <content>Valid gift coupon</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:assertion type="XPath Match" name="redemptionNo = &quot;1&quot;">
+            <con:configuration>
+              <path>*/redemptionNo</path>
+              <content>1</content>
+              <allowWildcards>false</allowWildcards>
+              <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+              <ignoreComments>false</ignoreComments>
+            </con:configuration>
+          </con:assertion>
+          <con:credentials>
+            <con:username>${login.username}</con:username>
+            <con:password>${login.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+      <con:breakPoints>
+        <con:testStepId>16cf45a0-c1af-4c33-8819-0a4ea8276756</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>1342966e-515f-4ec0-9a4c-9d7c51c48542</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>1fb764e4-1840-4cf8-af80-00f7f2c2ece6</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>3b800581-6387-44ff-b35b-945408787b7c</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>edfd8dac-0104-4730-8cc6-0428d656d0ad</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>6a97c497-6e1b-4cef-b11d-07bf8213303c</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>f90e9cac-ab42-46ea-98df-be81bfe12c6a</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>0d0d0e4d-ae89-44ba-8a1f-a351325fb2ac</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>335a9d86-8bef-4093-94b6-f118d2b94d26</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>8cc6b576-1299-4a62-a3cb-02dba18d783c</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>3d446bb9-7f2d-437d-ba9d-538c8544ebca</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>887ed9bf-ef65-4cd6-8d63-fe63059b6114</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>5e49a61f-6c85-495d-9b4a-4cb38df93a4c</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>ff9f7042-ba4f-437e-a043-8021225671b8</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>d76aa335-29eb-4aa2-91cd-16d24dbca2ba</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>679e8216-4253-4db8-8c5d-14aaa0c542fd</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>71a6c31e-5f1d-4b27-b2a7-44b62806bf64</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>5a75c453-48bd-46bc-b1f3-1987ee84ae9b</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>5acde369-b009-4471-a36a-146d0396a252</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>fd95a9ee-7a42-47ac-acef-a96cb56e687c</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>3b97c817-b31a-4a3f-b8ff-409f243cff67</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>e2cdbfdb-8bb7-4def-9ab4-51a9f9aa9b35</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>a461e16f-8295-44f1-8150-5ac5d8413f25</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>8c722f3e-448b-48cb-9417-916e6c71f2a4</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>b5ffe9da-6232-45b2-8878-ff6d59663ebd</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>f9f33afa-18df-4001-b902-af22172b09c9</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>f41cff6a-ef96-412a-88b1-035cd578ec10</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>bf010173-19fa-4baf-b5f4-0aa02758a4ca</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>c9f13830-2d42-4ea7-afff-1a1c3960b124</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+    </con:testCase>
+    <con:properties/>
+    <con:reportParameters/>
+  </con:testSuite>
+  <con:requirements/>
+  <con:properties/>
+  <con:wssContainer/>
+  <con:databaseConnectionContainer>
+    <con:databaseConnection>
+      <con:name>assignKey</con:name>
+      <con:driver>com.mysql.jdbc.Driver</con:driver>
+      <con:connectionString>jdbc:mysql://ec2-107-21-140-55.compute-1.amazonaws.com:3306/naesta_cleanup?user=sbedb&amp;password=PASS_VALUE</con:connectionString>
+      <con:password>admin@CONTROLGROUP</con:password>
+    </con:databaseConnection>
+  </con:databaseConnectionContainer>
+  <con:reporting>
+    <con:xmlTemplates/>
+    <con:parameters/>
+  </con:reporting>
+  <con:sensitiveInformation/>
+</con:soapui-project>

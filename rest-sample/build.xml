@@ -1,0 +1,516 @@
+<?xml version="1.0"?>
+
+<project name="naesta" default="build" basedir=".">
+	<description>Builds, deploys and tests naesta project(s)</description>
+
+	<echo>---------------------------------------------------------</echo>
+	<echo>Project: Naesta global build</echo>
+	<echo>---------------------------------------------------------</echo>
+
+	<!-- Root script directory -->
+	<dirname property="dir.root" file="${ant.file.naesta}"/>
+
+	<property file="${dir.root}/properties/${user.name}.properties"/>
+	<property file="${dir.root}/properties/naesta.properties"/>
+	<property file="${dir.root}/properties/build.properties"/>
+
+	<property name="dir.services"			value="${dir.root}/NaestaServices"/>
+	<property name="dir.kiosk"				value="${dir.root}/KioskWS"/>
+	<property name="dir.customer"			value="${dir.root}/CustomerWS"/>
+	<property name="dir.operator"			value="${dir.root}/OperatorWeb"/>
+	<property name="dir.payment"			value="${dir.root}/PaymentGateway"/>
+	<property name="dir.scheduler"			value="${dir.root}/BatchScheduler"/>
+
+	<property name="dir.test"				value="${dir.root}/testing"/>
+	<property name="soapui.home"			value="${dir.test}/resources/soapui-pro-4.5.1"/>
+	<property name="dir.functional.tests"	value="${dir.test}/functional-tests"/>
+	<property name="dir.load.tests"			value="${dir.test}/load-tests"/>
+	<property name="dir.junit"				value="${dir.test}/junit"/>
+	<property name="dir.temp"				value="${dir.test}/temp"/>
+	<property name="dir.logs"				value="${dir.test}/logs"/>
+	<property name="dir.test.resources"		value="${dir.test}/resources"/>
+	<property name="dir.sql"				value="${dir.test}/resources/sql"/>
+
+	<property name="dir.reports"			value="${dir.test}/reports"/>
+	<property name="dir.functional.reports"	value="${dir.reports}/functional"/>
+	<property name="dir.load.reports"		value="${dir.reports}/load"/>
+
+
+	<!--=======================================================================================================================-->
+	<!-- Classpath definitions -->
+	<!--=======================================================================================================================-->
+
+	<!-- Tomcat classpath -->
+	<path id="catalina-ant-classpath">
+	    <!-- We need the Catalina jars for Tomcat -->
+	    <fileset dir="${tomcat.home}/lib">
+	        <include name="**/*.jar"/>
+	        <include name="**/*.zip"/>
+	    </fileset>
+		<pathelement location="${tomcat.home}/bin/bootstrap.jar"/>
+		<pathelement location="${tomcat.home}/bin/tomcat-juli.jar"/>
+	</path>
+
+	<!-- SoapUI classpath -->
+	<path id="classpath.testing">
+		<fileset dir="${soapui.home}/lib" erroronmissingdir="false">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+
+	<!--=======================================================================================================================-->
+	<!-- Task definitions for Tomcat management -->
+	<!--=======================================================================================================================-->
+
+	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask">
+		<classpath refid="catalina-ant-classpath"/>
+	</taskdef>
+
+	<taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask">
+		<classpath refid="catalina-ant-classpath"/>
+	</taskdef>
+
+
+	<!--=======================================================================================================================-->
+	<!-- Public Targets -->
+	<!--=======================================================================================================================-->
+
+	<target name="build"			description="Builds all projects"	depends="build-all-step"/>
+	<target name="build-services"	description="Builds NaestaServices"	depends="build-payment, build-services-step"/>
+	<target name="build-kiosk"		description="Builds KioskWS"		depends="build-kiosk-step"/>
+	<target name="build-customer"	description="Builds CustomerWS"		depends="build-customer-step"/>
+	<target name="build-operator"	description="Builds OperatorWeb"	depends="build-operator-step"/>
+	<target name="build-payment"	description="Builds PaymentGateway"	depends="build-payment-step"/>
+	<target name="build-scheduler"	description="Builds BatchScheduler"	depends="build-scheduler-step"/>
+
+	<target name="deploy"		description="Deploys all deployable projects"	depends="kiosk-undeploy-step, kiosk-deploy-step,
+																						customer-undeploy-step, customer-deploy-step,
+																						operator-undeploy-step, operator-deploy-step"/>
+	<target name="deploy-kiosk"		description="Deploys KioskWS"		depends="kiosk-undeploy-step, kiosk-deploy-step"/>
+	<target name="deploy-customer"	description="Deploys CustomerWS"	depends="customer-undeploy-step, customer-deploy-step"/>
+	<target name="deploy-operator"	description="Deploys OperatorWeb"	depends="operator-undeploy-step, operator-deploy-step"/>
+
+	<target name="tomcat-start"			description="Cold Tomcat start"			depends="tomcat-start-step"/>
+	<target name="tomcat-stop"			description="Hard Tomcat stop"			depends="tomcat-stop-step"/>
+	<target name="tomcat-clean"			description="Tomcat webapps cleanup"	depends="clean-tomcat-apps-step"/>
+	<target name="tomcat-clean-logs"	description="Tomcat logs cleanup"		depends="clean-tomcat-logs-step"/>
+
+	<target 	name="quick-test"
+				description="Runs functional tests against dev db"
+				depends="clean-test, functional-test-step"/>
+	<target		name="test"
+				description="Runs functional tests against test db"
+				depends="clean-test, deploy-test-db, functional-test-step, drop-test-db"/>
+	<target 	name="test-all"
+				description="Cleans, builds and deploys the app, deploys dev schema and data, runs functional tests"
+				depends="clean-test, tomcat-start, deploy-test-schema, deploy-test-data, build, deploy, quick-test"/>
+	<!--target name="load-test"	description="Executes load tests" depends="clean-targets-step, load-test-step"/-->
+
+	<target name="deploy-schema"	description="Deploys dev database schema"	depends="copy-schema-step, deploy-schema-step"/>
+	<target name="deploy-data"		description="Deploys dev database data"		depends="copy-data-step, deploy-data-step"/>
+	<target name="deploy-db"		description="Resets dev database"			depends="deploy-schema, deploy-data"/>
+
+	<target name="deploy-test-db"		description="Prepared test database"		depends="deploy-test-schema, deploy-test-data"/>
+	<target name="drop-test-db"			description="Drops test database schema"	depends="drop-test-db-step"/>
+	<target name="deploy-test-schema"	description="Deploys test database schema"	depends="copy-schema-step, modify-schema-step, deploy-schema-step"/>
+	<target name="deploy-test-data"		description="Deploys test database data"	depends="copy-data-step, modify-data-step, deploy-data-step"/>
+
+	<target name="clean-test" description="Cleans all target outputs and soapUI logs" depends="clean-targets-step"/>
+
+
+	<!--=======================================================================================================================-->
+	<!-- Private Targets -->
+	<!--=======================================================================================================================-->
+
+	<!-- Project(s) clean-build steps (relies on Maven tasks) -->
+	<!--=======================================================================================================================-->
+	<target name="build-all-step">
+		<exec executable="${build.executable}" failonerror="true" dir="${dir.root}">
+			<arg line="${build.argline}"/>
+		</exec>
+	</target>
+
+	<target name="build-services-step">
+		<exec executable="${build.executable}" failonerror="true" dir="${dir.services}">
+			<arg line="${build.argline}"/>
+		</exec>
+	</target>
+
+	<target name="build-kiosk-step">
+		<exec executable="${build.executable}" failonerror="true" dir="${dir.kiosk}">
+			<arg line="${build.argline}"/>
+		</exec>
+	</target>
+
+	<target name="build-customer-step">
+		<exec executable="${build.executable}" failonerror="true" dir="${dir.customer}">
+			<arg line="${build.argline}"/>
+		</exec>
+	</target>
+
+	<target name="build-operator-step">
+		<exec executable="${build.executable}" failonerror="true" dir="${dir.operator}">
+			<arg line="${build.argline}"/>
+		</exec>
+	</target>
+
+	<target name="build-payment-step">
+		<exec executable="${build.executable}" failonerror="true" dir="${dir.payment}">
+			<arg line="${build.argline}"/>
+		</exec>
+	</target>
+
+	<target name="build-scheduler-step">
+		<exec executable="${build.executable}" failonerror="true" dir="${dir.scheduler}">
+			<arg line="${build.argline}"/>
+		</exec>
+	</target>
+
+	<!-- Projects deploy/undeploy steps -->
+	<!--=======================================================================================================================-->
+
+	<!-- KioskWS -->
+
+	<target name="kiosk-deploy-step">
+		<echo>Deploying, please wait ...</echo>
+		<deploy
+			failonerror="true"
+			username="${tomcat.manager.user}"
+			password="${tomcat.manager.password}"
+			path="/sbe-ws"
+			url="${tomcat.manager.url}"
+			war="file:${dir.kiosk}/target/sbe-ws.war"
+		/>
+	</target>
+
+	<target name="kiosk-undeploy-step">
+		<undeploy
+			failonerror="false"
+			username="${tomcat.manager.user}"
+			password="${tomcat.manager.password}"
+			path="/sbe-ws"
+			url="${tomcat.manager.url}"
+		/>
+	</target>
+
+	<!-- CustomerWS -->
+
+	<target name="customer-deploy-step">
+		<echo>Deploying, please wait ...</echo>
+		<deploy
+			failonerror="true"
+			username="${tomcat.manager.user}"
+			password="${tomcat.manager.password}"
+			path="/ube"
+			url="${tomcat.manager.url}"
+			war="file:${dir.customer}/target/ube.war"
+		/>
+	</target>
+
+	<target name="customer-undeploy-step">
+		<undeploy
+			failonerror="false"
+			username="${tomcat.manager.user}"
+			password="${tomcat.manager.password}"
+			path="/ube"
+			url="${tomcat.manager.url}"
+		/>
+	</target>
+
+	<!-- OperatorWS -->
+
+	<target name="operator-deploy-step">
+		<echo>Deploying, please wait ...</echo>
+		<deploy
+			failonerror="true"
+			username="${tomcat.manager.user}"
+			password="${tomcat.manager.password}"
+			path="/sbe"
+			url="${tomcat.manager.url}"
+			war="file:${dir.operator}/target/sbe.war"
+		/>
+	</target>
+
+	<target name="operator-undeploy-step">
+		<undeploy
+			failonerror="false"
+			username="${tomcat.manager.user}"
+			password="${tomcat.manager.password}"
+			path="/sbe"
+			url="${tomcat.manager.url}"
+		/>
+	</target>
+
+
+	<!--=======================================================================================================================-->
+	<!-- Tomcat management -->
+	<!--=======================================================================================================================-->
+
+	<target name="tomcat-start-step" if="tomcat.runUsingJar">
+		<echo>Tomcat Local Start = ${tomcat.home}</echo>
+		<java classname="org.apache.catalina.startup.Bootstrap" fork="true" dir="${tomcat.home}/bin" spawn="true" classpathref="catalina-ant-classpath">
+			<jvmarg line="${tomcat.debug}"/>
+			<jvmarg line="${tomcat.arguments}"/>
+			<jvmarg value="-Dcatalina.home=${tomcat.home}"/>
+			<jvmarg value="-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager"/>
+			<jvmarg value="-Djava.util.logging.config.file=${tomcat.base}/conf/logging.properties"/>
+		</java>
+		<sleep milliseconds="10"/>
+	</target>
+
+	<target name="tomcat-stop-step" if="tomcat.runUsingJar">
+		<echo>Tomcat Local Stop = ${tomcat.home}</echo>
+		<java classname="org.apache.catalina.startup.Bootstrap" fork="true" dir="${tomcat.home}/bin" classpathref="catalina-ant-classpath">
+			<jvmarg value="-Dcatalina.home=${tomcat.home}"/>
+			<jvmarg value="-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager"/>
+			<jvmarg value="-Djava.util.logging.config.file=${tomcat.base}/conf/logging.properties"/>
+			<arg line="stop"/>
+		</java>
+		<sleep milliseconds="10"/>
+	</target>
+
+	<target name="clean-tomcat-apps-step">
+		<echo>Cleaning-up tomcat webapps folder, please wait ...</echo>
+		<delete>
+			<fileset dir="${tomcat.home}/webapps" includes="**/*.war" defaultexcludes="false"/>
+		</delete>
+		<delete dir="${tomcat.home}/sbe" failonerror="true" includes="**/*"/>
+		<delete dir="${tomcat.home}/sbe-ws" failonerror="true" includes="**/*"/>
+		<delete dir="${tomcat.home}/ube" failonerror="true" includes="**/*"/>
+	</target>
+
+	<target name="clean-tomcat-logs-step">
+		<echo>Cleaning-up tomcat logs folder, please wait ...</echo>
+		<delete includeEmptyDirs="true">
+			<fileset dir="${tomcat.home}/logs" includes="**/*" defaultexcludes="no"/>
+		</delete>
+	</target>
+
+
+	<!-- Clean test step-->
+	<!--=======================================================================================================================-->
+	<target name="clean-targets-step">
+		<delete dir="${dir.temp}"/>
+		<delete dir="${dir.reports}"/>
+		<delete dir="${dir.logs}"/>
+		<delete dir="${dir.junit}"/>
+		<delete file="${dir.root}/global-groovy.log"/>
+	</target>
+
+
+	<!-- Functional test steps -->
+	<!--=======================================================================================================================-->
+
+	<target name="functional-test-step" depends="ant-tasks">
+
+		<!-- Wipe previous results -->
+		<delete dir="${dir.functional.reports}"/>
+
+		<!-- Create output directory -->
+		<mkdir dir="${dir.functional.reports}"/>
+
+		<!-- Run functional-test projects -->
+		<foreach target="soapui-functional-step" param="test.soapui.project">
+			<path>
+				<fileset dir="${dir.functional.tests}" defaultexcludes="no">
+					<include name="**/*.xml"/>
+				</fileset>
+			</path>
+		</foreach>
+
+		<!--junitreport todir="${dir.functional.reports}">
+			<fileset dir="${dir.functional.reports}" erroronmissingdir="false">
+				<include name="**/TEST-*.xml"/>
+			</fileset>
+			<report todir="${dir.functional.reports}"/>
+		</junitreport-->
+	</target>
+
+	<!-- Functional test exec step -->
+	<target name="soapui-functional-step" description="Runs given soapUI project"	depends="ant-tasks">
+		<echo>Running soapUI functional test for project: ${test.soapui.project}</echo>
+		<echo>================================DB URL: ${naesta.db.url}</echo>
+
+		<!-- get project name and create project folder -->
+		<basename property="project-name" file="${test.soapui.project}" suffix=".xml"/>
+		<property name="dir.test.name" value="${dir.functional.reports}/${project-name}"/>
+
+		<mkdir dir="${dir.logs}"/>
+		<mkdir dir="${dir.temp}"/>
+
+		<!-- create just-in-time properties file -->
+		<propertyfile file="${dir.temp}/soapui.properties">
+			<entry key="test.http.host" value="${test.http.host}"/>
+			<entry key="test.http.host.ube" value="${test.http.host.ube}"/>
+			<entry key="test.http.host.sbe" value="${test.http.host.sbe}"/>
+			<entry key="db.url" value="${naesta.db.url}"/>
+			<entry key="db.driver" value="${naesta.db.driver}"/>
+			<entry key="db.user" value="${naesta.db.user}"/>
+			<entry key="db.password" value="${naesta.db.password}"/>
+		</propertyfile>
+
+		<java classname="com.eviware.soapui.SoapUIProTestCaseRunner" fork="true" failonerror="true">
+			<classpath refid="classpath.testing"/>
+			<jvmarg value="-Xmx1024m"/>
+			<jvmarg value="-Xms1024m"/>
+			<jvmarg value="-Dsoapui.properties=${dir.temp}/soapui.properties"/>
+			<jvmarg value="-Dsoapui.home=${soapui.home}/lib"/>
+			<jvmarg value="-Dsoapui.logroot=${dir.test}/logs/"/>
+
+			<!-- continue after failure -->
+			<arg value="-I"/>
+
+			<!-- produce junit type report -->
+			<arg value="-j"/>
+
+			<!-- produce output to given directory -->
+			<arg value="-f"/>
+			<arg value="${dir.test.name}"/>
+
+			<arg value="-r"/>
+
+			<!-- soapUI settings -->
+			<arg value="-t"/>
+			<arg value="${dir.test.resources}/soapui-settings.xml"/>
+
+			<!-- soapui project files(s) -->
+			<arg value="${test.soapui.project}"/>
+		</java>
+	</target>
+
+
+	<!-- Load test steps-->
+	<!--=======================================================================================================================-->
+	<target name="load-test-step" depends="ant-tasks">
+
+		<!-- Wipe previous results -->
+		<delete dir="${dir.load.reports}"/>
+
+		<!-- Create output directory -->
+		<mkdir dir="${dir.load.reports}"/>
+
+		<!-- Run load-test projects -->
+		<foreach target="soapui-load-step" param="test.soapui.project">
+			<path>
+				<fileset dir="${dir.load.tests}" defaultexcludes="no">
+					<include name="**/*.xml"/>
+				</fileset>
+			</path>
+		</foreach>
+	</target>
+
+
+	<!-- Load test exec step-->
+	<target name="soapui-load-step" description="Runs given soapUI load test" depends="ant-tasks">
+		<echo>Running soapUI load test for project: ${test.soapui.project}</echo>
+
+		<mkdir dir="${dir.logs}" />
+
+		<java classname="com.eviware.soapui.SoapUIProLoadTestRunner" fork="true" failonerror="true">
+			<classpath refid="classpath.testing"/>
+			<jvmarg value="-Xmx1024m"/>
+			<jvmarg value="-Xms1024m"/>
+			<jvmarg value="-Dsoapui.home=${soapui.home}/lib"/>
+			<jvmarg value="-Dsoapui.logroot=${dir.test}/logs/"/>
+
+			<arg value="-r"/>
+
+			<arg value="-f"/>
+			<arg value="${dir.load.reports}"/>
+
+			<arg value="-t"/>
+			<arg value="${dir.test.resources}/soapui-settings.xml"/>
+
+			<arg value="${test.soapui.project}"/>
+		</java>
+	</target>
+
+
+	<!-- Database-related steps -->
+	<!--=======================================================================================================================-->
+	<target name="deploy-schema-step">
+		<exec executable="${mysqladmin}" failonerror="true" input="${dir.temp}/${naesta.db.schema}">
+			<arg value="--user=${naesta.db.user}"/>
+			<arg value="--password=${naesta.db.password}"/>
+			<arg value="--host=${naesta.db.host}"/>
+			<arg value="--port=${naesta.db.port}"/>
+		</exec>
+		<delete dir="${dir.temp}"/>
+	</target>
+
+	<target name="deploy-data-step">
+		<exec executable="${mysqladmin}" failonerror="true" input="${dir.temp}/${test.db.data}">
+			<arg value="--user=${naesta.db.user}"/>
+			<arg value="--password=${naesta.db.password}"/>
+			<arg value="--host=${naesta.db.host}"/>
+			<arg value="--port=${naesta.db.port}"/>
+		</exec>
+		<delete dir="${dir.temp}"/>
+	</target>
+
+	<target name="drop-test-db-step">
+		<sql driver="${naesta.db.driver}" url="${naesta.db.url}" userid="${naesta.db.user}" password="${naesta.db.password}" >
+			<classpath>
+				<pathelement location="${soapui.home}/bin/ext/mysql-connector-java-5.1.24-bin.jar"/>
+			</classpath>  
+			drop database if exists ${test.db.name};
+		</sql>
+	</target>
+
+	<!-- Copy schema to the temp folder -->
+	<target name="copy-schema-step">
+		<mkdir dir="${dir.temp}"/>
+		<echo>Copying ${naesta.db.schema} to the temp folder</echo>
+		<copy todir="${dir.temp}" flatten="true">
+			<fileset dir="${dir.sql}">
+				<include name="${naesta.db.schema}"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- Copy schema to the temp folder -->
+	<target name="copy-data-step">
+		<mkdir dir="${dir.temp}"/>
+		<echo>Copying ${naesta.db.schema} to the temp folder</echo>
+		<copy todir="${dir.temp}" flatten="true">
+			<fileset dir="${dir.sql}">
+				<include name="${test.db.data}"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- Modify populate_schema script -->
+	<target name="modify-schema-step">
+		<echo>Replacing "${naesta.db.name}" occurences with "${test.db.name}"" in ${naesta.db.schema}</echo>
+	   	<replaceregexp match="${naesta.db.name}" replace="${test.db.name}" flags="g" byline="true">
+			<fileset dir="${dir.temp}">
+				<include name="${naesta.db.schema}"/>
+			</fileset>
+		</replaceregexp>
+	</target>
+
+	<!-- Modify populate_data script -->
+	<target name="modify-data-step">
+		<echo>Replacing "${naesta.db.name}" occurences with "${test.db.name}" in ${test.db.data}</echo>
+	   	<replaceregexp match="${naesta.db.name}" replace="${test.db.name}" flags="g" byline="true">
+			<fileset dir="${dir.temp}">
+				<include name="${test.db.data}"/>
+			</fileset>
+		</replaceregexp>
+	</target>
+
+	<!--=======================================================================================================================-->
+	<!-- Help Targets -->
+	<!--=======================================================================================================================-->
+	<target name="ant-tasks">
+		<!-- Ant contributions -->
+		<taskdef resource="net/sf/antcontrib/antlib.xml">
+			<classpath>
+				<fileset dir="${dir.test.resources}/lib/ant-contrib-1.0b3">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</taskdef>
+	</target>
+
+</project>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-workspace name="Projects" soapui-version="4.5.1.1-SNAPSHOT" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:project name="Kiosk Functional Test">/home/zollder/bixi/testing/functional-tests/kiosk.xml</con:project>
+  <con:project name="Kiosk Load Test">/home/zollder/bixi/testing/load-tests/kiosk.xml</con:project>
+</con:soapui-workspace>
