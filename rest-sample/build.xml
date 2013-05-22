@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="naesta" default="build" basedir=".">
+<project name="rest-sample" default="build" basedir=".">
 	<description>Builds, deploys and tests naesta project(s)</description>
 
 	<echo>---------------------------------------------------------</echo>
@@ -8,32 +8,21 @@
 	<echo>---------------------------------------------------------</echo>
 
 	<!-- Root script directory -->
-	<dirname property="dir.root" file="${ant.file.naesta}"/>
+	<dirname property="dir.root" file="${ant.file.${ant.project.name}}"/>
 
-	<property file="${dir.root}/properties/${user.name}.properties"/>
-	<property file="${dir.root}/properties/naesta.properties"/>
-	<property file="${dir.root}/properties/build.properties"/>
-
-	<property name="dir.services"			value="${dir.root}/NaestaServices"/>
-	<property name="dir.kiosk"				value="${dir.root}/KioskWS"/>
-	<property name="dir.customer"			value="${dir.root}/CustomerWS"/>
-	<property name="dir.operator"			value="${dir.root}/OperatorWeb"/>
-	<property name="dir.payment"			value="${dir.root}/PaymentGateway"/>
-	<property name="dir.scheduler"			value="${dir.root}/BatchScheduler"/>
+	<property file="${dir.root}/props/${user.name}.properties"/>
 
 	<property name="dir.test"				value="${dir.root}/testing"/>
 	<property name="soapui.home"			value="${dir.test}/resources/soapui-pro-4.5.1"/>
-	<property name="dir.functional.tests"	value="${dir.test}/functional-tests"/>
-	<property name="dir.load.tests"			value="${dir.test}/load-tests"/>
+	<property name="dir.functional.tests"	value="${dir.test}/functional"/>
 	<property name="dir.junit"				value="${dir.test}/junit"/>
 	<property name="dir.temp"				value="${dir.test}/temp"/>
 	<property name="dir.logs"				value="${dir.test}/logs"/>
-	<property name="dir.test.resources"		value="${dir.test}/resources"/>
+	<property name="dir.resources"			value="${dir.test}/resources"/>
 	<property name="dir.sql"				value="${dir.test}/resources/sql"/>
 
 	<property name="dir.reports"			value="${dir.test}/reports"/>
 	<property name="dir.functional.reports"	value="${dir.reports}/functional"/>
-	<property name="dir.load.reports"		value="${dir.reports}/load"/>
 
 
 	<!--=======================================================================================================================-->
@@ -76,24 +65,11 @@
 	<!--=======================================================================================================================-->
 
 	<target name="build"			description="Builds all projects"	depends="build-all-step"/>
-	<target name="build-services"	description="Builds NaestaServices"	depends="build-payment, build-services-step"/>
-	<target name="build-kiosk"		description="Builds KioskWS"		depends="build-kiosk-step"/>
-	<target name="build-customer"	description="Builds CustomerWS"		depends="build-customer-step"/>
-	<target name="build-operator"	description="Builds OperatorWeb"	depends="build-operator-step"/>
-	<target name="build-payment"	description="Builds PaymentGateway"	depends="build-payment-step"/>
-	<target name="build-scheduler"	description="Builds BatchScheduler"	depends="build-scheduler-step"/>
-
-	<target name="deploy"		description="Deploys all deployable projects"	depends="kiosk-undeploy-step, kiosk-deploy-step,
-																						customer-undeploy-step, customer-deploy-step,
-																						operator-undeploy-step, operator-deploy-step"/>
-	<target name="deploy-kiosk"		description="Deploys KioskWS"		depends="kiosk-undeploy-step, kiosk-deploy-step"/>
-	<target name="deploy-customer"	description="Deploys CustomerWS"	depends="customer-undeploy-step, customer-deploy-step"/>
-	<target name="deploy-operator"	description="Deploys OperatorWeb"	depends="operator-undeploy-step, operator-deploy-step"/>
+	<target name="deploy"			description="Deploys all deployable projects"	depends="undeploy-step, deploy-step"/>
 
 	<target name="tomcat-start"			description="Cold Tomcat start"			depends="tomcat-start-step"/>
 	<target name="tomcat-stop"			description="Hard Tomcat stop"			depends="tomcat-stop-step"/>
 	<target name="tomcat-clean"			description="Tomcat webapps cleanup"	depends="clean-tomcat-apps-step"/>
-	<target name="tomcat-clean-logs"	description="Tomcat logs cleanup"		depends="clean-tomcat-logs-step"/>
 
 	<target 	name="quick-test"
 				description="Runs functional tests against dev db"
@@ -130,113 +106,34 @@
 		</exec>
 	</target>
 
-	<target name="build-services-step">
-		<exec executable="${build.executable}" failonerror="true" dir="${dir.services}">
-			<arg line="${build.argline}"/>
-		</exec>
-	</target>
-
-	<target name="build-kiosk-step">
-		<exec executable="${build.executable}" failonerror="true" dir="${dir.kiosk}">
-			<arg line="${build.argline}"/>
-		</exec>
-	</target>
-
-	<target name="build-customer-step">
-		<exec executable="${build.executable}" failonerror="true" dir="${dir.customer}">
-			<arg line="${build.argline}"/>
-		</exec>
-	</target>
-
-	<target name="build-operator-step">
-		<exec executable="${build.executable}" failonerror="true" dir="${dir.operator}">
-			<arg line="${build.argline}"/>
-		</exec>
-	</target>
-
-	<target name="build-payment-step">
-		<exec executable="${build.executable}" failonerror="true" dir="${dir.payment}">
-			<arg line="${build.argline}"/>
-		</exec>
-	</target>
-
-	<target name="build-scheduler-step">
-		<exec executable="${build.executable}" failonerror="true" dir="${dir.scheduler}">
-			<arg line="${build.argline}"/>
-		</exec>
-	</target>
-
 	<!-- Projects deploy/undeploy steps -->
 	<!--=======================================================================================================================-->
 
 	<!-- KioskWS -->
 
-	<target name="kiosk-deploy-step">
+	<target name="deploy-step">
 		<echo>Deploying, please wait ...</echo>
+		<echo>Tomcat user: ${tomcat.manager.user}</echo>
+		<echo>Tomcat password: ${tomcat.manager.password}</echo>
+		<echo>Project name: ${project.name}</echo>
+		<echo>Manager URL: ${tomcat.manager.url}</echo>
+		<echo>War file path: ${dir.root}/target/${project.name}.war</echo>
 		<deploy
 			failonerror="true"
 			username="${tomcat.manager.user}"
 			password="${tomcat.manager.password}"
-			path="/sbe-ws"
+			path="/${project.name}"
 			url="${tomcat.manager.url}"
-			war="file:${dir.kiosk}/target/sbe-ws.war"
+			war="file:${dir.root}/target/${project.name}.war"
 		/>
 	</target>
 
-	<target name="kiosk-undeploy-step">
+	<target name="undeploy-step">
 		<undeploy
 			failonerror="false"
 			username="${tomcat.manager.user}"
 			password="${tomcat.manager.password}"
-			path="/sbe-ws"
-			url="${tomcat.manager.url}"
-		/>
-	</target>
-
-	<!-- CustomerWS -->
-
-	<target name="customer-deploy-step">
-		<echo>Deploying, please wait ...</echo>
-		<deploy
-			failonerror="true"
-			username="${tomcat.manager.user}"
-			password="${tomcat.manager.password}"
-			path="/ube"
-			url="${tomcat.manager.url}"
-			war="file:${dir.customer}/target/ube.war"
-		/>
-	</target>
-
-	<target name="customer-undeploy-step">
-		<undeploy
-			failonerror="false"
-			username="${tomcat.manager.user}"
-			password="${tomcat.manager.password}"
-			path="/ube"
-			url="${tomcat.manager.url}"
-		/>
-	</target>
-
-	<!-- OperatorWS -->
-
-	<target name="operator-deploy-step">
-		<echo>Deploying, please wait ...</echo>
-		<deploy
-			failonerror="true"
-			username="${tomcat.manager.user}"
-			password="${tomcat.manager.password}"
-			path="/sbe"
-			url="${tomcat.manager.url}"
-			war="file:${dir.operator}/target/sbe.war"
-		/>
-	</target>
-
-	<target name="operator-undeploy-step">
-		<undeploy
-			failonerror="false"
-			username="${tomcat.manager.user}"
-			password="${tomcat.manager.password}"
-			path="/sbe"
+			path="/${project.name}"
 			url="${tomcat.manager.url}"
 		/>
 	</target>
@@ -274,16 +171,7 @@
 		<delete>
 			<fileset dir="${tomcat.home}/webapps" includes="**/*.war" defaultexcludes="false"/>
 		</delete>
-		<delete dir="${tomcat.home}/sbe" failonerror="true" includes="**/*"/>
-		<delete dir="${tomcat.home}/sbe-ws" failonerror="true" includes="**/*"/>
-		<delete dir="${tomcat.home}/ube" failonerror="true" includes="**/*"/>
-	</target>
-
-	<target name="clean-tomcat-logs-step">
-		<echo>Cleaning-up tomcat logs folder, please wait ...</echo>
-		<delete includeEmptyDirs="true">
-			<fileset dir="${tomcat.home}/logs" includes="**/*" defaultexcludes="no"/>
-		</delete>
+		<delete dir="${tomcat.home}/${project.name}" failonerror="true" includes="**/*"/>
 	</target>
 
 
@@ -374,53 +262,6 @@
 			<arg value="${dir.test.resources}/soapui-settings.xml"/>
 
 			<!-- soapui project files(s) -->
-			<arg value="${test.soapui.project}"/>
-		</java>
-	</target>
-
-
-	<!-- Load test steps-->
-	<!--=======================================================================================================================-->
-	<target name="load-test-step" depends="ant-tasks">
-
-		<!-- Wipe previous results -->
-		<delete dir="${dir.load.reports}"/>
-
-		<!-- Create output directory -->
-		<mkdir dir="${dir.load.reports}"/>
-
-		<!-- Run load-test projects -->
-		<foreach target="soapui-load-step" param="test.soapui.project">
-			<path>
-				<fileset dir="${dir.load.tests}" defaultexcludes="no">
-					<include name="**/*.xml"/>
-				</fileset>
-			</path>
-		</foreach>
-	</target>
-
-
-	<!-- Load test exec step-->
-	<target name="soapui-load-step" description="Runs given soapUI load test" depends="ant-tasks">
-		<echo>Running soapUI load test for project: ${test.soapui.project}</echo>
-
-		<mkdir dir="${dir.logs}" />
-
-		<java classname="com.eviware.soapui.SoapUIProLoadTestRunner" fork="true" failonerror="true">
-			<classpath refid="classpath.testing"/>
-			<jvmarg value="-Xmx1024m"/>
-			<jvmarg value="-Xms1024m"/>
-			<jvmarg value="-Dsoapui.home=${soapui.home}/lib"/>
-			<jvmarg value="-Dsoapui.logroot=${dir.test}/logs/"/>
-
-			<arg value="-r"/>
-
-			<arg value="-f"/>
-			<arg value="${dir.load.reports}"/>
-
-			<arg value="-t"/>
-			<arg value="${dir.test.resources}/soapui-settings.xml"/>
-
 			<arg value="${test.soapui.project}"/>
 		</java>
 	</target>
