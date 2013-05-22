@@ -81,7 +81,6 @@
 	<target 	name="test-all"
 				description="Cleans, builds and deploys the app, deploys dev schema and data, runs functional tests"
 				depends="clean-test, tomcat-start, deploy-test-schema, deploy-test-data, build, deploy, quick-test"/>
-	<!--target name="load-test"	description="Executes load tests" depends="clean-targets-step, load-test-step"/-->
 
 	<target name="deploy-schema"	description="Deploys dev database schema"	depends="copy-schema-step, deploy-schema-step"/>
 	<target name="deploy-data"		description="Deploys dev database data"		depends="copy-data-step, deploy-data-step"/>
