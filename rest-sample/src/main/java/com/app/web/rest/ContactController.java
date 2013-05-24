@@ -1,89 +1,74 @@
 package com.app.web.rest;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.app.domain.Contact;
 import com.app.services.ContactService;
 
-//--------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------
 @Controller
+@RequestMapping(value = "/contacts")
 public class ContactController
 {
 	// --------------------------------------------------------------------------------------------------------------------------------
 	@Autowired
 	private ContactService contactService;
 
-	@Autowired
-	private View jsonView_i;
-
-	private static final String DATA_FIELD = "data";
-	private static final String ERROR_FIELD = "error";
-
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/**
-	 * Retrieves the matching Employee associated to the given key.
-	 */
+	/** Retrieves {@link Contact} resource associated to the given key (JSON). */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	@RequestMapping(value = "/test/{key}", method = { RequestMethod.GET })
+	@RequestMapping(value = "/{key}", method = { RequestMethod.GET })
 	@ResponseBody
-	public ModelAndView loadWithPrimaryKey(@PathVariable String key)
+	public Contact loadWithPrimaryKey(@PathVariable Long key)
 	{
-		Contact contact = null;
-		if (!StringUtils.isNotBlank(key) || !StringUtils.isNumeric(key))
-		{
-			String sMessage = "Error invoking contact - Invalid key parameter";
-			return createErrorResponse(sMessage);
-		}
-		else
-		{
-			try
-			{
-				contact = contactService.getContactById(key);
-			}
-			catch (Exception e)
-			{
-				String sMessage = "Error fetching contact with key " + key;
-				return createErrorResponse(String.format(sMessage, e.toString()));
-			}
-		}
+		Contact contact = contactService.loadWithPrimaryKey(key);
 
-		ModelAndView mav = new ModelAndView(jsonView_i, DATA_FIELD, contact);
-		return mav;
+		return contact;
 	}
 
-	/**
-	 * Create an error REST response.
-	 * @param sMessage: the s message
-	 * @return the model and view
-	 */
-	private ModelAndView createErrorResponse(String sMessage)
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Inserts the {@link Contact} resource received in the payload. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@RequestMapping(method = { RequestMethod.POST })
+	@ResponseBody
+	public Contact save(@RequestBody Contact contact)
 	{
-		return new ModelAndView(jsonView_i, ERROR_FIELD, sMessage);
+		Contact savedContact = contactService.save(contact);
+		contactService.refresh(savedContact);
+
+		return savedContact;
 	}
 
-	/**
-	 * Injector methods.
-	 * @param contactService_p: the new contact service
-	 */
-	public void setContactService(ContactService service)
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Updates the {@link Contact} resource. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value = "/{key}", method = { RequestMethod.PUT })
+	@ResponseBody
+	public Contact update(@PathVariable Long key, @RequestBody Contact contact)
 	{
-		contactService = service;
+		contact.setId(key);
+		Contact updatedContact = contactService.update(contact);
+		contactService.refresh(updatedContact);
+
+		return updatedContact;
 	}
 
-	/**
-	 * Injector methods.
-	 * @param view: the new json view
-	 */
-	public void setJsonView(View view)
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Deletes the {@link Contact} resource associated to a given key. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value = "/{key}", method = { RequestMethod.DELETE })
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable Long key)
 	{
-		jsonView_i = view;
+		contactService.delete(key);
 	}
 }
