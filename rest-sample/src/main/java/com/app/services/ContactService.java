@@ -4,13 +4,33 @@ import java.util.List;
 
 import com.app.domain.Contact;
 
-
 public interface ContactService
 {
-	public Contact getContactById(String id);
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Loads given contact entity by primary key (id). Returns fetched contact. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Contact loadWithPrimaryKey(Long key);
+
 	public List<Contact> getContactsByName(String name);
-	public List<Contact> getAllContacts();
-	public int saveContact(Contact contact);
-	public void updateContact(Contact contact);
-	public void deleteContact(String id);
+	public List<Contact> loadAll();
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Saves given contact entity. Returns saved contact. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Contact save(Contact contact);
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Updates given contact entity. Returns updated contact. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Contact update(Contact contact);
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Deletes given contact entity. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public void delete(Long key);
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Refreshes saved contact so ensure correct serialisation/marshalling (especially for @ManyToOne relations) */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public void refresh(Contact contact);
 }

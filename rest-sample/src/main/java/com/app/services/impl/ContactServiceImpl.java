@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dao.ContactsDao;
 import com.app.domain.Contact;
@@ -16,21 +17,21 @@ public class ContactServiceImpl implements ContactService
     @Autowired
     private ContactsDao contactsDao;
 
-	public Contact getContactById(String id)
+    // --------------------------------------------------------------------------------------------------------------------------------
+    @Transactional(readOnly = true)
+	public Contact loadWithPrimaryKey(Long key)
 	{
-		Contact contact = null;
-		try
-		{
-			contact = contactsDao.getById(id);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		// TODO:
+//		if (entity == null)
+//		throw new DataNotFoundException(String.format("User with username '%s' not found", id));
 
-		return contact;
+		Contact contactEntity = contactsDao.loadWithPrimaryKey(key);
+
+		return contactEntity;
 	}
 
+    // --------------------------------------------------------------------------------------------------------------------------------
+    @Transactional(readOnly = true)
 	public List<Contact> getContactsByName(String name)
 	{
 		List<Contact> contacts = new ArrayList<Contact>();
@@ -46,57 +47,44 @@ public class ContactServiceImpl implements ContactService
 		return contacts;
 	}
 
-	public List<Contact> getAllContacts()
+    // --------------------------------------------------------------------------------------------------------------------------------
+    @Transactional(readOnly = true)
+	public List<Contact> loadAll()
 	{
-		List<Contact> contacts = new ArrayList<Contact>();
-		try
-		{
-			contactsDao.getAllContacts();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		List<Contact> contacts = contactsDao.loadAll();
 
 		return contacts;
 	}
 
-	public int saveContact(Contact contact)
+    // --------------------------------------------------------------------------------------------------------------------------------
+	@Transactional
+	public Contact save(Contact contact)
 	{
-		int response = 0;
-		try
-		{
-			response = contactsDao.save(contact);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}	
+		Contact savedContact = contactsDao.save(contact);
 
-		return response;
+		return savedContact;
 	}
 
-	public void updateContact(Contact contact)
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@Transactional
+	public Contact update(Contact contact)
 	{
-		try
-		{
-			contactsDao.update(contact);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		Contact updatedContact = contactsDao.update(contact);
+
+		return updatedContact;
 	}
 
-	public void deleteContact(String id)
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public void delete(Long key)
 	{
-		try
-		{
-			contactsDao.delete(id);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+			contactsDao.delete(key);
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Refreshes saved contact so ensure correct serialisation/marshalling (especially for @ManyToOne relations) */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public void refresh(Contact savedContact)
+	{
+		contactsDao.refresh(savedContact);		
 	}
 }
