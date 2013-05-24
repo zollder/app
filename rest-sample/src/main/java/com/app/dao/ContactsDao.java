@@ -6,10 +6,31 @@ import com.app.domain.Contact;
 
 public interface ContactsDao
 {
-	public Contact getById(String id);
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Loads given entity by primary key (id). Returns fetched entity. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Contact loadWithPrimaryKey(Long key);
+
 	public List<Contact> searchContacts(String name);
-	public List<Contact> getAllContacts();
-	public int save(Contact contact);
-	public void update(Contact contact);
-	public void delete(String id);
+	public List<Contact> loadAll();
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Saves given entity. Returns saved entity. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Contact save(Contact contact);
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Updates given entity. Returns updated entity. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Contact update(Contact contact);
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Deletes given entity. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public void delete(Long key);
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Refreshes entity so ensure correct serialisation/marshalling (especially for @ManyToOne relations) */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public void refresh(Contact savedEntity);
 }

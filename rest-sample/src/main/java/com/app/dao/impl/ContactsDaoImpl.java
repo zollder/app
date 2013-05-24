@@ -19,11 +19,18 @@ public class ContactsDaoImpl implements ContactsDao
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Contact getById(String id)
+	public void setSessionFactory(SessionFactory sFactory)
 	{
-		return (Contact) sessionFactory.getCurrentSession().get(Contact.class, id);
+		this.sessionFactory = sFactory;
 	}
-  
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Contact loadWithPrimaryKey(Long key)
+	{
+		return (Contact) sessionFactory.getCurrentSession().get(Contact.class, key);
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	public List<Contact> searchContacts(String name)
 	{
@@ -32,26 +39,46 @@ public class ContactsDaoImpl implements ContactsDao
 		return criteria.list();
 	}
 
+	// --------------------------------------------------------------------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
-	public List<Contact> getAllContacts()
+	public List<Contact> loadAll()
 	{
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Contact.class);
 		return criteria.list();
 	}
-	
-	public int save(Contact contact)
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Contact save(Contact entity)
 	{
-		return (Integer) sessionFactory.getCurrentSession().save(contact);
+		sessionFactory.getCurrentSession().save(entity);
+		return entity;
 	}
-	
-	public void update(Contact contact)
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Contact update(Contact entity)
 	{
-		sessionFactory.getCurrentSession().merge(contact);
+		try
+		{
+			sessionFactory.getCurrentSession().saveOrUpdate(entity);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return entity;
 	}
-	
-	public void delete(String id)
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public void delete(Long key)
 	{
-		Contact contact = getById(id);
-		sessionFactory.getCurrentSession().delete(contact);
+		Contact entity = this.loadWithPrimaryKey(key);
+		sessionFactory.getCurrentSession().delete(entity);
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public void refresh(Contact savedEntity)
+	{
+		sessionFactory.getCurrentSession().refresh(savedEntity);
 	}
 }
