@@ -2,123 +2,160 @@ package com.app.domain;
  
 import java.io.Serializable;
 import java.util.Date;
- 
+
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
- 
+
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.app.web.utils.Documentation;
+import com.app.web.utils.JsonDateSerializer;
+
+//--------------------------------------------------------------------------------------------------------------------------------
+/** Contact entity. */
+//--------------------------------------------------------------------------------------------------------------------------------
 @Entity
-@Table(name="CONTACTS")
+@Table(name="contacts")
 public class Contact implements Serializable
 {
+	// TODO: add validation annotations
 	// Default serial version ID
 	private static final long serialVersionUID = 1L;
 
 	 @Id
+	 @Basic
+	 @Column(name = "id")
+	 @Documentation(caption = "id", comment = "identification code.")
 	 @GeneratedValue(strategy = GenerationType.AUTO)
-	 private String id;
-	 
-	 @Column
+	 private Long id;
+
+	 @Basic
+	 @Column(name = "name")
 	 private String name;
-	 
-	 @Column
+
+	 @Basic
+	 @Column(name = "address")
 	 private String address;
-	 
-	 @Column
+
+	 @Basic
+	 @Column(name = "gender")
 	 private String gender;
-	 
-	 @Column
+
+	 @Column(name = "dob")
+	 @JsonSerialize(using = JsonDateSerializer.class)
 	 private Date dob;
-	 
-	 @Column
+
+	 @Basic
+	 @Column(name = "email")
 	 private String email;
-	 
-	 @Column
+
+	 @Basic
+	 @Column(name = "mobile")
 	 private String mobile;
-	 
-	 @Column
+
+	 @Basic
+	 @Column(name = "phone")
 	 private String phone;
-	
-	 //setters & getters
-	
-	public String getId()
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	//setters & getters
+	// --------------------------------------------------------------------------------------------------------------------------------
+
+	public Long getId()
 	{
 		return id;
 	}
-	
-	public void setId(String id)
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public void setId(Long id)
 	{
 		this.id = id;
 	}
-	
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public String getName()
 	{
 		return name;
 	}
-	
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public void setName(String name)
 	{
 		this.name = name;
 	}
-	
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public String getAddress()
 	{
 		return address;
 	}
-	
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public void setAddress(String address)
 	{
 		this.address = address;
 	}
-	
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public String getGender()
 	{
 		return gender;
 	}
-	
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public void setGender(String gender)
 	{
 		this.gender = gender;
 	}
-	
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public Date getDob()
 	{
 		return dob;
 	}
-	
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public void setDob(Date dob)
 	{
 		this.dob = dob;
 	}
-	
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public String getEmail()
 	{
 		return email;
 	}
-	
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public void setEmail(String email)
 	{
 		this.email = email;
 	}
-	
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public String getMobile()
 	{
 		return mobile;
 	}
-	
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public void setMobile(String mobile)
 	{
 		this.mobile = mobile;
 	}
-	
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public String getPhone()
 	{
 		return phone;
 	}
-	
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public void setPhone(String phone)
 	{
 		this.phone = phone;
