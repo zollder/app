@@ -1877,23 +1877,32 @@ log.info(stopTime)</script>
         <con:properties/>
       </con:breakPoints>
     </con:testCase>
-    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="true" maxResults="0" name="Contacts" searchProperties="true">
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="true" maxResults="0" name="Contacts CRUD" searchProperties="true" id="13facf36-9f3c-42d4-9020-02874ee50614">
       <con:settings/>
       
       
       
       
-      <con:testStep type="properties" name="Properties" id="18313ee5-9be5-461b-bbef-4ac16dc18a16"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>newContact.id</con:name><con:value>5</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="get existing contact">
+      <con:testStep type="properties" name="Properties" id="18313ee5-9be5-461b-bbef-4ac16dc18a16"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>newContact.id</con:name><con:value>4</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create contact" id="629d7ffd-2eeb-46e3-bb04-778428631c99">
         <con:settings/>
-        <con:config method="GET" xsi:type="con:HttpRequest" name="get existing contact" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:config method="POST" xsi:type="con:HttpRequest" name="create contact" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
-          <con:endpoint>${test.http.host.rest}/contacts/1</con:endpoint>
-          <con:request/>
+          <con:endpoint>${test.http.host.rest}/contacts</con:endpoint>
+          <con:request>{
+   "id":"",
+   "name":"new contact",
+   "address":"new address",
+   "gender":"M",
+   "dob":"2000-04-16",
+   "email":"new-test@email.com",
+   "mobile":"5145145111",
+   "phone":"5145145121"
+}</con:request>
           
           
-          <con:assertion type="XPath Match" name="valid id returned"><con:configuration><path>//*:Response/*:id</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+          <con:assertion type="XPath Match" name="valid name returned"><con:configuration><path>//*:Response/*:name</path><content>new contact</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid address returned"><con:configuration><path>//*:Response/*:address</path><content>new address</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
             <con:username/>
             <con:password/>
             <con:authType>Global HTTP Settings</con:authType>
@@ -1930,26 +1939,17 @@ log.info(stopTime)</script>
       
       
       
-      <con:testStep type="httprequest" name="save new contact">
+      <con:testStep type="transfer" name="transfer key" id="c1469165-8392-4ede-ae0c-08bc0ba0118c"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>key</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>create contact</con:sourceStep><con:sourcePath>//*:Response/*:id</con:sourcePath><con:targetType>newContact.id</con:targetType><con:targetStep>Properties</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="validate 1">
         <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="save new contact" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:config method="GET" xsi:type="con:HttpRequest" name="validate 1" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
-          <con:endpoint>${test.http.host.rest}/contacts</con:endpoint>
-          <con:request>{
-   "id":"",
-   "name":"new contact",
-   "address":"new address",
-   "gender":"M",
-   "dob":"2000-04-16",
-   "email":"new-test@email.com",
-   "mobile":"5145145111",
-   "phone":"5145145121"
-}</con:request>
+          <con:endpoint>${test.http.host.rest}/contacts/${newContact.id}</con:endpoint>
+          <con:request/>
           
           
-          <con:assertion type="XPath Match" name="valid name returned"><con:configuration><path>//*:Response/*:name</path><content>new contact</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid address returned"><con:configuration><path>//*:Response/*:address</path><content>new address</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+          <con:assertion type="XPath Match" name="valid name returned"><con:configuration><path>//*:Response/*:name</path><content>new contact</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid address returned"><con:configuration><path>//*:Response/*:address</path><content>new address</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid key returned"><con:configuration><path>//*:Response/*:id</path><content>${newContact.id}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
             <con:username/>
             <con:password/>
             <con:authType>Global HTTP Settings</con:authType>
@@ -1958,9 +1958,9 @@ log.info(stopTime)</script>
           <con:jmsPropertyConfig/>
           <con:parameters/>
         </con:config>
-      </con:testStep><con:testStep type="transfer" name="transfer key"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>key</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>save new contact</con:sourceStep><con:sourcePath>//*:Response/*:id</con:sourcePath><con:targetType>newContact.id</con:targetType><con:targetStep>Properties</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="update existing contact">
+      </con:testStep><con:testStep type="httprequest" name="update contact">
         <con:settings/>
-        <con:config method="PUT" xsi:type="con:HttpRequest" name="update existing contact" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:config method="PUT" xsi:type="con:HttpRequest" name="update contact" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
@@ -1986,9 +1986,9 @@ log.info(stopTime)</script>
           <con:jmsPropertyConfig/>
           <con:parameters/>
         </con:config>
-      </con:testStep><con:testStep type="httprequest" name="get updated contact">
+      </con:testStep><con:testStep type="httprequest" name="validate 2">
         <con:settings/>
-        <con:config method="GET" xsi:type="con:HttpRequest" name="get updated contact" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:config method="GET" xsi:type="con:HttpRequest" name="validate 2" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
@@ -1997,6 +1997,53 @@ log.info(stopTime)</script>
           
           
           <con:assertion type="XPath Match" name="valid name returned"><con:configuration><path>//*:Response/*:name</path><content>updated contact</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid address returned"><con:configuration><path>//*:Response/*:address</path><content>updated address</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid key returned"><con:configuration><path>//*:Response/*:id</path><content>${newContact.id}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+            <con:username/>
+            <con:password/>
+            <con:authType>Global HTTP Settings</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="delete contact">
+        <con:settings/>
+        <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete contact" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/contacts/${newContact.id}</con:endpoint>
+          <con:request>{
+   "id":"",
+   "name":"updated contact",
+   "address":"updated address",
+   "gender":"F",
+   "dob":"2001-04-16",
+   "email":"updated-test@email.com",
+   "mobile":"5145145111",
+   "phone":"5145145121"
+}</con:request>
+          
+          
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code returned"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
+            <con:username/>
+            <con:password/>
+            <con:authType>Global HTTP Settings</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="validate 3">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="validate 3" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/contacts/${newContact.id}</con:endpoint>
+          <con:request/>
+          
+          
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials>
             <con:username/>
             <con:password/>
             <con:authType>Global HTTP Settings</con:authType>
@@ -2152,7 +2199,346 @@ log.info(stopTime)</script>
         <con:status>NONE</con:status>
         <con:properties/>
       </con:breakPoints>
-    <con:breakPoints><con:testStepId>18313ee5-9be5-461b-bbef-4ac16dc18a16</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:properties/>
+    <con:breakPoints><con:testStepId>18313ee5-9be5-461b-bbef-4ac16dc18a16</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>629d7ffd-2eeb-46e3-bb04-778428631c99</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c1469165-8392-4ede-ae0c-08bc0ba0118c</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="true" maxResults="0" name="User CRUD" searchProperties="true">
+      <con:settings/>
+      
+      
+      
+      
+      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>newUser.key</con:name><con:value>3</con:value></con:property><con:property><con:name>newUser.userName</con:name><con:value>username</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create user">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="create user" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/user</con:endpoint>
+          <con:request>{
+   "primaryKey":"",
+   "firstName":"fname",
+   "lastName":"lname",
+   "userName":"${newUser.userName}",
+   "email":"new-test@email.com",
+   "canLogin":"true",
+   "isAdmin":"true"
+}</con:request>
+          
+          
+          <con:assertion type="XPath Match" name="valid firstName returned"><con:configuration><path>//*:Response/*:firstName</path><content>fname</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid userName returned"><con:configuration><path>//*:Response/*:userName</path><content>username</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+            <con:username/>
+            <con:password/>
+            <con:authType>Global HTTP Settings</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <con:testStep type="transfer" name="transfer key"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>primaryKey</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>create user</con:sourceStep><con:sourcePath>//*:Response/*:primaryKey</con:sourcePath><con:targetType>newUser.key</con:targetType><con:targetStep>Properties</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="validate 1">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="validate 1" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/user/${newUser.key}</con:endpoint>
+          <con:request/>
+          
+          
+          <con:assertion type="XPath Match" name="valid first name returned"><con:configuration><path>//*:Response/*:firstName</path><content>fname</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid userName returned"><con:configuration><path>//*:Response/*:userName</path><content>username</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid primaryKey returned"><con:configuration><path>//*:Response/*:primaryKey</path><content>${newUser.key}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+            <con:username/>
+            <con:password/>
+            <con:authType>Global HTTP Settings</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="load by username">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="load by username" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/user/usr/username</con:endpoint>
+          <con:request/>
+          
+          
+          <con:assertion type="XPath Match" name="valid first name returned"><con:configuration><path>//*:Response/*:firstName</path><content>fname</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid userName returned"><con:configuration><path>//*:Response/*:userName</path><content>username</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid primaryKey returned"><con:configuration><path>//*:Response/*:primaryKey</path><content>${newUser.key}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+            <con:username/>
+            <con:password/>
+            <con:authType>Global HTTP Settings</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="update user">
+        <con:settings/>
+        <con:config method="PUT" xsi:type="con:HttpRequest" name="update user" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/user/${newUser.key}</con:endpoint>
+          <con:request>{
+   "primaryKey":"",
+   "firstName":"updated-fname",
+   "lastName":"updated-lname",
+   "userName":"updated-username",
+   "email":"updated-test@email.com",
+   "canLogin":"false",
+   "isAdmin":"false"
+}</con:request>
+          
+          
+          <con:assertion type="XPath Match" name="valid firstName returned"><con:configuration><path>//*:Response/*:firstName</path><content>updated-fname</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid userName returned"><con:configuration><path>//*:Response/*:userName</path><content>updated-username</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid primaryKey returned"><con:configuration><path>//*:Response/*:primaryKey</path><content>${newUser.key}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+            <con:username/>
+            <con:password/>
+            <con:authType>Global HTTP Settings</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="validate 2">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="validate 2" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/user/${newUser.key}</con:endpoint>
+          <con:request/>
+          
+          
+          <con:assertion type="XPath Match" name="valid first name returned"><con:configuration><path>//*:Response/*:firstName</path><content>updated-fname</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid userName returned"><con:configuration><path>//*:Response/*:userName</path><content>updated-username</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid primaryKey returned"><con:configuration><path>//*:Response/*:primaryKey</path><content>${newUser.key}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+            <con:username/>
+            <con:password/>
+            <con:authType>Global HTTP Settings</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="delete contact">
+        <con:settings/>
+        <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete contact" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/contacts/${newUser.key}</con:endpoint>
+          <con:request>{
+   "id":"",
+   "name":"updated contact",
+   "address":"updated address",
+   "gender":"F",
+   "dob":"2001-04-16",
+   "email":"updated-test@email.com",
+   "mobile":"5145145111",
+   "phone":"5145145121"
+}</con:request>
+          
+          
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code returned"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
+            <con:username/>
+            <con:password/>
+            <con:authType>Global HTTP Settings</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="validate 3">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="validate 3" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/contacts/${newUser.key}</con:endpoint>
+          <con:request/>
+          
+          
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials>
+            <con:username/>
+            <con:password/>
+            <con:authType>Global HTTP Settings</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:properties/>
+      <con:reportParameters/>
+      <con:breakPoints>
+        <con:testStepId>16cf45a0-c1af-4c33-8819-0a4ea8276756</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>1342966e-515f-4ec0-9a4c-9d7c51c48542</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>1fb764e4-1840-4cf8-af80-00f7f2c2ece6</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>3b800581-6387-44ff-b35b-945408787b7c</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>edfd8dac-0104-4730-8cc6-0428d656d0ad</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>6a97c497-6e1b-4cef-b11d-07bf8213303c</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>f90e9cac-ab42-46ea-98df-be81bfe12c6a</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>0d0d0e4d-ae89-44ba-8a1f-a351325fb2ac</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>335a9d86-8bef-4093-94b6-f118d2b94d26</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>8cc6b576-1299-4a62-a3cb-02dba18d783c</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>3d446bb9-7f2d-437d-ba9d-538c8544ebca</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>887ed9bf-ef65-4cd6-8d63-fe63059b6114</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>5e49a61f-6c85-495d-9b4a-4cb38df93a4c</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>ff9f7042-ba4f-437e-a043-8021225671b8</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>d76aa335-29eb-4aa2-91cd-16d24dbca2ba</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>679e8216-4253-4db8-8c5d-14aaa0c542fd</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>71a6c31e-5f1d-4b27-b2a7-44b62806bf64</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>5a75c453-48bd-46bc-b1f3-1987ee84ae9b</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>5acde369-b009-4471-a36a-146d0396a252</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>fd95a9ee-7a42-47ac-acef-a96cb56e687c</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>3b97c817-b31a-4a3f-b8ff-409f243cff67</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>e2cdbfdb-8bb7-4def-9ab4-51a9f9aa9b35</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>a461e16f-8295-44f1-8150-5ac5d8413f25</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>8c722f3e-448b-48cb-9417-916e6c71f2a4</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>b5ffe9da-6232-45b2-8878-ff6d59663ebd</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>f9f33afa-18df-4001-b902-af22172b09c9</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>f41cff6a-ef96-412a-88b1-035cd578ec10</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>bf010173-19fa-4baf-b5f4-0aa02758a4ca</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>c9f13830-2d42-4ea7-afff-1a1c3960b124</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+    <con:breakPoints><con:testStepId>18313ee5-9be5-461b-bbef-4ac16dc18a16</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>629d7ffd-2eeb-46e3-bb04-778428631c99</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c1469165-8392-4ede-ae0c-08bc0ba0118c</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:properties/>
     <con:reportParameters/>
   </con:testSuite>
   <con:requirements/>
