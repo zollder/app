@@ -24,7 +24,7 @@ CREATE TABLE  `user`
   firstName varchar(45) NOT NULL,
   lastName varchar(45) NOT NULL,
   userName varchar(45) NOT NULL UNIQUE,
-  password varchar(80),
+  password varchar(80) NOT NULL,
   email varchar(45) DEFAULT NULL,
   isEnabled boolean NOT NULL,
   canLogin boolean NOT NULL,

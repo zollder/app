@@ -9,10 +9,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
+import com.app.dto.PasswordReset;
+import com.app.security.LoggedUserFactory;
+import com.app.security.PasswordEncoder;
+import com.app.security.PasswordEncoderFactory;
 import com.app.web.utils.Documentation;
 
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -50,7 +55,7 @@ public class User implements Serializable
 	@Basic
 	@Column(name = "password")
 	@Documentation(caption = "Password", comment = "User's password used to login.")
-	@JsonIgnore
+	//@JsonIgnore
 	private String password;
 
 	@Basic
@@ -58,6 +63,11 @@ public class User implements Serializable
 	@Documentation(caption = "Email", comment = "User's email.")
 	private String email;
 
+	@Basic
+	@Column(name = "isEnabled")
+	@Documentation(caption = "Is enabled", comment = "Enables the user.")
+	private Boolean isEnabled;
+	
 	@Basic
 	@Column(name = "canLogin")
 	@Documentation(caption = "Can Login", comment = "Grants user the ability to login.")
@@ -68,6 +78,42 @@ public class User implements Serializable
 	@Documentation(caption = "Is Administrator", comment = "Grants user administrator access rights.")
 	private Boolean isAdmin;
 
+	/** Used by UI and transformed into a password by passwordEncoder */
+	@Transient
+	private String newPassword;
+
+	@Transient
+	private String confirmPassword;
+
+	@Transient
+	@JsonIgnore
+	protected PasswordEncoder passwordEncoder;
+
+	@Transient
+	@JsonIgnore
+	protected User loggedUser; // Loaded on demand
+
+	// TODO: implement resetPassword and changePassword
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/**
+	 * Resets password for user, observing standard password changing rules.
+	 * TODO: Make this method available to 'administrators' only	 * 
+	 * @param passwordReset data from the UI, which is currently mocked using the password field from the User payload
+	 * @throws InvalidRequestException if the password update fails
+	 * 
+	 * @see UserService#resetPassword(Long, PasswordReset)
+	 */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public void resetPassword(PasswordReset passwordReset)
+	{
+		// TODO: add password validation
+
+		String encodedPassword = this.getPasswordEncoder().encodePassword(this.getPassword());
+		this.setPassword(encodedPassword);
+
+		this.setNewPassword(null);
+		this.setConfirmPassword(null);
+	}
 	// --------------------------------------------------------------------------------------------------------------------------------
 	//setters & getters
 	// --------------------------------------------------------------------------------------------------------------------------------
@@ -144,6 +190,18 @@ public class User implements Serializable
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
+	public Boolean getIsEnabled()
+	{
+		return isEnabled;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public void setIsEnabled(Boolean isEnabled)
+	{
+		this.isEnabled = isEnabled;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public Boolean getCanLogin()
 	{
 		return canLogin;
@@ -165,5 +223,53 @@ public class User implements Serializable
 	public void setIsAdmin(Boolean isAdmin)
 	{
 		this.isAdmin = isAdmin;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public String getNewPassword()
+	{
+		return newPassword;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public void setNewPassword(String newPassword)
+	{
+		this.newPassword = newPassword;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public String getConfirmPassword()
+	{
+		return confirmPassword;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public void setConfirmPassword(String confirmPassword)
+	{
+		this.confirmPassword = confirmPassword;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public PasswordEncoder getPasswordEncoder()
+	{
+		if (passwordEncoder == null)
+			passwordEncoder = PasswordEncoderFactory.getPasswordEncoder();
+
+		return passwordEncoder;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public User getLoggedUser()
+	{
+		if (loggedUser == null)
+			loggedUser = LoggedUserFactory.get();
+
+		return loggedUser;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public void setLoggedUser(User loggedUser)
+	{
+		this.loggedUser = loggedUser;
 	}
 }

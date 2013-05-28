@@ -51,7 +51,7 @@ public class UserDaoImpl implements UserDao
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public User update(User entity)
 	{
-		sessionFactory.getCurrentSession().saveOrUpdate(entity);		
+		sessionFactory.getCurrentSession().merge(entity);		
 		return entity;
 	}
 

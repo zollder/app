@@ -1,6 +1,7 @@
 package com.app.services;
 
 import com.app.domain.User;
+import com.app.dto.PasswordReset;
 
 public interface UserService
 {
@@ -33,4 +34,13 @@ public interface UserService
 	/** Refreshes saved User so ensure correct serialisation/marshalling (especially for @ManyToOne relations) */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public void refresh(User user);
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/**
+	 * Resets the password for the User entity having the given primary key.
+	 * @param primaryKey - user account identifier.
+	 * @param resetPassword - data provided by the UI for the password reset
+	 */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public User resetPassword(Long primaryKey, PasswordReset resetPassword);
 }

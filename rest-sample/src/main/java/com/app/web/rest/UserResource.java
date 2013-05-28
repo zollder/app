@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.app.domain.Contact;
 import com.app.domain.User;
+import com.app.dto.PasswordReset;
 import com.app.services.UserService;
 
 //-------------------------------------------------------------------------------------------------------------------------------------
@@ -38,7 +39,7 @@ public class UserResource
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/**
 	 * Retrieves {@link User} resource associated to the given key (JSON).
-	 * TODO: This resource is required for testing purpose and must not be exposed to client.
+	 * TODO: This resource is required for testing purpose only and must not be exposed to client.
 	 */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/usr/{username}", method = { RequestMethod.GET })
@@ -86,5 +87,19 @@ public class UserResource
 	public void delete(@PathVariable Long key)
 	{
 		userService.delete(key);
+	}
+
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Resets {@link User}'s password resource having the given key.
+	 */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value = "/{key}/password", params= {"reset=true"}, method = RequestMethod.PUT)
+	@ResponseBody
+	public User resetPassword(@PathVariable Long key, @RequestBody PasswordReset passwordReset)
+	{
+		User user = userService.resetPassword(key, passwordReset);
+		userService.refresh(user);
+		return user;
 	}
 }
