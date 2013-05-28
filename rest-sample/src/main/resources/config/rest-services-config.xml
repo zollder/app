@@ -6,10 +6,7 @@
 		xmlns:mvc="http://www.springframework.org/schema/mvc"
 		xmlns:context="http://www.springframework.org/schema/context"
 		xmlns:tx="http://www.springframework.org/schema/tx"
-		xmlns:security="http://www.springframework.org/schema/security"
 		xsi:schemaLocation="
-			http://www.springframework.org/schema/security
-			http://www.springframework.org/schema/security/spring-security-3.0.xsd
 			http://www.springframework.org/schema/beans
 			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 			http://www.springframework.org/schema/mvc
@@ -57,7 +54,6 @@
 			</util:list>
 		</property>
 	</bean>
-
 
 
  	<!-- DataSource, Hibernate and Transaction Manager Configuration -->
