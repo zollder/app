@@ -1883,7 +1883,7 @@ log.info(stopTime)</script>
       
       
       
-      <con:testStep type="properties" name="Properties" id="18313ee5-9be5-461b-bbef-4ac16dc18a16"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>newContact.id</con:name><con:value>4</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create contact" id="629d7ffd-2eeb-46e3-bb04-778428631c99">
+      <con:testStep type="properties" name="Properties" id="18313ee5-9be5-461b-bbef-4ac16dc18a16"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>newContact.id</con:name><con:value>1</con:value></con:property><con:property><con:name>app.username</con:name><con:value>admin</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create contact" id="629d7ffd-2eeb-46e3-bb04-778428631c99">
         <con:settings/>
         <con:config method="POST" xsi:type="con:HttpRequest" name="create contact" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
@@ -1903,9 +1903,9 @@ log.info(stopTime)</script>
           
           
           <con:assertion type="XPath Match" name="valid name returned"><con:configuration><path>//*:Response/*:name</path><content>new contact</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid address returned"><con:configuration><path>//*:Response/*:address</path><content>new address</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username/>
-            <con:password/>
-            <con:authType>Global HTTP Settings</con:authType>
+            <con:username>${app.username}</con:username>
+            <con:password>${adminpass}</con:password>
+            <con:authType>Preemptive</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
@@ -1950,9 +1950,9 @@ log.info(stopTime)</script>
           
           
           <con:assertion type="XPath Match" name="valid name returned"><con:configuration><path>//*:Response/*:name</path><content>new contact</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid address returned"><con:configuration><path>//*:Response/*:address</path><content>new address</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid key returned"><con:configuration><path>//*:Response/*:id</path><content>${newContact.id}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username/>
-            <con:password/>
-            <con:authType>Global HTTP Settings</con:authType>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
@@ -1978,9 +1978,9 @@ log.info(stopTime)</script>
           
           
           <con:assertion type="XPath Match" name="valid name returned"><con:configuration><path>//*:Response/*:name</path><content>updated contact</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid address returned"><con:configuration><path>//*:Response/*:address</path><content>updated address</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid key returned"><con:configuration><path>//*:Response/*:id</path><content>${newContact.id}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username/>
-            <con:password/>
-            <con:authType>Global HTTP Settings</con:authType>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
@@ -1997,9 +1997,9 @@ log.info(stopTime)</script>
           
           
           <con:assertion type="XPath Match" name="valid name returned"><con:configuration><path>//*:Response/*:name</path><content>updated contact</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid address returned"><con:configuration><path>//*:Response/*:address</path><content>updated address</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid key returned"><con:configuration><path>//*:Response/*:id</path><content>${newContact.id}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username/>
-            <con:password/>
-            <con:authType>Global HTTP Settings</con:authType>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
@@ -2025,9 +2025,9 @@ log.info(stopTime)</script>
           
           
           <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code returned"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
-            <con:username/>
-            <con:password/>
-            <con:authType>Global HTTP Settings</con:authType>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
@@ -2044,9 +2044,9 @@ log.info(stopTime)</script>
           
           
           <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials>
-            <con:username/>
-            <con:password/>
-            <con:authType>Global HTTP Settings</con:authType>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
@@ -2199,13 +2199,13 @@ log.info(stopTime)</script>
         <con:status>NONE</con:status>
         <con:properties/>
       </con:breakPoints>
-    <con:breakPoints><con:testStepId>18313ee5-9be5-461b-bbef-4ac16dc18a16</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>629d7ffd-2eeb-46e3-bb04-778428631c99</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c1469165-8392-4ede-ae0c-08bc0ba0118c</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="true" maxResults="0" name="User CRUD" searchProperties="true">
+    <con:breakPoints><con:testStepId>18313ee5-9be5-461b-bbef-4ac16dc18a16</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>629d7ffd-2eeb-46e3-bb04-778428631c99</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c1469165-8392-4ede-ae0c-08bc0ba0118c</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="true" maxResults="0" name="User CRUD" searchProperties="true" id="1b33f9a5-ce08-4890-8d55-e45e145d82c9">
       <con:settings/>
       
       
       
       
-      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>newUser.key</con:name><con:value>3</con:value></con:property><con:property><con:name>newUser.userName</con:name><con:value>username</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create user">
+      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>newUser.key</con:name><con:value>4</con:value></con:property><con:property><con:name>newUser.userName</con:name><con:value>username</con:value></con:property><con:property><con:name>app.username</con:name><con:value>admin</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create user">
         <con:settings/>
         <con:config method="POST" xsi:type="con:HttpRequest" name="create user" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
@@ -2217,16 +2217,18 @@ log.info(stopTime)</script>
    "firstName":"fname",
    "lastName":"lname",
    "userName":"${newUser.userName}",
+   "password":"test234",
    "email":"new-test@email.com",
+   "isEnabled":"true",
    "canLogin":"true",
    "isAdmin":"true"
 }</con:request>
           
           
           <con:assertion type="XPath Match" name="valid firstName returned"><con:configuration><path>//*:Response/*:firstName</path><content>fname</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid userName returned"><con:configuration><path>//*:Response/*:userName</path><content>username</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username/>
-            <con:password/>
-            <con:authType>Global HTTP Settings</con:authType>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
@@ -2271,9 +2273,9 @@ log.info(stopTime)</script>
           
           
           <con:assertion type="XPath Match" name="valid first name returned"><con:configuration><path>//*:Response/*:firstName</path><content>fname</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid userName returned"><con:configuration><path>//*:Response/*:userName</path><content>username</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid primaryKey returned"><con:configuration><path>//*:Response/*:primaryKey</path><content>${newUser.key}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username/>
-            <con:password/>
-            <con:authType>Global HTTP Settings</con:authType>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
@@ -2290,9 +2292,9 @@ log.info(stopTime)</script>
           
           
           <con:assertion type="XPath Match" name="valid first name returned"><con:configuration><path>//*:Response/*:firstName</path><content>fname</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid userName returned"><con:configuration><path>//*:Response/*:userName</path><content>username</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid primaryKey returned"><con:configuration><path>//*:Response/*:primaryKey</path><content>${newUser.key}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username/>
-            <con:password/>
-            <con:authType>Global HTTP Settings</con:authType>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
@@ -2317,9 +2319,9 @@ log.info(stopTime)</script>
           
           
           <con:assertion type="XPath Match" name="valid firstName returned"><con:configuration><path>//*:Response/*:firstName</path><content>updated-fname</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid userName returned"><con:configuration><path>//*:Response/*:userName</path><content>updated-username</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid primaryKey returned"><con:configuration><path>//*:Response/*:primaryKey</path><content>${newUser.key}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username/>
-            <con:password/>
-            <con:authType>Global HTTP Settings</con:authType>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
@@ -2336,9 +2338,9 @@ log.info(stopTime)</script>
           
           
           <con:assertion type="XPath Match" name="valid first name returned"><con:configuration><path>//*:Response/*:firstName</path><content>updated-fname</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid userName returned"><con:configuration><path>//*:Response/*:userName</path><content>updated-username</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid primaryKey returned"><con:configuration><path>//*:Response/*:primaryKey</path><content>${newUser.key}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username/>
-            <con:password/>
-            <con:authType>Global HTTP Settings</con:authType>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
@@ -2350,7 +2352,7 @@ log.info(stopTime)</script>
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
-          <con:endpoint>${test.http.host.rest}/contacts/${newUser.key}</con:endpoint>
+          <con:endpoint>${test.http.host.rest}/user/${newUser.key}</con:endpoint>
           <con:request>{
    "id":"",
    "name":"updated contact",
@@ -2364,9 +2366,9 @@ log.info(stopTime)</script>
           
           
           <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code returned"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
-            <con:username/>
-            <con:password/>
-            <con:authType>Global HTTP Settings</con:authType>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
@@ -2383,9 +2385,9 @@ log.info(stopTime)</script>
           
           
           <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials>
-            <con:username/>
-            <con:password/>
-            <con:authType>Global HTTP Settings</con:authType>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>

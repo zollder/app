@@ -10,20 +10,50 @@
 
 	<display-name>REST Sample</display-name>
 
-	<!-- Main configuration file for this Spring web application. -->
+	<!-- Context Location and Context Listener Configuration-->
+	<!--=======================================================================================================================-->
+	<!--
+		Main configuration file for this Spring web application.
+		Keep all configuration files in the app/resources/* to take advantage of "classpath:" notation 
+	-->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:config/rest-services-config.xml
+			classpath:config/security-context.xml
 		</param-value>
 	</context-param>
 
-	<!-- Loads the Spring web application context using the config file defined above. -->
+	<!-- Loads the Spring web application context using the configuration file defined above. -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
 
+	<!-- Spring Security Configuration (hook into the Spring Security web infrastructure) -->
+	<!--=======================================================================================================================-->
+
+	<!--
+		Spring servlet filter: delegates filtering to implementation of javax.servlet.filter
+		which is registered as a bean in the rest-services-config
+	-->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<!--
+		Defines FilterChainProxy: filter that chains together one or more additional filters.
+		Spring automatically creates filter beans in security-context when <http> element is added
+	-->
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<!-- Servlet Configuration-->
+	<!--=======================================================================================================================-->
 	<!--
 		Define the Spring Dispatcher Servlet for the REST services.
 		The 'contextConfiguration' param with an empty value means that the
