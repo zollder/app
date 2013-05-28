@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 
 <project name="rest-sample" default="build" basedir=".">
-	<description>Builds, deploys and tests naesta project(s)</description>
+	<description>Builds, deploys Rest-Sampple project</description>
 
 	<echo>---------------------------------------------------------</echo>
-	<echo>Project: Naesta global build</echo>
+	<echo>Project: Rest-Sample global build</echo>
 	<echo>---------------------------------------------------------</echo>
 
 	<!-- Root script directory -->
@@ -66,7 +66,8 @@
 
 	<target name="clean"			description="Cleans project"	depends="clean-step"/>
 	<target name="build"			description="Builds project"	depends="build-step"/>
-	<target name="deploy"			description="Deploys all deployable projects"	depends="undeploy-step, deploy-step"/>
+	<target name="deploy"			description="Deploys all deployable projects"	depends="undeploy-step, deploy-db, deploy-step"/>
+	<target name="deploy-db"		description="Deploys database schema and data"	depends="deploy-db-step"/>
 
 	<target name="tomcat-start"			description="Cold Tomcat start"			depends="tomcat-start-step"/>
 	<target name="tomcat-stop"			description="Hard Tomcat stop"			depends="tomcat-stop-step"/>
@@ -82,9 +83,7 @@
 				description="Cleans, builds and deploys the app, deploys dev schema and data, runs functional tests"
 				depends="clean-test, tomcat-start, deploy-test-schema, deploy-test-data, build, deploy, quick-test"/>
 
-	<target name="deploy-schema"	description="Deploys dev database schema"	depends="copy-schema-step, deploy-schema-step"/>
-	<target name="deploy-data"		description="Deploys dev database data"		depends="copy-data-step, deploy-data-step"/>
-	<target name="deploy-db"		description="Resets dev database"			depends="deploy-schema, deploy-data"/>
+
 
 	<target name="deploy-test-db"		description="Prepared test database"		depends="deploy-test-schema, deploy-test-data"/>
 	<target name="drop-test-db"			description="Drops test database schema"	depends="drop-test-db-step"/>
@@ -275,6 +274,24 @@
 
 	<!-- Database-related steps -->
 	<!--=======================================================================================================================-->
+
+	<target name="deploy-db-step">
+		<echo>Deploying database schema, please wait ...</echo>
+		<echo>executable: ${mysqladmin}</echo>
+		<echo>sql directory: ${dir.sql}</echo>
+		<echo>sql script: ${db.sql.script}</echo>
+		<echo>db user: ${db.user}</echo>
+		<echo>db password: ${db.password}</echo>
+		<echo>db host: ${db.host}</echo>
+		<echo>db port: ${db.port}</echo>
+		<exec executable="${mysqladmin}" failonerror="true" input="${dir.sql}/${db.sql.script}">
+			<arg value="--user=${db.user}"/>
+			<arg value="--password=${db.password}"/>
+			<arg value="--host=${db.host}"/>
+			<arg value="--port=${db.port}"/>
+		</exec>
+	</target>
+
 	<target name="deploy-schema-step">
 		<exec executable="${mysqladmin}" failonerror="true" input="${dir.temp}/${naesta.db.schema}">
 			<arg value="--user=${naesta.db.user}"/>
