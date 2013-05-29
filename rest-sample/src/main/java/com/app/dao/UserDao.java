@@ -10,9 +10,14 @@ public interface UserDao
 	public User loadWithPrimaryKey(Long key);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Loads given entity by criteria. Returns fetched entity. */
+	/** Loads given entity by userName. Returns fetched entity. */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public User findByUserName(String username);
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** TODO: revise to make it generic. Loads given entity by criteria. Returns fetched entity. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public User findByCriteria(String username);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/** Saves given entity. Returns saved entity. */

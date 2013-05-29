@@ -1,7 +1,9 @@
 package com.app.dao.impl;
  
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,8 +38,20 @@ public class UserDaoImpl implements UserDao
 	{
 		// TODO: revise the code: use criteria approach
 		Session session = sessionFactory.getCurrentSession();
-		String getUserNameQuery = "from User as usr where usr.userName = " + username;
-		User user = (User) session.createQuery(getUserNameQuery).uniqueResult();
+		User user = (User) session.createQuery("from User usr where usr.userName = ?").setString(0, username).uniqueResult();
+		return user;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	// TODO: revise to make it generic
+	public User findByCriteria(String username)
+	{
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(User.class);
+		criteria.add(Restrictions.eq("userName", username));
+		criteria.setMaxResults(1);
+
+		User user = (User) criteria.uniqueResult();
 		return user;
 	}
 
