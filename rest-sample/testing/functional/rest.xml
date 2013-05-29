@@ -1883,7 +1883,7 @@ log.info(stopTime)</script>
       
       
       
-      <con:testStep type="properties" name="Properties" id="18313ee5-9be5-461b-bbef-4ac16dc18a16"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>newContact.id</con:name><con:value>1</con:value></con:property><con:property><con:name>app.username</con:name><con:value>admin</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create contact" id="629d7ffd-2eeb-46e3-bb04-778428631c99">
+      <con:testStep type="properties" name="Properties" id="18313ee5-9be5-461b-bbef-4ac16dc18a16"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>newContact.id</con:name><con:value>1</con:value></con:property><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create contact" id="629d7ffd-2eeb-46e3-bb04-778428631c99">
         <con:settings/>
         <con:config method="POST" xsi:type="con:HttpRequest" name="create contact" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
@@ -1904,7 +1904,7 @@ log.info(stopTime)</script>
           
           <con:assertion type="XPath Match" name="valid name returned"><con:configuration><path>//*:Response/*:name</path><content>new contact</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid address returned"><con:configuration><path>//*:Response/*:address</path><content>new address</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
             <con:username>${app.username}</con:username>
-            <con:password>${adminpass}</con:password>
+            <con:password>${app.password}</con:password>
             <con:authType>Preemptive</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
@@ -2205,7 +2205,7 @@ log.info(stopTime)</script>
       
       
       
-      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>newUser.key</con:name><con:value>4</con:value></con:property><con:property><con:name>newUser.userName</con:name><con:value>username</con:value></con:property><con:property><con:name>app.username</con:name><con:value>admin</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create user">
+      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>newUser.key</con:name><con:value>1</con:value></con:property><con:property><con:name>newUser.userName</con:name><con:value>username</con:value></con:property><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create user">
         <con:settings/>
         <con:config method="POST" xsi:type="con:HttpRequest" name="create user" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
@@ -2217,7 +2217,7 @@ log.info(stopTime)</script>
    "firstName":"fname",
    "lastName":"lname",
    "userName":"${newUser.userName}",
-   "password":"test234",
+   "password":"adminpass",
    "email":"new-test@email.com",
    "isEnabled":"true",
    "canLogin":"true",
@@ -2314,6 +2314,7 @@ log.info(stopTime)</script>
    "userName":"updated-username",
    "email":"updated-test@email.com",
    "canLogin":"false",
+   "isEnabled":"true",
    "isAdmin":"false"
 }</con:request>
           
