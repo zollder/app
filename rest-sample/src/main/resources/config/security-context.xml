@@ -18,8 +18,8 @@
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="admin" password="adminpass" authorities="ROLE_USER, ROLE_ADMIN" />
-				<user name="test" password="testpass" authorities="ROLE_USER" />
+				<user name="adminuser" password="adminpass" authorities="ROLE_USER, ROLE_ADMIN" />
+				<user name="testuser" password="testpass" authorities="ROLE_USER" />
 			</user-service>
 		</authentication-provider>
 	</authentication-manager>

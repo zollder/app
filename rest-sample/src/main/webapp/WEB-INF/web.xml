@@ -35,7 +35,7 @@
 
 	<!--
 		Spring servlet filter: delegates filtering to implementation of javax.servlet.filter
-		which is registered as a bean in the rest-services-config
+		which is registered as a bean in the security-context.xml
 	-->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>

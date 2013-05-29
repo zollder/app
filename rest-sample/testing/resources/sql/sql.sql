@@ -31,3 +31,7 @@ CREATE TABLE  `user`
   isAdmin boolean NOT NULL,
   PRIMARY KEY (primaryKey)
 );
+
+INSERT INTO `user`
+VALUES
+    (1,'Admin','User','admin','d9acd48369a1a20280c8c3b6921d8d8a','admin@email.com',1,1,1);
