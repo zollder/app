@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans:beans
-	xmlns="http://www.springframework.org/schema/security"
-	xmlns:beans="http://www.springframework.org/schema/beans"
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 					http://www.springframework.org/schema/beans
@@ -11,16 +11,33 @@
 					http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 
-	<http auto-config='true'>
-		<intercept-url pattern="/**" access="ROLE_USER" />
-	</http>
+	<!-- Spring Security Configuration -->
+	<!--=======================================================================================================================-->
 
-	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="adminuser" password="adminpass" authorities="ROLE_USER, ROLE_ADMIN" />
-				<user name="testuser" password="testpass" authorities="ROLE_USER" />
-			</user-service>
-		</authentication-provider>
-	</authentication-manager>
-</beans:beans>
+	<!-- HTTP security handling -->
+	<security:http access-denied-page="/denied.jsp" use-expressions="true">
+		<!-- Defines a pattern which is matched against the URL's of incoming requests-->
+		<security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" requires-channel="any" />
+
+		<!-- Enables basic authentication instead of form login. Gives precedence to the first -->
+		<security:http-basic />
+	</security:http>
+
+	<!-- Authentication strategy: use custom implementation of the Spring's UserDetailsService -->
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="userSecurityService">
+			<security:password-encoder ref="passwordEncoder" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<!-- Custom password encoder (salted) -->
+	<bean id="passwordEncoder" class="com.app.security.PasswordEncoder" />
+
+	<!--
+		Enables simple role-based constraints with Spring's native annotations (currently not used)
+		Example: @PreAuthorize("hasAuthority('ROLE_TELLER')")
+		Note: annotated methods will only be secured for instances which are defined as Spring beans
+	-->
+	<security:global-method-security pre-post-annotations="enabled" />
+
+</beans>

@@ -86,7 +86,7 @@ public class PasswordEncoder extends Md5PasswordEncoder
 		}
 		catch (Exception e)
 		{
-			throw new RuntimeException("failed to encode password", e);
+			throw new RuntimeException("Failed to encode password", e);
 		}
 	}
 }
