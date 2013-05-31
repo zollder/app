@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -25,6 +27,7 @@ import com.app.web.utils.Documentation;
 //--------------------------------------------------------------------------------------------------------------------------------
 @Entity
 @Table(name="user", uniqueConstraints = { @UniqueConstraint(columnNames = { "userName" }) })
+@Documentation(caption = "User", comment = "Rest-sample application user.")
 public class User implements Serializable
 {
 	// Default serial version ID
@@ -40,42 +43,54 @@ public class User implements Serializable
 	@Basic
 	@Column(name = "firstName")
 	@Documentation(caption = "First Name", comment = "User's first name.")
+	@NotNull
+	@Size(max = 80)
 	private String firstName;
 	
 	@Basic
 	@Column(name = "lastName")
 	@Documentation(caption = "Last Name", comment = "User's last name.")
+	@Size(max = 80)
 	private String lastName;
 
 	@Basic
 	@Column(name = "userName")
 	@Documentation(caption = "Name", comment = "User's identification name.")
+	@NotNull
+	@Size(max = 80)
 	private String userName;
 
 	@Basic
 	@Column(name = "password")
 	@Documentation(caption = "Password", comment = "User's password used to login.")
+	@NotNull
+	@Size(max = 80)
 	//@JsonIgnore
 	private String password;
 
 	@Basic
 	@Column(name = "email")
 	@Documentation(caption = "Email", comment = "User's email.")
+	@NotNull
+	@Size(max = 120)
 	private String email;
 
 	@Basic
 	@Column(name = "isEnabled")
 	@Documentation(caption = "Is enabled", comment = "Enables the user.")
+	@NotNull
 	private Boolean isEnabled;
 	
 	@Basic
 	@Column(name = "canLogin")
 	@Documentation(caption = "Can Login", comment = "Grants user the ability to login.")
+	@NotNull
 	private Boolean canLogin;
 
 	@Basic
 	@Column(name = "isAdmin")
 	@Documentation(caption = "Is Administrator", comment = "Grants user administrator access rights.")
+	@NotNull
 	private Boolean isAdmin;
 
 	/** Used by UI and transformed into a password by passwordEncoder */

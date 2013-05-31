@@ -23,11 +23,17 @@
 	<!-- Enables automatic bean discovery -->
 	<context:annotation-config/>
 
+
 	<!--
 		Enables annotation-driven Spring MVC: allows binding request parameters to handler method parameters
 		registers several features, including JSR-303 validation support, message conversion, field formatting
 	-->
 	<mvc:annotation-driven/>
+
+
+	<!-- Enables injection of ConstraintValidator instantiated by spring into custom JSR303 validation -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
 
 	<!--
 		 Setup spring to pull in @Controller, @RequestMapping, etc Configuration scans specified packages
@@ -97,4 +103,5 @@
         (from native exceptions to Spring DataAccessException hierarchy).
     -->
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
 </beans>

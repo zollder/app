@@ -36,7 +36,7 @@
 	<!--
 		Enables simple role-based constraints with Spring's native annotations (currently not used)
 		Example: @PreAuthorize("hasAuthority('ROLE_TELLER')")
-		Note: annotated methods will only be secured for instances which are defined as Spring beans
+		Note: annotated methods will only be secured for instances which are defined as Spring beans.
 	-->
 	<security:global-method-security pre-post-annotations="enabled" />
 
