@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dao.ContactsDao;
-import com.app.domain.Contact;
+import com.app.domain.model.Contact;
  
 @Repository
 @Transactional

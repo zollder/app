@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.app.domain.Contact;
-import com.app.services.ContactService;
+import com.app.domain.model.Contact;
+import com.app.domain.services.ContactService;
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 @Controller

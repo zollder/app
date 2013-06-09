@@ -1,16 +1,21 @@
-package com.app.dao;
+package com.app.domain.services;
 
 import com.app.domain.model.User;
+import com.app.domain.dto.PasswordReset;
 
-public interface UserDao extends AbstractDao<User>
+public interface UserService extends AbstractService<User>
 {
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Loads given User by userName. Returns fetched User. */
+	/** Loads given user entity by userName. Returns fetched user. */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public User findByUserName(String username);
+	public User loadWithUserName(String userName);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** TODO: revise to make it generic. Loads given User by criteria. Returns fetched User. */
+	/**
+	 * Resets the password for the User entity having the given primary key.
+	 * @param primaryKey - user account identifier.
+	 * @param resetPassword - data provided by the UI for the password reset
+	 */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public User findByCriteria(String username);
+	public User resetPassword(Long primaryKey, PasswordReset resetPassword);
 }

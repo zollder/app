@@ -1,36 +1,38 @@
-package com.app.dao;
+package com.app.domain.services;
 
-import java.util.List;
+import java.io.Serializable;
 
-import com.app.domain.model.Contact;
+import com.app.domain.model.AbstractBase;
 
-public interface ContactsDao
+//--------------------------------------------------------------------------------------------------------------------------------
+/** Implements standard services around any {@link AbstractBase} entity */
+//--------------------------------------------------------------------------------------------------------------------------------
+public interface AbstractService<T extends Serializable>
 {
-	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Loads given entity by primary key (id). Returns fetched entity. */
-	// --------------------------------------------------------------------------------------------------------------------------------
-	public Contact loadWithPrimaryKey(Long key);
-
-	public List<Contact> searchContacts(String name);
-	public List<Contact> loadAll();
+	public Class<T> getModelClass();
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Saves given entity. Returns saved entity. */
+	/** Loads the entity by primary key (id). Returns loaded entity. Throws DataNotFoundException. */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public Contact save(Contact contact);
+	public T loadWithPrimaryKey(Long key);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Updates given entity. Returns updated entity. */
+	/** Saves (inserts) given entity. Returns saved entity. */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public Contact update(Contact contact);
+	public T save(T entity);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Deletes given entity. */
+	/** Updates (merges) given entity. Returns updated entity. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public T update(T entity);
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Deletes entity by specified primary key. */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public void delete(Long key);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Refreshes entity so ensure correct serialisation/marshalling (especially for @ManyToOne relations) */
+	/** Refreshes entity to ensure correct serialisation/marshalling (especially for @ManyToOne relations) */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public void refresh(Contact savedEntity);
+	public void refresh(T entity);
 }

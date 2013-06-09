@@ -1,13 +1,8 @@
-package com.app.domain;
+package com.app.domain.model;
  
-import java.io.Serializable;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -16,8 +11,8 @@ import javax.validation.constraints.Size;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-import com.app.dto.PasswordReset;
-import com.app.security.LoggedUserFactory;
+import com.app.domain.dto.PasswordReset;
+import com.app.domain.services.UserService;
 import com.app.security.PasswordEncoder;
 import com.app.security.PasswordEncoderFactory;
 import com.app.web.utils.Documentation;
@@ -28,25 +23,18 @@ import com.app.web.utils.Documentation;
 @Entity
 @Table(name="user", uniqueConstraints = { @UniqueConstraint(columnNames = { "userName" }) })
 @Documentation(caption = "User", comment = "Rest-sample application user.")
-public class User implements Serializable
+public class User extends AbstractBase<User>
 {
 	// Default serial version ID
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Basic
-	@Column(name = "primaryKey")
-	@Documentation(caption = "Primary Key", comment = "Primary key assigned by the database.")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long primaryKey;
-	
 	@Basic
 	@Column(name = "firstName")
 	@Documentation(caption = "First Name", comment = "User's first name.")
 	@NotNull
 	@Size(max = 80)
 	private String firstName;
-	
+
 	@Basic
 	@Column(name = "lastName")
 	@Documentation(caption = "Last Name", comment = "User's last name.")
@@ -104,10 +92,6 @@ public class User implements Serializable
 	@JsonIgnore
 	protected PasswordEncoder passwordEncoder;
 
-	@Transient
-	@JsonIgnore
-	protected User loggedUser; // Loaded on demand
-
 	// TODO: implement resetPassword and changePassword
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/**
@@ -132,17 +116,6 @@ public class User implements Serializable
 	// --------------------------------------------------------------------------------------------------------------------------------
 	//setters & getters
 	// --------------------------------------------------------------------------------------------------------------------------------
-
-	public Long getPrimaryKey()
-	{
-		return primaryKey;
-	}
-
-	// --------------------------------------------------------------------------------------------------------------------------------
-	public void setPrimaryKey(Long key)
-	{
-		this.primaryKey = key;
-	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public String getFirstName()
@@ -271,20 +244,5 @@ public class User implements Serializable
 			passwordEncoder = PasswordEncoderFactory.getPasswordEncoder();
 
 		return passwordEncoder;
-	}
-
-	// --------------------------------------------------------------------------------------------------------------------------------
-	public User getLoggedUser()
-	{
-		if (loggedUser == null)
-			loggedUser = LoggedUserFactory.get();
-
-		return loggedUser;
-	}
-
-	// --------------------------------------------------------------------------------------------------------------------------------
-	public void setLoggedUser(User loggedUser)
-	{
-		this.loggedUser = loggedUser;
 	}
 }

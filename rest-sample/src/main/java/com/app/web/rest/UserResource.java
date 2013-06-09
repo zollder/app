@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.app.domain.Contact;
-import com.app.domain.User;
-import com.app.dto.PasswordReset;
-import com.app.services.UserService;
+import com.app.domain.model.User;
+import com.app.domain.dto.PasswordReset;
+import com.app.domain.services.UserService;
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 @Controller
@@ -80,7 +79,7 @@ public class UserResource
 
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Deletes the {@link Contact} resource associated to a given key. */
+	/** Deletes the {@link User} resource associated to a given key. */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/{key}", method = { RequestMethod.DELETE })
 	@ResponseStatus(HttpStatus.NO_CONTENT)
