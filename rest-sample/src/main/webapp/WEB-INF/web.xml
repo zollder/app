@@ -19,8 +19,9 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:config/rest-services-config.xml,
-			classpath:config/security-context.xml
+			classpath:config/application-context.xml,
+			classpath:config/security-context.xml,
+			classpath:config/hibernate-context.xml
 		</param-value>
 	</context-param>
 
