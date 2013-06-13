@@ -1,11 +1,10 @@
 package com.app.dao.impl;
  
-import java.io.Serializable;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.app.dao.AbstractDao;
+import com.app.domain.model.AbstractBase;
 
 //--------------------------------------------------------------------------------------------------------------------------------
 /**
@@ -13,7 +12,7 @@ import com.app.dao.AbstractDao;
 * Note: since Hibernate 3.0.1 the use of HibernateDaoSupport is not required due to availability of Spring transaction support.
 */
 //--------------------------------------------------------------------------------------------------------------------------------
-public abstract class AbstractDaoImpl<T extends Serializable>  implements AbstractDao<T>
+public abstract class AbstractDaoImpl<T extends AbstractBase<T>>  implements AbstractDao<T>
 {
 	private Class<T> modelClass;
 	private SessionFactory sessionFactory;
@@ -38,7 +37,7 @@ public abstract class AbstractDaoImpl<T extends Serializable>  implements Abstra
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public Session getCurrentSession()
 	{
-		return this.sessionFactory.getCurrentSession();
+		return sessionFactory.getCurrentSession();
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
@@ -48,34 +47,34 @@ public abstract class AbstractDaoImpl<T extends Serializable>  implements Abstra
 		// Alternatively, "load" can be used. It creates an association with the object without loading it from the db.
 		// It also allows multiple instances to be loaded as a batch (Hibernate 4 reference: Loading an object)
 		@SuppressWarnings("unchecked")
-		T entity = (T) this.getCurrentSession().get(getModelClass(), key);
+		T entity = (T) getCurrentSession().get(getModelClass(), key);
 		return entity;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public T save(T entity)
 	{
-		sessionFactory.getCurrentSession().save(entity);
+		getCurrentSession().save(entity);
 		return entity;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public T update(T entity)
 	{
-		sessionFactory.getCurrentSession().merge(entity);		
+		getCurrentSession().merge(entity);		
 		return entity;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public void delete(Long key)
 	{
-		T entity = this.loadWithPrimaryKey(key);
-		sessionFactory.getCurrentSession().delete(entity);
+		T entity = loadWithPrimaryKey(key);
+		getCurrentSession().delete(entity);
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public void refresh(T savedEntity)
 	{
-		sessionFactory.getCurrentSession().refresh(savedEntity);
+		getCurrentSession().refresh(savedEntity);
 	}
 }

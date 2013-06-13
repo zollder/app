@@ -1,7 +1,5 @@
 package com.app.domain.services.impl;
 
-import java.io.Serializable;
-
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dao.AbstractDao;
@@ -13,7 +11,7 @@ import com.app.domain.services.AbstractService;
 * Provides implementation for standard business services around any {@link AbstractBase} entity
 */
 //--------------------------------------------------------------------------------------------------------------------------------
-public abstract class AbstractServiceImpl<T extends Serializable, D extends AbstractDao<T>> implements AbstractService<T>
+public abstract class AbstractServiceImpl<T extends AbstractBase<T>, D extends AbstractDao<T>> implements AbstractService<T>
 {
 	protected AbstractDao<T> entityDao;
 

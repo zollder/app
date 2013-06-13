@@ -1,9 +1,9 @@
 package com.app.dao;
 
-import java.io.Serializable;
+import com.app.domain.model.AbstractBase;
 
 
-public interface AbstractDao<T extends Serializable>
+public interface AbstractDao<T extends AbstractBase<T>>
 {
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/** Loads given entity by primary key (id). Returns loaded entity. */

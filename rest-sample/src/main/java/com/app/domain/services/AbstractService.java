@@ -1,13 +1,11 @@
 package com.app.domain.services;
 
-import java.io.Serializable;
-
 import com.app.domain.model.AbstractBase;
 
 //--------------------------------------------------------------------------------------------------------------------------------
 /** Implements standard services around any {@link AbstractBase} entity */
 //--------------------------------------------------------------------------------------------------------------------------------
-public interface AbstractService<T extends Serializable>
+public interface AbstractService<T extends AbstractBase<T>>
 {
 	public Class<T> getModelClass();
 
