@@ -31,6 +31,19 @@
 	</listener>
 
 
+	<!-- Logging -->
+	<!--=======================================================================================================================-->
+
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>classpath:log4j.xml</param-value>
+	</context-param>
+
+
 	<!-- Spring Security Configuration (hook into the Spring Security web infrastructure) -->
 	<!--=======================================================================================================================-->
 
