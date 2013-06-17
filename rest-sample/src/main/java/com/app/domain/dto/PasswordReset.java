@@ -1,4 +1,4 @@
-package com.app.dto;
+package com.app.domain.dto;
  
 import java.io.Serializable;
 

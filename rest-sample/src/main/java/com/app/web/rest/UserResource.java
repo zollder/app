@@ -1,5 +1,6 @@
 package com.app.web.rest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -10,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.app.domain.Contact;
-import com.app.domain.User;
-import com.app.dto.PasswordReset;
-import com.app.services.UserService;
+import com.app.domain.dto.PasswordReset;
+import com.app.domain.model.User;
+import com.app.domain.services.UserService;
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 @Controller
 @RequestMapping(value = "/user")
 public class UserResource
 {
+	private static Logger logger = Logger.getLogger(UserResource.class);
 	// --------------------------------------------------------------------------------------------------------------------------------
 	@Autowired
 	private UserService userService;
@@ -31,6 +32,7 @@ public class UserResource
 	@ResponseBody
 	public User loadWithPrimaryKey(@PathVariable Long key)
 	{
+		logger.info("load user with primary key:" + key);
 		User user = userService.loadWithPrimaryKey(key);
 
 		return user;
@@ -46,6 +48,7 @@ public class UserResource
 	@ResponseBody
 	public User loadWithUserName(@PathVariable String username)
 	{
+		logger.info("load user with username:" + username);
 		User user = userService.loadWithUserName(username);
 
 		return user;
@@ -58,6 +61,7 @@ public class UserResource
 	@ResponseBody
 	public User save(@RequestBody User user)
 	{
+		logger.info("saving user with username:" + user.getUserName());
 		User savedUser = userService.save(user);
 		userService.refresh(savedUser);
 
@@ -71,6 +75,7 @@ public class UserResource
 	@ResponseBody
 	public User update(@PathVariable Long key, @RequestBody User user)
 	{
+		logger.info("update user with username:" + user.getUserName());
 		user.setPrimaryKey(key);
 		User updatedUser = userService.update(user);
 		userService.refresh(updatedUser);
@@ -80,12 +85,13 @@ public class UserResource
 
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Deletes the {@link Contact} resource associated to a given key. */
+	/** Deletes the {@link User} resource associated to a given key. */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/{key}", method = { RequestMethod.DELETE })
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long key)
 	{
+		logger.info("delete user with primary key:" + key);
 		userService.delete(key);
 	}
 
@@ -98,6 +104,7 @@ public class UserResource
 	@ResponseBody
 	public User resetPassword(@PathVariable Long key, @RequestBody PasswordReset passwordReset)
 	{
+		logger.info("resetting password for user with primary key:" + key);
 		User user = userService.resetPassword(key, passwordReset);
 		userService.refresh(user);
 		return user;

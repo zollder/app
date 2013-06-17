@@ -5,7 +5,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.app.domain.User;
+import com.app.domain.model.User;
 
 // --------------------------------------------------------------------------------------------------------------------------------
 /** LoggedUserFactory */

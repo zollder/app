@@ -1,4 +1,4 @@
-package com.app.services.impl;
+package com.app.domain.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dao.ContactsDao;
-import com.app.domain.Contact;
-import com.app.services.ContactService;
+import com.app.domain.model.Contact;
+import com.app.domain.services.ContactService;
 
 @Service("contactService")
 public class ContactServiceImpl implements ContactService

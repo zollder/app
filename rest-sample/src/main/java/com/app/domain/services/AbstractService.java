@@ -1,36 +1,36 @@
-package com.app.services;
+package com.app.domain.services;
 
-import java.util.List;
+import com.app.domain.model.AbstractBase;
 
-import com.app.domain.Contact;
-
-public interface ContactService
+//--------------------------------------------------------------------------------------------------------------------------------
+/** Implements standard services around any {@link AbstractBase} entity */
+//--------------------------------------------------------------------------------------------------------------------------------
+public interface AbstractService<T extends AbstractBase<T>>
 {
-	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Loads given contact entity by primary key (id). Returns fetched contact. */
-	// --------------------------------------------------------------------------------------------------------------------------------
-	public Contact loadWithPrimaryKey(Long key);
-
-	public List<Contact> getContactsByName(String name);
-	public List<Contact> loadAll();
+	public Class<T> getModelClass();
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Saves given contact entity. Returns saved contact. */
+	/** Loads the entity by primary key (id). Returns loaded entity. Throws DataNotFoundException. */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public Contact save(Contact contact);
+	public T loadWithPrimaryKey(Long key);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Updates given contact entity. Returns updated contact. */
+	/** Saves (inserts) given entity. Returns saved entity. */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public Contact update(Contact contact);
+	public T save(T entity);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Deletes given contact entity. */
+	/** Updates (merges) given entity. Returns updated entity. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public T update(T entity);
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Deletes entity by specified primary key. */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public void delete(Long key);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Refreshes saved contact so ensure correct serialisation/marshalling (especially for @ManyToOne relations) */
+	/** Refreshes entity to ensure correct serialisation/marshalling (especially for @ManyToOne relations) */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public void refresh(Contact contact);
+	public void refresh(T entity);
 }

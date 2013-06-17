@@ -154,6 +154,7 @@
 			<jvmarg line="${tomcat.debug}"/>
 			<jvmarg line="${tomcat.arguments}"/>
 			<jvmarg value="-Dcatalina.home=${tomcat.home}"/>
+			<jvmarg value="-Dcatalina.base=${tomcat.base}"/>
 			<jvmarg value="-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager"/>
 			<jvmarg value="-Djava.util.logging.config.file=${tomcat.base}/conf/logging.properties"/>
 		</java>
@@ -164,6 +165,7 @@
 		<echo>Tomcat Local Stop = ${tomcat.home}</echo>
 		<java classname="org.apache.catalina.startup.Bootstrap" fork="true" dir="${tomcat.home}/bin" classpathref="catalina-ant-classpath">
 			<jvmarg value="-Dcatalina.home=${tomcat.home}"/>
+			<jvmarg value="-Dcatalina.base=${tomcat.base}"/>
 			<jvmarg value="-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager"/>
 			<jvmarg value="-Djava.util.logging.config.file=${tomcat.base}/conf/logging.properties"/>
 			<arg line="stop"/>

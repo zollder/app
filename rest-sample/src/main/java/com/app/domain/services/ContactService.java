@@ -1,36 +1,36 @@
-package com.app.dao;
+package com.app.domain.services;
 
 import java.util.List;
 
 import com.app.domain.model.Contact;
 
-public interface ContactsDao
+public interface ContactService
 {
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Loads given entity by primary key (id). Returns fetched entity. */
+	/** Loads given contact entity by primary key (id). Returns fetched contact. */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public Contact loadWithPrimaryKey(Long key);
 
-	public List<Contact> searchContacts(String name);
+	public List<Contact> getContactsByName(String name);
 	public List<Contact> loadAll();
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Saves given entity. Returns saved entity. */
+	/** Saves given contact entity. Returns saved contact. */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public Contact save(Contact contact);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Updates given entity. Returns updated entity. */
+	/** Updates given contact entity. Returns updated contact. */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public Contact update(Contact contact);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Deletes given entity. */
+	/** Deletes given contact entity. */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public void delete(Long key);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Refreshes entity so ensure correct serialisation/marshalling (especially for @ManyToOne relations) */
+	/** Refreshes saved contact so ensure correct serialisation/marshalling (especially for @ManyToOne relations) */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public void refresh(Contact savedEntity);
+	public void refresh(Contact contact);
 }

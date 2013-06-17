@@ -1,28 +1,24 @@
 package com.app.dao;
 
-import java.util.List;
+import com.app.domain.model.AbstractBase;
 
-import com.app.domain.model.Contact;
 
-public interface ContactsDao
+public interface AbstractDao<T extends AbstractBase<T>>
 {
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Loads given entity by primary key (id). Returns fetched entity. */
+	/** Loads given entity by primary key (id). Returns loaded entity. */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public Contact loadWithPrimaryKey(Long key);
-
-	public List<Contact> searchContacts(String name);
-	public List<Contact> loadAll();
+	public T loadWithPrimaryKey(Long key);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/** Saves given entity. Returns saved entity. */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public Contact save(Contact contact);
+	public T save(T entity);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/** Updates given entity. Returns updated entity. */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public Contact update(Contact contact);
+	public T update(T entity);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/** Deletes given entity. */
@@ -30,7 +26,7 @@ public interface ContactsDao
 	public void delete(Long key);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Refreshes entity so ensure correct serialisation/marshalling (especially for @ManyToOne relations) */
+	/** Refreshes entity to ensure correct serialisation/marshalling (especially for @ManyToOne relations) */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public void refresh(Contact savedEntity);
+	public void refresh(T savedEntity);
 }
