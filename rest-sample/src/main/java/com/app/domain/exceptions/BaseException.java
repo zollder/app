@@ -1,5 +1,3 @@
-// Copyright (c) MEI Computer Technology Group Inc, 2011
-
 package com.app.domain.exceptions;
 
 import java.util.ArrayList;
