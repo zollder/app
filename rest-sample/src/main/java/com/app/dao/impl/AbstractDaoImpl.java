@@ -48,6 +48,7 @@ public abstract class AbstractDaoImpl<T extends AbstractBase<T>>  implements Abs
 		// It also allows multiple instances to be loaded as a batch (Hibernate 4 reference: Loading an object)
 		@SuppressWarnings("unchecked")
 		T entity = (T) getCurrentSession().get(getModelClass(), key);
+
 		return entity;
 	}
 
@@ -66,10 +67,14 @@ public abstract class AbstractDaoImpl<T extends AbstractBase<T>>  implements Abs
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public void delete(Long key)
+	public boolean delete(Long key)
 	{
 		T entity = loadWithPrimaryKey(key);
+		if (entity == null)
+			return false;
+
 		getCurrentSession().delete(entity);
+		return true;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
