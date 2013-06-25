@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.validator.constraints.Email;
 
 import com.app.domain.dto.PasswordReset;
 import com.app.domain.services.UserService;
@@ -38,6 +39,7 @@ public class User extends AbstractBase<User>
 	@Basic
 	@Column(name = "lastName")
 	@Documentation(caption = "Last Name", comment = "User's last name.")
+	@NotNull
 	@Size(max = 80)
 	private String lastName;
 
@@ -45,14 +47,14 @@ public class User extends AbstractBase<User>
 	@Column(name = "userName")
 	@Documentation(caption = "Name", comment = "User's identification name.")
 	@NotNull
-	@Size(max = 80)
+	@Size(max = 40)
 	private String userName;
 
 	@Basic
 	@Column(name = "password")
 	@Documentation(caption = "Password", comment = "User's password used to login.")
 	@NotNull
-	@Size(max = 80)
+	@Size(max = 40)
 	//@JsonIgnore
 	private String password;
 
@@ -61,6 +63,7 @@ public class User extends AbstractBase<User>
 	@Documentation(caption = "Email", comment = "User's email.")
 	@NotNull
 	@Size(max = 120)
+	@Email
 	private String email;
 
 	@Basic
@@ -244,5 +247,11 @@ public class User extends AbstractBase<User>
 			passwordEncoder = PasswordEncoderFactory.getPasswordEncoder();
 
 		return passwordEncoder;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public void setPasswordEncoder(PasswordEncoder passwordEncoder)
+	{
+		this.passwordEncoder = passwordEncoder;
 	}
 }

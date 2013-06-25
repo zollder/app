@@ -1,16 +1,13 @@
-// Copyright (c) MEI Computer Technology Group Inc, 2011
-
-package com.app.exceptions;
+package com.app.domain.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import com.meicpg.ti.domain.dto.Violation;
+
+import com.app.domain.dto.Violation;
 
 // --------------------------------------------------------------------------------------------------------------------------------
-/**
- * Base exception class.
- */
+/** Base exception class. */
 // --------------------------------------------------------------------------------------------------------------------------------
 public class BaseException extends RuntimeException
 {
@@ -19,9 +16,7 @@ public class BaseException extends RuntimeException
 	protected List<Violation> violations = new ArrayList<Violation>();
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/**
-	 * Default constructor
-	 */
+	/** Default constructor */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public BaseException()
 	{
@@ -29,9 +24,7 @@ public class BaseException extends RuntimeException
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/**
-	 * Constructor with message
-	 */
+	/** Constructor with message */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public BaseException(String message)
 	{
@@ -39,9 +32,7 @@ public class BaseException extends RuntimeException
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/**
-	 * Constructor with message and root cause
-	 */
+	/** Constructor with message and root cause */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public BaseException(String message, Throwable cause)
 	{
@@ -49,9 +40,7 @@ public class BaseException extends RuntimeException
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/**
-	 * Constructor with message
-	 */
+	/** Constructor with message */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public BaseException(String message, String violationMessageKey, Object... violationMessageArguments)
 	{
@@ -59,9 +48,7 @@ public class BaseException extends RuntimeException
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/**
-	 * Constructor with message
-	 */
+	/** Constructor with message */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public BaseException(String message, Throwable cause, String violationMessageKey, Object...  arguments)
 	{
@@ -73,9 +60,7 @@ public class BaseException extends RuntimeException
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/**
-	 * Constructor with message and reported constraint violations
-	 */
+	/** Constructor with message and reported constraint violations */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public BaseException(String message, Set<javax.validation.ConstraintViolation<?>> pViolations)
 	{
@@ -85,9 +70,7 @@ public class BaseException extends RuntimeException
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/**
-	 * Constructor with message and reported constraint violations
-	 */
+	/** Constructor with message and reported constraint violations */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public BaseException(String message, Violation pViolation)
 	{
@@ -96,9 +79,7 @@ public class BaseException extends RuntimeException
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/**
-	 * Constructor with message and reported constraint violations
-	 */
+	/** Constructor with message and reported constraint violations */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public BaseException(String message, List<Violation> pViolations)
 	{
@@ -107,9 +88,7 @@ public class BaseException extends RuntimeException
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/**
-	 * Accessor
-	 */
+	/** Accessor */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public List<Violation> getViolations()
 	{

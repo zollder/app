@@ -3,6 +3,7 @@ package com.app.domain.services.impl;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dao.AbstractDao;
+import com.app.domain.exceptions.DataNotFoundException;
 import com.app.domain.model.AbstractBase;
 import com.app.domain.services.AbstractService;
 
@@ -22,6 +23,18 @@ public abstract class AbstractServiceImpl<T extends AbstractBase<T>, D extends A
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
+	public Class<T> getModelClazz()
+	{
+		return entityDao.getModelClass();
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public String getClazzName()
+	{
+		return getModelClazz().getSimpleName();
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	protected D getDao()
 	{
@@ -33,7 +46,10 @@ public abstract class AbstractServiceImpl<T extends AbstractBase<T>, D extends A
 	public T loadWithPrimaryKey(Long key)
 	{
 		T entity = (T) entityDao.loadWithPrimaryKey(key);
-	
+
+		if (entity == null)
+			throw new DataNotFoundException(String.format(getClazzName() + " with primarykey '%s' not found", key));
+
 		return entity;
 	}
 
@@ -59,11 +75,14 @@ public abstract class AbstractServiceImpl<T extends AbstractBase<T>, D extends A
 	@Transactional
 	public void delete(Long key)
 	{
-		entityDao.delete(key);
+		boolean deleted = entityDao.delete(key);
+
+		if (!deleted)
+			throw new DataNotFoundException(String.format("entity with key '%s' not found", key));
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Refreshes saved Entity so ensure correct serialisation/marshalling (especially for @ManyToOne relations) */
+	/** Refreshes saved Entity so ensure correct serialization/marshaling (especially for @ManyToOne relations) */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	@Transactional
 	public void refresh(T savedEntity)
