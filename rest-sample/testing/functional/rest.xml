@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project activeEnvironment="Default" name="rest-sample" resourceRoot="" soapui-version="4.5.2" xmlns:con="http://eviware.com/soapui/config">
+<con:soapui-project activeEnvironment="Default" name="rest-sample" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config">
   <con:settings/>
   <con:testSuite name="Services">
     <con:settings>
@@ -2452,7 +2452,7 @@ log.info(stopTime)</script>
       
       
       
-      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>newUser.key</con:name><con:value>2</con:value></con:property><con:property><con:name>newUser.userName</con:name><con:value>username</con:value></con:property><con:property><con:name>newUser.password</con:name><con:value>userpass</con:value></con:property><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create user">
+      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>newUser.key</con:name><con:value>5</con:value></con:property><con:property><con:name>newUser.userName</con:name><con:value>username</con:value></con:property><con:property><con:name>newUser.password</con:name><con:value>userpass</con:value></con:property><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create user">
         <con:settings/>
         <con:config method="POST" xsi:type="con:HttpRequest" name="create user" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>

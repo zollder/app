@@ -1,0 +1,2 @@
+SELECT * FROM `test`.`devices` NATURAL JOIN  `test`.`y1g` 
+WHERE devices.dev_ip = y1g.dev_ip;

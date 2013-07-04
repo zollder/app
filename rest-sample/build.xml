@@ -64,8 +64,8 @@
 	<!-- Public Targets -->
 	<!--=======================================================================================================================-->
 
-	<target name="clean"			description="Cleans project"	depends="clean-step"/>
-	<target name="build"			description="Builds project"	depends="build-step"/>
+	<target name="clean"			description="Cleans project"			depends="clean-step"/>
+	<target name="build"			description="Builds project"			depends="build-step"/>
 	<target name="deploy"			description="Deploys all deployable projects"	depends="undeploy-step, deploy-db, deploy-step"/>
 	<target name="deploy-db"		description="Deploys database schema and data"	depends="deploy-db-step"/>
 
@@ -94,14 +94,11 @@
 				description="Cleans, builds and deploys the app, deploys dev schema and data, runs functional tests"
 				depends="clean-test, tomcat-start, deploy-test-schema, deploy-test-data, build, deploy, quick-test"/>
 
-
-
 	<target name="deploy-test-db"		description="Prepared test database"		depends="deploy-test-schema, deploy-test-data"/>
 	<target name="drop-test-db"			description="Drops test database schema"	depends="drop-test-db-step"/>
 	<target name="deploy-test-schema"	description="Deploys test database schema"	depends="copy-schema-step, modify-schema-step, deploy-schema-step"/>
 	<target name="deploy-test-data"		description="Deploys test database data"	depends="copy-data-step, modify-data-step, deploy-data-step"/>
-
-	<target name="clean-test" description="Cleans all target outputs and soapUI logs" depends="clean-targets-step"/>
+	<target name="clean-test" 			description="Cleans all target outputs and soapUI logs" depends="clean-targets-step"/>
 
 
 	<!--=======================================================================================================================-->
