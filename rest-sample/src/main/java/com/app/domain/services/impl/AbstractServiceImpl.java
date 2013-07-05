@@ -36,7 +36,7 @@ public abstract class AbstractServiceImpl<T extends AbstractBase<T>, D extends A
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
-	protected D getDao()
+	public D getDao()
 	{
 		return (D) entityDao;
 	}

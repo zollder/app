@@ -36,7 +36,7 @@ public class MockUser extends User
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public MockUser()
 	{
-		// Simulate Spring's injection
+		// Inject mock encoder by Simulate Spring injection
 		setPasswordEncoder(new SecurityPasswordEncoderMock());
 
 		// Set valid field values

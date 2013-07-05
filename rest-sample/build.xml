@@ -12,16 +12,16 @@
 
 	<property file="${dir.root}/props/${user.name}.properties"/>
 
-	<property name="dir.test"				value="${dir.root}/testing"/>
-	<property name="soapui.home"			value="${dir.test}/resources/soapui-pro-4.5.1"/>
+	<property name="dir.test"		value="${dir.root}/testing"/>
+	<property name="soapui.home"		value="${dir.test}/resources/soapui-pro-4.5.1"/>
 	<property name="dir.functional.tests"	value="${dir.test}/functional"/>
-	<property name="dir.junit"				value="${dir.test}/junit"/>
-	<property name="dir.temp"				value="${dir.test}/temp"/>
-	<property name="dir.logs"				value="${dir.test}/logs"/>
-	<property name="dir.resources"			value="${dir.test}/resources"/>
-	<property name="dir.sql"				value="${dir.test}/resources/sql"/>
+	<property name="dir.junit"		value="${dir.test}/junit"/>
+	<property name="dir.temp"		value="${dir.test}/temp"/>
+	<property name="dir.logs"		value="${dir.test}/logs"/>
+	<property name="dir.resources"		value="${dir.test}/resources"/>
+	<property name="dir.sql"		value="${dir.test}/resources/sql"/>
 
-	<property name="dir.reports"			value="${dir.test}/reports"/>
+	<property name="dir.reports"		value="${dir.test}/reports"/>
 	<property name="dir.functional.reports"	value="${dir.reports}/functional"/>
 
 
@@ -69,19 +69,30 @@
 	<target name="deploy"			description="Deploys all deployable projects"	depends="undeploy-step, deploy-db, deploy-step"/>
 	<target name="deploy-db"		description="Deploys database schema and data"	depends="deploy-db-step"/>
 
-	<target name="tomcat-start"		description="Cold Tomcat start"			depends="tomcat-start-step"/>
-	<target name="tomcat-stop"		description="Hard Tomcat stop"			depends="tomcat-stop-step"/>
-	<target name="tomcat-clean"		description="Tomcat webapps cleanup"		depends="clean-tomcat-apps-step"/>
+	<target
+		name="deploy-remote"
+		description="Deploys all deployable projects to remote tomcat"
+		depends="undeploy-remote-step, deploy-remote-db, deploy-remote-step"
+	/>
+	<target
+		name="deploy-remote-db"
+		description="Deploys database schema and data to remote database"
+		depends="deploy-remote-db-step"
+	/>
 
-	<target name="quick-test"		
-		description="Runs functional tests against dev db" 
-			depends="clean-test, functional-test-step"/>
-	<target	name="test"				
-		description="Runs functional tests against test db" 
-			depends="clean-test, deploy-test-db, functional-test-step, drop-test-db"/>
-	<target name="test-all"			
-		description="Cleans, builds and deploys the app, deploys dev schema and data, runs functional tests"
-			depends="clean-test, tomcat-start, deploy-test-schema, deploy-test-data, build, deploy, quick-test"/>
+	<target name="tomcat-start"			description="Cold Tomcat start"		depends="tomcat-start-step"/>
+	<target name="tomcat-stop"			description="Hard Tomcat stop"		depends="tomcat-stop-step"/>
+	<target name="tomcat-clean"			description="Tomcat webapps cleanup"	depends="clean-tomcat-apps-step"/>
+
+	<target 	name="quick-test"
+				description="Runs functional tests against dev db"
+				depends="clean-test, functional-test-step"/>
+	<target		name="test"
+				description="Runs functional tests against test db"
+				depends="clean-test, deploy-test-db, functional-test-step, drop-test-db"/>
+	<target 	name="test-all"
+				description="Cleans, builds and deploys the app, deploys dev schema and data, runs functional tests"
+				depends="clean-test, tomcat-start, deploy-test-schema, deploy-test-data, build, deploy, quick-test"/>
 
 	<target name="deploy-test-db"		description="Prepared test database"		depends="deploy-test-schema, deploy-test-data"/>
 	<target name="drop-test-db"			description="Drops test database schema"	depends="drop-test-db-step"/>
@@ -111,7 +122,7 @@
 	<!-- Projects deploy/undeploy steps -->
 	<!--=======================================================================================================================-->
 
-	<!-- KioskWS -->
+	<!-- Local environment-->
 
 	<target name="deploy-step">
 		<echo>Deploying, please wait ...</echo>
@@ -140,6 +151,35 @@
 		/>
 	</target>
 
+
+	<!-- Remote environment-->
+
+	<target name="deploy-remote-step">
+		<echo>Deploying, please wait ...</echo>
+		<echo>Tomcat user: ${tomcat.manager.user}</echo>
+		<echo>Tomcat password: ${tomcat.manager.password}</echo>
+		<echo>Project name: ${project.name}</echo>
+		<echo>Manager URL: ${remote.tomcat.manager.url}</echo>
+		<echo>War file path: ${dir.root}/target/${project.name}.war</echo>
+		<deploy
+			failonerror="true"
+			username="${tomcat.manager.user}"
+			password="${tomcat.manager.password}"
+			path="/${project.name}"
+			url="${remote.tomcat.manager.url}"
+			war="file:${dir.root}/target/${project.name}.war"
+		/>
+	</target>
+
+	<target name="undeploy-remote-step">
+		<undeploy
+			failonerror="false"
+			username="${tomcat.manager.user}"
+			password="${tomcat.manager.password}"
+			path="/${project.name}"
+			url="${remote.tomcat.manager.url}"
+		/>
+	</target>
 
 	<!--=======================================================================================================================-->
 	<!-- Tomcat management -->
@@ -274,6 +314,8 @@
 	<!-- Database-related steps -->
 	<!--=======================================================================================================================-->
 
+	<!-- Local database-->
+
 	<target name="deploy-db-step">
 		<echo>Deploying database schema, please wait ...</echo>
 		<echo>executable: ${mysqladmin}</echo>
@@ -290,6 +332,26 @@
 			<arg value="--port=${db.port}"/>
 		</exec>
 	</target>
+
+	<!-- Remote database-->
+
+	<target name="deploy-remote-db-step">
+		<echo>Deploying database schema, please wait ...</echo>
+		<echo>executable: ${mysqladmin}</echo>
+		<echo>sql directory: ${dir.sql}</echo>
+		<echo>sql script: ${db.sql.script}</echo>
+		<echo>db user: ${db.user}</echo>
+		<echo>db password: ${db.password}</echo>
+		<echo>db host: ${remote.db.host}</echo>
+		<echo>db port: ${remote.db.port}</echo>
+		<exec executable="${mysqladmin}" failonerror="true" input="${dir.sql}/${db.sql.script}">
+			<arg value="--user=${db.user}"/>
+			<arg value="--password=${db.password}"/>
+			<arg value="--host=${remote.db.host}"/>
+			<arg value="--port=${remote.db.port}"/>
+		</exec>
+	</target>
+
 
 	<target name="deploy-schema-step">
 		<exec executable="${mysqladmin}" failonerror="true" input="${dir.temp}/${naesta.db.schema}">

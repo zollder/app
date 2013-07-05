@@ -7,8 +7,6 @@ import com.app.domain.model.AbstractBase;
 //--------------------------------------------------------------------------------------------------------------------------------
 public interface AbstractService<T extends AbstractBase<T>>
 {
-	public Class<T> getModelClass();
-
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/** Loads the entity by primary key (id). Returns loaded entity. Throws DataNotFoundException. */
 	// --------------------------------------------------------------------------------------------------------------------------------

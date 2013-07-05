@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dao.UserDao;
 import com.app.domain.dto.PasswordReset;
+import com.app.domain.exceptions.DataNotFoundException;
 import com.app.domain.model.User;
 import com.app.domain.services.UserService;
 
@@ -57,6 +58,10 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao> implemen
     public User loadWithUserName(String username)
     {
     	User user = getDao().findByUserName(username);
+
+		if (user == null)
+			throw new DataNotFoundException(String.format(getClazzName() + " with username '%s' not found", username));
+
     	return user;
     }
 

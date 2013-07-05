@@ -2252,7 +2252,26 @@ log.info(stopTime)</script>
       
       
       
-      <con:testStep type="httprequest" name="delete non-existing user">
+      <con:testStep type="httprequest" name="load by non-existing username">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="load by non-existing username" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/user/usr/non-existing-user</con:endpoint>
+          <con:request/>
+          
+          
+          <con:assertion type="XPath Match" name="primaryKey = null"><con:configuration><path>//*:Fault/*:violations/*:e/*:primaryKey/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid error message returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:message</path><content>User with username 'non-existing-user' not found</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="delete non-existing user">
         <con:settings/>
         <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete non-existing user" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
