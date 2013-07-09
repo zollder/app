@@ -1,56 +1,55 @@
 -- Dumping database structure for test
-DROP DATABASE IF EXISTS `test`;
-CREATE DATABASE IF NOT EXISTS `test`;
-USE `test`;
+DROP DATABASE IF EXISTS `HybridDB`;
+CREATE DATABASE IF NOT EXISTS `HybridDB` DEFAULT CHARACTER SET latin1;
+USE `HybridDB`;
 
-DROP TABLE IF EXISTS `contacts`;
-CREATE TABLE  `contacts`
-(
-  id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  name varchar(45) NOT NULL,
-  address varchar(45) DEFAULT NULL,
-  gender char(1) DEFAULT 'M',
-  dob datetime DEFAULT NULL,
-  email varchar(45) DEFAULT NULL,
-  mobile varchar(15) DEFAULT NULL,
-  phone varchar(15) DEFAULT NULL,
-  PRIMARY KEY (id)
-);
-
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE  `user`
-(
-  primaryKey int(10) unsigned NOT NULL UNIQUE AUTO_INCREMENT,
-  firstName varchar(45) NOT NULL,
-  lastName varchar(45) NOT NULL,
-  userName varchar(45) NOT NULL UNIQUE,
-  password varchar(80) NOT NULL,
-  email varchar(45) DEFAULT NULL,
-  isEnabled boolean NOT NULL,
-  canLogin boolean NOT NULL,
-  isAdmin boolean NOT NULL,
-  PRIMARY KEY (primaryKey)
-);
-
-
-
-DROP TABLE IF EXISTS `test`.`devices`;
-CREATE  TABLE IF NOT EXISTS `test`.`devices` (
-  `dev_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
+CREATE  TABLE IF NOT EXISTS `HybridDB`.`devices` (
+  `dev_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `dev_ip` CHAR(15) NOT NULL ,
   `mac` CHAR(12) NULL ,
   `type` ENUM('y1g', 'y1g-m', 'yfm', 'yfm2', 'yfm4') NOT NULL ,
   PRIMARY KEY (`dev_ip`) ,
-  UNIQUE INDEX `id_UNIQUE` (`dev_id` ASC) ,
-  UNIQUE INDEX `ip_UNIQUE` (`dev_ip` ASC) ,
-  UNIQUE INDEX `mac_UNIQUE` (`mac` ASC) )
+  UNIQUE INDEX `mac_UNIQUE` (`mac` ASC) ,
+  UNIQUE INDEX `dev_id_UNIQUE` (`dev_id` ASC) ,
+  UNIQUE INDEX `dev_ip_UNIQUE` (`dev_ip` ASC) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COMMENT = 'holds all the devices information';
 
+CREATE  TABLE IF NOT EXISTS `HybridDB`.`type_f` (
+  `typef_id` INT NOT NULL AUTO_INCREMENT ,
+  `devices_dev_ip` CHAR(15) NOT NULL ,
+  `name` VARCHAR(32) NOT NULL ,
+  `location` VARCHAR(128) NOT NULL ,
+  `switchStatus` ENUM('ovr','off','auto') NOT NULL ,
+  `latchActive` TINYINT(1) NULL ,
+  `bPressLapse` INT UNSIGNED NOT NULL ,
+  `networkOn` TINYINT(1) NULL ,
+  `flickWarn` TINYINT(1) NULL ,
+  `flickReps` INT UNSIGNED NOT NULL ,
+  `firmwareVersion` VARCHAR(4) NOT NULL ,
+  `dim` INT UNSIGNED NULL ,
+  `dimMin` INT UNSIGNED NULL ,
+  `dimMode` ENUM('off','on','onFade') NOT NULL ,
+  `motionMuteDelay` INT UNSIGNED NULL ,
+  `input` TINYINT(1) NULL ,
+  `offDelay` INT UNSIGNED NULL ,
+  PRIMARY KEY (`devices_dev_ip`) ,
+  INDEX `fk_type_f_devices_idx` (`devices_dev_ip` ASC) ,
+  UNIQUE INDEX `typef_id_UNIQUE` (`typef_id` ASC) ,
+  UNIQUE INDEX `devices_dev_ip_UNIQUE` (`devices_dev_ip` ASC) ,
+  CONSTRAINT `fk_type_f_devices`
+    FOREIGN KEY (`devices_dev_ip` )
+    REFERENCES `HybridDB`.`devices` (`dev_ip` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1
+COMMENT = 'Device ceiling mount oBIX variables';
 
-DROP TABLE IF EXISTS `y1g`;
-CREATE  TABLE IF NOT EXISTS `test`.`y1g` (
+CREATE TABLE IF NOT EXISTS `HybridDB`.`type_g` (
+  `typeg_id` INT NOT NULL AUTO_INCREMENT ,
+  `devices_dev_ip` CHAR(15) NOT NULL ,
   `switchStatus` ENUM('ovr','off','auto') NOT NULL ,
   `ledOnColor` ENUM('none','red','green','blue','amber','cycle','toggle') NOT NULL ,
   `ledOffColor` ENUM('none','red','green','blue','amber','cycle','toggle') NOT NULL ,
@@ -62,28 +61,30 @@ CREATE  TABLE IF NOT EXISTS `test`.`y1g` (
   `firmwareVersion` VARCHAR(4) NOT NULL ,
   `name` VARCHAR(32) NOT NULL ,
   `location` VARCHAR(128) NOT NULL ,
-  `dev_ip` CHAR(15) NOT NULL ,
-  PRIMARY KEY (`dev_ip`) ,
-  CONSTRAINT `fk_y1g_devices`
-    FOREIGN KEY (`dev_ip` )
-    REFERENCES `test`.`devices` (`dev_ip` )
+  UNIQUE INDEX `typeg_id_UNIQUE` (`typeg_id` ASC) ,
+  UNIQUE INDEX `devices_dev_ip_UNIQUE` (`devices_dev_ip` ASC) ,
+  PRIMARY KEY (`devices_dev_ip`) ,
+  CONSTRAINT `fk_type_g_devices`
+    FOREIGN KEY (`devices_dev_ip` )
+    REFERENCES `HybridDB`.`devices` (`dev_ip` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
-COMMENT = 'Y1G oBIX Variables';
+COMMENT = 'Device no motion oBIX variables';
 
-INSERT INTO `user`
-VALUES
-    (1,'Admin','User','adminuser','d9acd48369a1a20280c8c3b6921d8d8a','admin@email.com',1,1,1);
-INSERT INTO test.devices (type,dev_ip)
-VALUES ('Y1G','192.168.168.1');
-INSERT INTO test.devices (type,dev_ip)
-VALUES ('Y1G-M','192.168.168.2');
-INSERT INTO test.devices (type,dev_ip)
-VALUES ('YFM','192.168.168.3');
-INSERT INTO test.y1g (switchStatus,ledOnColor,ledOffColor,latchActive,bPressLapse,networkOn,flickWarn,flickReps,firmwareVersion,name,location,dev_ip)
-VALUES ('auto','blue','red',true,50,true,false,2,'2.10','arcadian','House','192.168.168.1');
+-- Creating testing Values for--
+INSERT INTO devices (type, dev_ip)
+VALUES ('y1g','192.168.168.1');
+INSERT INTO devices (type, dev_ip)
+VALUES ('y1g-m','192.168.168.2');
+INSERT INTO devices (type, dev_ip)
+VALUES ('yfm','192.168.168.3');
+INSERT INTO devices (type, dev_ip)
+VALUES ('yfm2','192.168.168.4');
+INSERT INTO devices (type, dev_ip)
+VALUES ('yfm4','192.168.168.5');
 
-INSERT INTO test.devices (type,dev_ip)
-VALUES ('YFM4','192.168.168.4');
+INSERT INTO type_f (name, devices_dev_ip,location,latchActive,networkOn,flickWarn,firmwareVersion,dim,dimMin,motionMuteDelay,input,offDelay)
+VALUES ('yfm','192.168.168.3','test','1','1','0','2.10','10','5','90','0','30');
+

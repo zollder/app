@@ -1,2 +1,6 @@
-SELECT * FROM `test`.`devices` NATURAL JOIN  `test`.`y1g` 
-WHERE devices.dev_ip = y1g.dev_ip;
+
+
+DELETE FROM `HybridDB`.`devices` WHERE `dev_ip` ='192.168.168.3';
+SELECT * FROM `HybridDB`.`type_f`;
+SELECT * FROM `HybridDB`.`devices`;
+SELECT * FROM `HybridDB`.`devices` NATURAL JOIN  `HybridDB`.`type_f` WHERE devices_dev_ip = dev_ip;

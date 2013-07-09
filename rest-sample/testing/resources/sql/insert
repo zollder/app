@@ -1,0 +1,3 @@
+SELECT * FROM `HybridDB`.`devices`;
+SELECT * FROM `HybridDB`.`type_f`;
+

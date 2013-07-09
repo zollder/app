@@ -1,3 +1,5 @@
-DELETE FROM `test`.`y1g` WHERE `dev_ip` ='192.168.168.1';
-SELECT * FROM `test`.`y1g`;
-SELECT * FROM `test`.`devices`;
+DESCRIBE SELECT * FROM `HybridDB`.`devices`;
+EXPLAIN SELECT * FROM `HybridDB`.`devices`;
+
+DESCRIBE SELECT * FROM `HybridDB`.`type_f`;
+EXPLAIN SELECT * FROM `HybridDB`.`type_f`;

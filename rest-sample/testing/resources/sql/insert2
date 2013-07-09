@@ -1,0 +1,20 @@
+INSERT INTO type_g (name, devices_dev_ip)
+VALUES ('y1g','192.168.168.3');
+UPDATE `HybridDB`.`type_g` 
+SET 
+    `location` = 'test',
+    `latchActive` = '1',
+    `networkOn` = '1',
+    `flickWarn` = '0',
+    `firmwareVersion` = '2.10',
+    `dim` = '10',
+    `dimMin` = '5',
+    `motionMuteDelay` = '90',
+    `input` = '0',
+    `offDelay` = '30'
+WHERE
+    `devices_dev_ip` = '192.168.168.4';
+
+INSERT INTO type_f (name, devices_dev_ip,location,latchActive,networkOn,flickWarn,firmwareVersion,dim,dimMin,motionMuteDelay,input,offDelay)
+VALUES ('yfm','192.168.168.30','test','1','1','0','2.10','10','5','90','0','30');
+
