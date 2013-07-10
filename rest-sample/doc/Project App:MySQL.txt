@@ -1,0 +1,51 @@
+====== MySQL ======
+Created Wednesday 03 July 2013
+
+**Understanding relationship:**
+	creating 1-to-1 relationship.
+		every device has 1 type and the each type variables belongs to one device.
+	creating 1 to many relationship
+		Would work if using tables reflecting the different reference points(href)
+		each device has many reference points but each reference point points to one device.
+		FSY-1G device has point: [[/obix/]] && [[/obix/y1g/]] && [[/obix/y1g/adv/]]
+	http://net.tutsplus.com/tutorials/databases/sql-for-beginners-part-3-database-relationships/
+
+**Understanding Supertables:**
+	http://stackoverflow.com/questions/3145084/mysql-two-n1-relations-but-not-both-at-once
+	http://stackoverflow.com/questions/2112882/designing-a-conditional-database-relationship-in-sql-server/2113129#2113129
+	http://stackoverflow.com/questions/441001/possible-to-do-a-mysql-foreign-key-to-one-of-two-possible-tables/441111#441111
+
+	delte bottom to top
+		http://stackoverflow.com/questions/11497149/how-to-enforce-referential-integrity-on-single-table-inheritance
+	http://stackoverflow.com/questions/2002985/mysql-conditional-foreign-key-constraints/2003042#2003042
+	
+**Foreign key:**
+	On Update CASCADE
+	On Delete CASCADE
+	http://stackoverflow.com/questions/6720050/foreign-key-constraints-when-to-use-on-update-and-on-delete
+	//CREATE TABLE customers (  //
+		//customer_id INT AUTO_INCREMENT PRIMARY KEY,  //
+		//customer_name VARCHAR(100)  //
+	//); //
+	//CREATE TABLE orders (  //
+		//order_id INT AUTO_INCREMENT PRIMARY KEY,  //
+		//customer_id INT,  //
+		//amount DOUBLE,  //
+		//FOREIGN KEY (customer_id) REFERENCES customers(customer_id)  //
+	//);//
+	
+**IP Address:**
+INET_ATON() and INET_NTOA() functions.
+	http://dev.mysql.com/doc/refman/5.0/en/miscellaneous-functions.html#function_inet-aton
+mysql> SELECT INET_ATON('10.0.5.9');
+        -> 167773449
+	For this example, the return value is calculated as 10×2563 + 0×2562 + 5×256 + 9.
+mysql> SELECT INET_NTOA(167773449);
+        -> '10.0.5.9'
+
+**MAC Address:**
+use bigint unsigned (8 bytes) then you can:
+	select hex(mac_addr) from log;
+	and
+	insert into log (mac_addr) values (x'000CF15698AD');
+store as binary to save space:
