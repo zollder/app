@@ -1,3 +1,1 @@
-SELECT * FROM `HybridDB`.`devices`;
-SELECT * FROM `HybridDB`.`type_f`;
-
+SELECT * FROM `test`.`devices` natural JOIN  `test`.`type_gm` where dev_ip = devices_dev_ip;

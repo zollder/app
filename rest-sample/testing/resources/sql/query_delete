@@ -1,5 +1,5 @@
-DESCRIBE SELECT * FROM `HybridDB`.`devices`;
-EXPLAIN SELECT * FROM `HybridDB`.`devices`;
+DESCRIBE SELECT * FROM `test`.`devices`;
+EXPLAIN SELECT * FROM `test`.`devices`;
 
-DESCRIBE SELECT * FROM `HybridDB`.`type_f`;
-EXPLAIN SELECT * FROM `HybridDB`.`type_f`;
+DESCRIBE SELECT * FROM `test`.`type_f`;
+EXPLAIN SELECT * FROM `test`.`type_f`;
