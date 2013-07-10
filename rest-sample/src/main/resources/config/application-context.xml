@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xmlns:oxm="http://www.springframework.org/schema/oxm"
-		xmlns:util="http://www.springframework.org/schema/util"
 		xmlns:mvc="http://www.springframework.org/schema/mvc"
 		xmlns:context="http://www.springframework.org/schema/context"
 		xsi:schemaLocation="
@@ -11,18 +9,7 @@
 			http://www.springframework.org/schema/mvc
 			http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 			http://www.springframework.org/schema/context
-			http://www.springframework.org/schema/context/spring-context-3.2.xsd
-			http://www.springframework.org/schema/oxm
-			http://www.springframework.org/schema/oxm/spring-oxm-3.2.xsd
-			http://www.springframework.org/schema/util
-  			http://www.springframework.org/schema/util/spring-util-3.2.xsd">
-
-
-	<!--
-		Enables annotation-driven Spring MVC: allows binding request parameters to handler method parameters
-		registers several features, including JSR-303 validation support, message conversion, field formatting
-	-->
-	<mvc:annotation-driven/>
+			http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 
 	<!-- Enables injection of ConstraintValidator instantiated by spring into custom JSR303 validation -->
@@ -37,27 +24,18 @@
     <context:component-scan base-package="com.app*" />
 
 
-	<!-- Message Converter Configuration -->
-	<!--=======================================================================================================================-->
+	<!--
+		Enables annotation-driven Spring MVC: allows binding request parameters to handler method parameters
+		registers several features, including JSR-303 validation support, message conversion, field formatting.
+		Message converter beans define the precedence of converters. 
+	-->
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="false">
+			<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+			<bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 
-	<!-- Defines JSON message converter: converts POJOs to JSON and backwards -->
-	<bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-		<property name="prefixJson" value="false"/>
-		<property name="supportedMediaTypes" value="application/json"/>
-	</bean>
-
-	<!-- Enables converters by registering them in the AnnotationMethodHandlerAdapter -->
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<util:list id="beanList">
-				<ref bean="jsonHttpMessageConverter"/>
-			</util:list>
-		</property>
-	</bean>
-
-
-	<!-- Other -->
-	<!--=======================================================================================================================-->
 
 	<!--
         Post-processor to perform exception translation on @Repository classes
