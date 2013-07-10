@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.app.domain.dto.Person;
 import com.app.domain.model.Contact;
 import com.app.domain.services.ContactService;
 
@@ -32,6 +33,22 @@ public class ContactController
 		Contact contact = contactService.loadWithPrimaryKey(key);
 
 		return contact;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Test */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value = "/person/{key}", method = { RequestMethod.GET }, produces="application/xml")
+	@ResponseBody
+	public Person loadWithKey(@PathVariable Long key)
+	{
+		Contact contact = contactService.loadWithPrimaryKey(key);
+
+		Person person = new Person();
+		person.setName(contact.getName());
+		person.setAddress(contact.getAddress());
+
+		return person;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
