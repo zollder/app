@@ -16,14 +16,14 @@
 
 	<!-- HTTP security handling -->
 
-	<!-- make sure login page and few other are not secured -->
+	<!-- make sure login page and few others are not secured -->
+	<security:http pattern="/images/**" security="none"/>
+	<security:http pattern="/css/**" security="none"/>
+	<security:http pattern="/js/**" security="none"/>
 	<security:http pattern="/login.jsp" security="none"/>
 	<security:http pattern="/denied.jsp" security="none"/>
 
 	<security:http>
-
-		<!-- Defines a pattern which is matched against the URL's of incoming requests-->
-		<security:intercept-url pattern="/**" access="ROLE_USER" requires-channel="any"/>
 
 		<!-- supporting form-based authentication for interactive connections (u/i) -->
 		<security:form-login
@@ -38,6 +38,9 @@
 			logout-success-url="/login.jsp?loggedout=true"
 		/>
 
+		<!-- Defines a pattern which is matched against the URL's of incoming requests -->
+		<security:intercept-url pattern="/**" access="ROLE_USER" requires-channel="any"/>
+
 		<!-- Enables basic authentication instead of form login. Gives precedence to the first -->
 		<security:http-basic />
 
@@ -51,8 +54,10 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 
+
 	<!-- Custom password encoder (salted) -->
 	<bean id="passwordEncoder" class="com.app.security.PasswordEncoder" />
+
 
 	<!--
 		Enables simple role-based constraints with Spring's native annotations (currently not used)
