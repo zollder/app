@@ -17,13 +17,12 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COMMENT = 'holds all the devices information';
 
--- Creating testing Values for--
+-- Creating testing Values for devices--
 INSERT INTO devices (dev_ip,mac,type)
 VALUES
 	('192.168.0.2','abcdef123456','type_f'),
 	('192.168.0.3','abcdef789012','type_g'),
 	('192.168.0.4','fedcba654321','type_gm');
-
 
 DROP TABLE IF EXISTS `type_f`;
 CREATE  TABLE IF NOT EXISTS `type_f` (
@@ -57,6 +56,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COMMENT = 'Device ceiling mount oBIX variables';
 
+-- Creating testing Values for type_f--
 INSERT INTO test.type_f
 VALUES ('192.168.0.2','1','typeFTest1','Virtual1','0.10','1','65534','0','2','600','60','10','0','off','0','auto','1');
 
@@ -88,6 +88,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COMMENT = 'Device no motion oBIX variables';
 
+-- Creating testing Values for type_g--
 INSERT INTO test.type_g
 VALUES ('192.168.0.3','1','typeGTest1','virtual2','1.7','0','45220','0','3','blue','red','auto','1');
 
@@ -126,6 +127,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COMMENT = 'Device motion sensor oBIX variables';
 
+-- Creating testing Values for type_gm--
 INSERT INTO test.type_gm
 VALUES ('192.168.0.4','1','typeGmTest1','virtual3','1.7','1','240','0','3','900','green','amber','12','60','600','954','100','autoOnOff','auto','1');
 
