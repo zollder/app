@@ -3,30 +3,31 @@ DROP DATABASE IF EXISTS `test`;
 CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1;
 USE `test`;
 
-DROP TABLE IF EXISTS `devices`;
-CREATE  TABLE IF NOT EXISTS `devices` (
+DROP TABLE IF EXISTS `device`;
+CREATE  TABLE IF NOT EXISTS `device` (
+  `primaryKey` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `dev_ip` CHAR(15) NOT NULL ,
-  `dev_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `mac` CHAR(12) NULL ,
-  `type` ENUM('type_g', 'type_gm', 'type_f', 'type_f2', 'type_f4') NOT NULL ,
-  PRIMARY KEY (`dev_ip`) ,
-  UNIQUE INDEX `mac_UNIQUE` (`mac` ASC) ,
-  UNIQUE INDEX `dev_id_UNIQUE` (`dev_id` ASC) ,
-  UNIQUE INDEX `dev_ip_UNIQUE` (`dev_ip` ASC) )
+  `dev_mac` CHAR(17) NULL ,
+  `dev_type` ENUM('TYPE_G', 'TYPE_GM', 'TYPE_F', 'TYPE_F2', 'TYPE_F4') NOT NULL ,
+  UNIQUE INDEX `dev_mac_UNIQUE` (`dev_mac` ASC) ,
+  UNIQUE INDEX `primaryKey_UNIQUE` (`primaryKey` ASC) ,
+  UNIQUE INDEX `dev_ip_UNIQUE` (`dev_ip` ASC) ,
+  PRIMARY KEY (`primaryKey`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COMMENT = 'holds all the devices information';
 
--- Creating testing Values for devices--
-INSERT INTO devices (dev_ip,mac,type)
+
+-- Creating testing Values for device--
+INSERT INTO device (dev_ip,dev_mac,dev_type)
 VALUES
-	('192.168.0.2','abcdef123456','type_f'),
-	('192.168.0.3','abcdef789012','type_g'),
-	('192.168.0.4','fedcba654321','type_gm');
+	('192.168.0.2','ab:cd:ef:12:34:56','TYPE_F'),
+	('192.168.0.3','ab:cd:ef:78:90:12','TYPE_G'),
+	('192.168.0.4','fe:dc:ba:65:43:21','TYPE_GM');
 
 DROP TABLE IF EXISTS `type_f`;
 CREATE  TABLE IF NOT EXISTS `type_f` (
-  `devices_dev_ip` CHAR(15) NOT NULL ,
+  `device_dev_ip` CHAR(15) NOT NULL ,
   `typef_id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(32) NOT NULL ,
   `location` VARCHAR(128) NOT NULL ,
@@ -43,13 +44,13 @@ CREATE  TABLE IF NOT EXISTS `type_f` (
   `input` TINYINT(1) NULL ,
   `switchStatus` ENUM('ovr','off','auto') NOT NULL ,
   `networkOn` TINYINT(1) NULL ,
-  PRIMARY KEY (`devices_dev_ip`) ,
-  INDEX `fk_type_f_devices_idx` (`devices_dev_ip` ASC) ,
+  PRIMARY KEY (`device_dev_ip`) ,
+  INDEX `fk_type_f_device_idx` (`device_dev_ip` ASC) ,
   UNIQUE INDEX `typef_id_UNIQUE` (`typef_id` ASC) ,
-  UNIQUE INDEX `devices_dev_ip_UNIQUE` (`devices_dev_ip` ASC) ,
-  CONSTRAINT `fk_type_f_devices`
-    FOREIGN KEY (`devices_dev_ip` )
-    REFERENCES `devices` (`dev_ip` )
+  UNIQUE INDEX `device_dev_ip_UNIQUE` (`device_dev_ip` ASC) ,
+  CONSTRAINT `fk_type_f_device`
+    FOREIGN KEY (`device_dev_ip` )
+    REFERENCES `device` (`dev_ip` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -63,7 +64,7 @@ VALUES ('192.168.0.2','1','typeFTest1','Virtual1','0.10','1','65534','0','2','60
 
 DROP TABLE IF EXISTS `type_g`;
 CREATE  TABLE IF NOT EXISTS `type_g` (
-  `devices_dev_ip` CHAR(15) NOT NULL ,
+  `device_dev_ip` CHAR(15) NOT NULL ,
   `typeg_id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(32) NOT NULL ,
   `location` VARCHAR(128) NOT NULL ,
@@ -77,11 +78,11 @@ CREATE  TABLE IF NOT EXISTS `type_g` (
   `switchStatus` ENUM('ovr','off','auto') NOT NULL ,
   `networkOn` TINYINT(1) NULL ,
   UNIQUE INDEX `typeg_id_UNIQUE` (`typeg_id` ASC) ,
-  UNIQUE INDEX `devices_dev_ip_UNIQUE` (`devices_dev_ip` ASC) ,
-  PRIMARY KEY (`devices_dev_ip`) ,
-  CONSTRAINT `fk_type_g_devices`
-    FOREIGN KEY (`devices_dev_ip` )
-    REFERENCES `devices` (`dev_ip` )
+  UNIQUE INDEX `device_dev_ip_UNIQUE` (`device_dev_ip` ASC) ,
+  PRIMARY KEY (`device_dev_ip`) ,
+  CONSTRAINT `fk_type_g_device`
+    FOREIGN KEY (`device_dev_ip` )
+    REFERENCES `device` (`dev_ip` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -95,7 +96,7 @@ VALUES ('192.168.0.3','1','typeGTest1','virtual2','1.7','0','45220','0','3','blu
 
 DROP TABLE IF EXISTS `type_gm`;
 CREATE  TABLE IF NOT EXISTS `type_gm` (
-  `devices_dev_ip` CHAR(15) NOT NULL ,
+  `device_dev_ip` CHAR(15) NOT NULL ,
   `typegm_id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(32) NULL ,
   `location` VARCHAR(128) NULL ,
@@ -115,12 +116,12 @@ CREATE  TABLE IF NOT EXISTS `type_gm` (
   `mode` ENUM('man','autoOnOff','manOnAutoOff') NOT NULL ,
   `switchStatus` ENUM('ovr','off','auto') NOT NULL ,
   `networkOn` TINYINT(1) NULL ,
-  PRIMARY KEY (`devices_dev_ip`) ,
+  PRIMARY KEY (`device_dev_ip`) ,
   UNIQUE INDEX `typegm_id_UNIQUE` (`typegm_id` ASC) ,
-  UNIQUE INDEX `devices_dev_ip_UNIQUE` (`devices_dev_ip` ASC) ,
-  CONSTRAINT `fk_type_gm_devices1`
-    FOREIGN KEY (`devices_dev_ip` )
-    REFERENCES `devices` (`dev_ip` )
+  UNIQUE INDEX `device_dev_ip_UNIQUE` (`device_dev_ip` ASC) ,
+  CONSTRAINT `fk_type_gm_device1`
+    FOREIGN KEY (`device_dev_ip` )
+    REFERENCES `device` (`dev_ip` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
