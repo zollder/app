@@ -29,11 +29,10 @@
 				locale: 'en',
 				parseOnLoad: false,
 				packages: [{ name: 'js', location: '/restSample/js'}],
-				useXDomain: false
-			"
+				useXDomain: false"
 			src="/toolkit/js/dojo/dojo/dojo.js"
-			type="text/javascript"
-		></script>
+			type="text/javascript">
+		</script>
 
 		<!-- create login form with all required buttons and/or checkboxes -->
 		<div id="restSampleContext">

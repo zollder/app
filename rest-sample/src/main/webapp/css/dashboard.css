@@ -1,0 +1,34 @@
+	html, body
+	{
+		height: 100%;
+		margin: 0;
+		overflow: hidden;
+		padding: 0;
+	}
+
+	#appLayout
+	{
+		height: 100%;
+	}
+
+	#leftContainer
+	{
+		width: 14em;
+	}
+
+	.claro .mainLayout .edgePanel
+	{
+		background-color: #d0e9fc;
+	}
+
+	#viewsChart
+	{
+		width: 550px;
+		height: 550px;
+	}
+
+	/*custom font order, overrides defaults in dojo.css*/
+	.claro {
+	  font-family: "Lucida Console", Verdana,Arial,Helvetica,sans-serif;
+	  font-size: .75em;
+	}
