@@ -1,0 +1,69 @@
+body
+{
+	background: #fff url("../images/bg-top.gif") repeat-x;
+}
+#restSampleContext
+{
+	background: url("../images/bg-container.gif") center top no-repeat;
+	min-height: 473px;
+}
+#restSampleLogo
+{
+	position: absolute;
+	left: 25px;
+	top: 50px;
+	margin-left: 30px;
+}
+#restSampleLogin
+{
+	position: absolute;
+	top: 175px;
+	margin-left: 0px;
+	width: 375px;
+	font-size: 11px;
+	font-family: Verdana, Sans-Serif;
+	left: 0;
+	padding: 50px 0px 0px 50px;
+	background: url("../images/window.png") center top no-repeat;
+	font-size: 12px;
+}
+#restSampleLogin h2
+{
+	padding: 0;
+	margin: 0;
+	color: #B40D26;
+	font-size: 14px;
+	font-weight: bold;
+}
+#restSamplePortal
+{
+	border: 0;
+	position: absolute;
+	top: 130px;
+	left: 400px;
+	width: 800px;
+	height: 400px;
+	overflow: visible;
+}
+.field
+{
+	margin-bottom: 6px;
+}
+.field label
+{
+	float: left;
+	width: 65px;
+	text-align: right;
+	padding-right: 5px;
+}
+.logMe
+{
+	text-align: right;
+	margin-right: 55px;
+	margin-bottom: 6px;
+}
+.errorMsg
+{
+	color: red;
+	font-weight: bold;
+}

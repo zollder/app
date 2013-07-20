@@ -15,23 +15,49 @@
 	<!--=======================================================================================================================-->
 
 	<!-- HTTP security handling -->
-	<security:http access-denied-page="/denied.jsp" use-expressions="true">
-		<!-- Defines a pattern which is matched against the URL's of incoming requests-->
-		<security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" requires-channel="any" />
+
+	<!-- make sure login page and few others are not secured -->
+	<security:http pattern="/images/**" security="none"/>
+	<security:http pattern="/css/**" security="none"/>
+	<security:http pattern="/js/**" security="none"/>
+	<security:http pattern="/login.jsp" security="none"/>
+	<security:http pattern="/denied.jsp" security="none"/>
+
+	<security:http>
+
+		<!-- supporting form-based authentication for interactive connections (u/i) -->
+		<security:form-login
+			login-page="/login.jsp"
+			default-target-url="/index.jsp"
+			always-use-default-target='true'
+			authentication-failure-url="/login.jsp?login_error=true"
+		/>
+		<security:logout
+			logout-url="/j_spring_security_logout"
+			invalidate-session="true"
+			logout-success-url="/login.jsp?loggedout=true"
+		/>
+
+		<!-- Defines a pattern which is matched against the URL's of incoming requests -->
+		<security:intercept-url pattern="/**" access="ROLE_USER" requires-channel="any"/>
 
 		<!-- Enables basic authentication instead of form login. Gives precedence to the first -->
 		<security:http-basic />
+
 	</security:http>
 
+
 	<!-- Authentication strategy: use custom implementation of the Spring's UserDetailsService -->
-	<security:authentication-manager>
+	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider user-service-ref="userSecurityService">
 			<security:password-encoder ref="passwordEncoder" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 
+
 	<!-- Custom password encoder (salted) -->
 	<bean id="passwordEncoder" class="com.app.security.PasswordEncoder" />
+
 
 	<!--
 		Enables simple role-based constraints with Spring's native annotations (currently not used)

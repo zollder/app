@@ -1,0 +1,77 @@
+		html, body
+		{
+			height: 100%;
+			overflow: hidden;
+		}
+		.dojoxGrid table
+		{
+			margin: 0;
+		}
+		.claro .dojoxGridMasterHeader
+		{
+			border: 0 none;
+		}
+		.claro .dijitContentPane
+		{
+			padding: 0;
+		}
+		.claro .dijitMenu
+		{
+			/*IE support*/
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#C6DAF5', endColorstr='#E7EEF8');
+			/*webkit browser support*/
+			background: -webkit-gradient(linear, left top, left bottom, from(#C6DAF5), to(#E7EEF8));
+ 			/* Firefox 3.6+ support*/
+			background: -moz-linear-gradient(top,  #C6DAF5,  #E7EEF8);
+		}
+		.restSampleVisible
+		{
+			display: block;
+		}
+		.restSampleHidden
+		{
+			display: none;
+		}
+		.pickerBox
+		{
+			float: left;
+		}
+		.formField, .pickerBoxSearchField
+		{
+			float: left;
+			height: 22px;
+		}
+		#updateUserForm .formField
+		{
+			float: none;
+			height: 27px;
+		}
+		.formLabel, .pickerBoxSearchLabel
+		{
+			float: left;
+			width: 100px;
+			text-align: right;
+			padding-right: 5px;
+			height: 22px;
+			padding-top:5px;
+		}
+		#notificationArea
+		{
+			display: none;
+			opacity: 0;
+			position: absolute;
+			top: 0px;
+			left: 200px;
+			right: 200px;
+			padding: 20px;
+			background-color: #fff;
+			border-bottom:2px solid lightblue;
+			border-left:1px solid lightblue;
+			border-right:1px solid lightblue;
+			-webkit-box-shadow: -3px 3px 10px #aaa;
+			-moz-box-shadow: -3px 3px 10px #aaa;
+			box-shadow: -3px 3px 10px #aaa;
+			filter: progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=135, Color='#a0a0a0');
+			-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=135, Color='#a0a0a0')";
+			z-index: 999;
+		}
