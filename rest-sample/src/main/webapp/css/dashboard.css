@@ -26,9 +26,3 @@
 		width: 550px;
 		height: 550px;
 	}
-
-	/*custom font order, overrides defaults in dojo.css*/
-	.claro {
-	  font-family: "Lucida Console", Verdana,Arial,Helvetica,sans-serif;
-	  font-size: .75em;
-	}
