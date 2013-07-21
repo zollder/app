@@ -3,112 +3,21 @@ DROP DATABASE IF EXISTS `test`;
 CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1;
 USE `test`;
 
-DROP TABLE IF EXISTS `test`.`devices`;
-CREATE  TABLE IF NOT EXISTS `test`.`devices` (
-  `dev_ip` CHAR(15) NOT NULL ,
-  `dev_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `mac` CHAR(12) NULL ,
-  `type` ENUM('type_g', 'type_gm', 'type_f', 'type_f2', 'type_f4') NOT NULL ,
-  PRIMARY KEY (`dev_ip`) ,
-  UNIQUE INDEX `mac_UNIQUE` (`mac` ASC) ,
-  UNIQUE INDEX `dev_id_UNIQUE` (`dev_id` ASC) ,
-  UNIQUE INDEX `dev_ip_UNIQUE` (`dev_ip` ASC) )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1
-COMMENT = 'holds all the devices information';
+DROP TABLE IF EXISTS `device`;
+CREATE  TABLE IF NOT EXISTS `device` (
+  `primaryKey` bigint NOT NULL,
+  `devIp` char(15) NOT NULL,
+  `devMac` char(17),
+  `devType` bigint NOT NULL,
+  `devName` char(20),
+  `devDescription` char(240),
+  PRIMARY KEY (`primaryKey`)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = latin1 COMMENT = 'holds device information';
 
-DROP TABLE IF EXISTS `test`.`type_f`;
-CREATE  TABLE IF NOT EXISTS `test`.`type_f` (
-  `devices_dev_ip` CHAR(15) NOT NULL ,
-  `typef_id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(32) NOT NULL ,
-  `location` VARCHAR(128) NOT NULL ,
-  `firmwareVersion` VARCHAR(4) NOT NULL ,
-  `latchActive` TINYINT(1) NULL ,
-  `bPressLapse` INT UNSIGNED NOT NULL ,
-  `flickWarn` TINYINT(1) NULL ,
-  `flickReps` INT UNSIGNED NOT NULL ,
-  `offDelay` INT UNSIGNED NULL ,
-  `motionMuteDelay` INT UNSIGNED NULL ,
-  `dim` INT UNSIGNED NULL ,
-  `dimMin` INT UNSIGNED NULL ,
-  `dimMode` ENUM('off','on','onFade') NOT NULL ,
-  `input` TINYINT(1) NULL ,
-  `switchStatus` ENUM('ovr','off','auto') NOT NULL ,
-  `networkOn` TINYINT(1) NULL ,
-  PRIMARY KEY (`devices_dev_ip`) ,
-  INDEX `fk_type_f_devices_idx` (`devices_dev_ip` ASC) ,
-  UNIQUE INDEX `typef_id_UNIQUE` (`typef_id` ASC) ,
-  UNIQUE INDEX `devices_dev_ip_UNIQUE` (`devices_dev_ip` ASC) ,
-  CONSTRAINT `fk_type_f_devices`
-    FOREIGN KEY (`devices_dev_ip` )
-    REFERENCES `test`.`devices` (`dev_ip` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1
-COMMENT = 'Device ceiling mount oBIX variables';
+-- Creating testing Values for--
+INSERT INTO device
+VALUES (1, '192.168.0.2','ab:cd:ef:12:34:56', 1, 'device1', 'test device');
 
-DROP TABLE IF EXISTS `test`.`type_g`;
-CREATE  TABLE IF NOT EXISTS `test`.`type_g` (
-  `devices_dev_ip` CHAR(15) NOT NULL ,
-  `typeg_id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(32) NOT NULL ,
-  `location` VARCHAR(128) NOT NULL ,
-  `firmwareVersion` VARCHAR(4) NOT NULL ,
-  `latchActive` TINYINT(1) NULL ,
-  `bPressLapse` INT UNSIGNED NOT NULL ,
-  `flickWarn` TINYINT(1) NULL ,
-  `flickReps` INT UNSIGNED NOT NULL ,
-  `ledOnColor` ENUM('none','red','green','blue','amber','cycle','toggle') NOT NULL ,
-  `ledOffColor` ENUM('none','red','green','blue','amber','cycle','toggle') NOT NULL ,
-  `switchStatus` ENUM('ovr','off','auto') NOT NULL ,
-  `networkOn` TINYINT(1) NULL ,
-  UNIQUE INDEX `typeg_id_UNIQUE` (`typeg_id` ASC) ,
-  UNIQUE INDEX `devices_dev_ip_UNIQUE` (`devices_dev_ip` ASC) ,
-  PRIMARY KEY (`devices_dev_ip`) ,
-  CONSTRAINT `fk_type_g_devices`
-    FOREIGN KEY (`devices_dev_ip` )
-    REFERENCES `test`.`devices` (`dev_ip` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1
-COMMENT = 'Device no motion oBIX variables';
-
-DROP TABLE IF EXISTS `test`.`type_gm`;
-CREATE  TABLE IF NOT EXISTS `test`.`type_gm` (
-  `devices_dev_ip` CHAR(15) NOT NULL ,
-  `typegm_id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(32) NULL ,
-  `location` VARCHAR(128) NULL ,
-  `firmwareVersion` VARCHAR(4) NULL ,
-  `latchActive` TINYINT(1) NULL ,
-  `bPressLapse` INT UNSIGNED NULL ,
-  `flickWarn` TINYINT(1) NULL ,
-  `flickReps` INT UNSIGNED NULL ,
-  `offDelay` INT UNSIGNED NULL ,
-  `ledOnColor` ENUM('none','red','green','blue','amber','cycle','toggle') NOT NULL ,
-  `ledOffColor` ENUM('none','red','green','blue','amber','cycle','toggle') NOT NULL ,
-  `pirSens` INT UNSIGNED NULL ,
-  `motionMuteDelay` INT UNSIGNED NULL ,
-  `noMotionTime` INT UNSIGNED NULL ,
-  `luminosity` INT UNSIGNED NULL ,
-  `lumFactor` INT UNSIGNED NULL ,
-  `mode` ENUM('man','autoOnOff','manOnAutoOff') NOT NULL ,
-  `switchStatus` ENUM('ovr','off','auto') NOT NULL ,
-  `networkOn` TINYINT(1) NULL ,
-  PRIMARY KEY (`devices_dev_ip`) ,
-  UNIQUE INDEX `typegm_id_UNIQUE` (`typegm_id` ASC) ,
-  UNIQUE INDEX `devices_dev_ip_UNIQUE` (`devices_dev_ip` ASC) ,
-  CONSTRAINT `fk_type_gm_devices1`
-    FOREIGN KEY (`devices_dev_ip` )
-    REFERENCES `test`.`devices` (`dev_ip` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1
-COMMENT = 'Device motion sensor oBIX variables';
 
 -- Need to update with new version of contacts--
 DROP TABLE IF EXISTS `contacts`;
@@ -124,6 +33,10 @@ CREATE TABLE  `contacts`
   phone varchar(15) DEFAULT NULL,
   PRIMARY KEY (id)
 );
+
+INSERT INTO `contacts`
+VALUES (1,'John','6750 Des Moines','M','2013-08-07 9:00:00','admin@email.com','514-123-4568','514-456-7898');
+
 
 -- need to update with new version of user--
 DROP TABLE IF EXISTS `user`;
@@ -143,24 +56,5 @@ CREATE TABLE  `user`
 
 -- Creating testing Values for user--
 INSERT INTO `user`
-VALUES
-    (1,'Admin','User','adminuser','d9acd48369a1a20280c8c3b6921d8d8a','admin@email.com',1,1,1);
-INSERT INTO `contacts`
-VALUES
-    (1,'John','6750 Des Moines','M','2013-08-07 9:00:00','admin@email.com','514-123-4568','514-456-7898');
+VALUES (1,'Admin','User','adminuser','d9acd48369a1a20280c8c3b6921d8d8a','admin@email.com',1,1,1);
 
--- Creating testing Values for--
-INSERT INTO devices (dev_ip,mac,type)
-VALUES ('192.168.0.2','abcdef123456','type_f');
-INSERT INTO test.type_f
-VALUES ('192.168.0.2','1','typeFTest1','Virtual1','0.10','1','65534','0','2','600','60','10','0','off','0','auto','1');
-
-INSERT INTO devices (dev_ip,mac,type)
-VALUES ('192.168.0.3','abcdef789012','type_g');
-INSERT INTO test.type_g
-VALUES ('192.168.0.3','1','typeGTest1','virtual2','1.7','0','45220','0','3','blue','red','auto','1');
-
-INSERT INTO devices (dev_ip,mac,type)
-VALUES ('192.168.0.4','fedcba654321','type_gm');
-INSERT INTO test.type_gm
-VALUES ('192.168.0.4','1','typeGmTest1','virtual3','1.7','1','240','0','3','900','green','amber','12','60','600','954','100','autoOnOff','auto','1');

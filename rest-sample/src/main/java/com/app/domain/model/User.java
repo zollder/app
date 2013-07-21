@@ -5,7 +5,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -22,7 +21,7 @@ import com.app.web.utils.Documentation;
 /** User entity. */
 //--------------------------------------------------------------------------------------------------------------------------------
 @Entity
-@Table(name="user", uniqueConstraints = { @UniqueConstraint(columnNames = { "userName" }) })
+@Table(name="user")
 @Documentation(caption = "User", comment = "Rest-sample application user.")
 public class User extends AbstractBase<User>
 {
@@ -44,7 +43,7 @@ public class User extends AbstractBase<User>
 	private String lastName;
 
 	@Basic
-	@Column(name = "userName")
+	@Column(name = "userName", unique = true)
 	@Documentation(caption = "Name", comment = "User's identification name.")
 	@NotNull
 	@Size(max = 40)
