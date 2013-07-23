@@ -24,4 +24,9 @@ public enum DeviceType implements NamedEnum
 	{
 		return this.name;
 	}
+
+	public String getDeviceTypes()
+	{
+		return DeviceType.values().toString();
+	}
 }

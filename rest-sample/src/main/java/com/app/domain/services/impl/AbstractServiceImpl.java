@@ -1,5 +1,9 @@
 package com.app.domain.services.impl;
 
+import java.util.List;
+
+import javax.persistence.RollbackException;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dao.AbstractDao;
@@ -53,13 +57,29 @@ public abstract class AbstractServiceImpl<T extends AbstractBase<T>, D extends A
 		return entity;
 	}
 
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@Transactional(readOnly = true)
+	public List<T> findAll()
+	{
+		return entityDao.findAll();
+	}
+
     // --------------------------------------------------------------------------------------------------------------------------------
 	@Transactional
 	public T save(T entity)
 	{
-		T savedEntity = entityDao.save(entity);
+		T savedEntity = null;
+		try
+		{
+			savedEntity = entityDao.save(entity);
+		}
+		catch (RollbackException e)
+		{
+			System.err.println("transaction.RollbackException");
+		}
 
 		return (T) savedEntity;
+		
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------

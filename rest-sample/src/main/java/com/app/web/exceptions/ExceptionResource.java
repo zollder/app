@@ -14,6 +14,7 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.QueryException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.transaction.TransactionSystemException;
@@ -190,6 +191,32 @@ public class ExceptionResource
 
 		Violation violation = new Violation();
 		violation.setMessage(exception.getMessage());
+
+		ViolationList vList = new ViolationList(Arrays.asList(new Violation[] { violation }));
+		return vList;
+	}
+
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/**
+	 * For instance when duplicate entry is saved (unique fields), as @UniqueConstraint defined at field level has no effect
+	 * and, therefore, constraints are defined at SQL level.
+	 * @param exception
+	 * @return
+	 */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	@ResponseBody
+	public ViolationList dataIntegrityViolationExceptionHandler(DataIntegrityViolationException exception)
+	{
+		log.debug("Unexpected exception: " + exception.getClass().getName() + " reported as HttpStatus.BAD_REQUEST", exception);
+
+		Violation violation = new Violation();
+		violation.setMessage(exception.getMostSpecificCause().getMessage());
+
+		String extendedInfo = exception.getClass().getName();
+		violation.setExtendedInfo(extendedInfo);
 
 		ViolationList vList = new ViolationList(Arrays.asList(new Violation[] { violation }));
 		return vList;

@@ -5,18 +5,14 @@ USE `test`;
 
 DROP TABLE IF EXISTS `device`;
 CREATE  TABLE IF NOT EXISTS `device` (
-  `primaryKey` bigint NOT NULL,
-  `devIp` char(15) NOT NULL,
-  `devMac` char(17),
-  `devType` bigint NOT NULL,
-  `devName` char(20),
-  `devDescription` char(240),
-  PRIMARY KEY (`primaryKey`)
-) ENGINE = InnoDB DEFAULT CHARACTER SET = latin1 COMMENT = 'holds device information';
-
--- Creating testing Values for--
-INSERT INTO device
-VALUES (1, '192.168.0.2','ab:cd:ef:12:34:56', 1, 'device1', 'test device');
+  primaryKey int(10) unsigned NOT NULL AUTO_INCREMENT,
+  devIp varchar(15) NOT NULL UNIQUE,
+  devMac varchar(17) DEFAULT NULL UNIQUE,
+  devType bigint NOT NULL,
+  devName varchar(20) NOT NULL UNIQUE,
+  devDescription varchar(240),
+  PRIMARY KEY (primaryKey)
+);
 
 
 -- Need to update with new version of contacts--
@@ -42,16 +38,17 @@ VALUES (1,'John','6750 Des Moines','M','2013-08-07 9:00:00','admin@email.com','5
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE  `user`
 (
-  primaryKey int(10) unsigned NOT NULL UNIQUE AUTO_INCREMENT,
+  primaryKey int(10) unsigned NOT NULL AUTO_INCREMENT,
   firstName varchar(45) NOT NULL,
   lastName varchar(45) NOT NULL,
-  userName varchar(45) NOT NULL UNIQUE,
+  userName varchar(45) NOT NULL,
   password varchar(80) NOT NULL,
   email varchar(45) DEFAULT NULL,
   isEnabled boolean NOT NULL,
   canLogin boolean NOT NULL,
   isAdmin boolean NOT NULL,
-  PRIMARY KEY (primaryKey)
+  PRIMARY KEY (primaryKey),
+  UNIQUE (userName, email)
 );
 
 -- Creating testing Values for user--

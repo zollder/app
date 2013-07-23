@@ -1,5 +1,7 @@
 package com.app.domain.services;
 
+import java.util.List;
+
 import com.app.domain.model.AbstractBase;
 
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -11,6 +13,11 @@ public interface AbstractService<T extends AbstractBase<T>>
 	/** Loads the entity by primary key (id). Returns loaded entity. Throws DataNotFoundException. */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public T loadWithPrimaryKey(Long key);
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Loads all entities. Returns a list of entities. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public List<T> findAll();
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/** Saves (inserts) given entity. Returns saved entity. */

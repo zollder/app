@@ -27,7 +27,7 @@ import com.app.web.utils.Documentation;
 // @MappedSuperclass tells Hibernate to apply all mappings defined in the base class to all classes which extend from it.
 // It makes the superclass properties persistent.
 @MappedSuperclass
-@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlAccessorType(XmlAccessType.FIELD)
 @Documentation(caption = "Abstract Base", comment = "Base class for model entities.")
 public abstract class AbstractBase<T> implements PrimaryKeySupport, VersionSupport, Serializable
 {
@@ -47,7 +47,7 @@ public abstract class AbstractBase<T> implements PrimaryKeySupport, VersionSuppo
 	@Column(name = "primaryKey")
 	@Documentation(caption = "Primary Key", comment = "Primary key assigned by the database.")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@XmlElement
+	//@XmlElement
 	private Long primaryKey;
 	
 

@@ -1,5 +1,7 @@
 package com.app.web.rest;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,9 +40,10 @@ public class DeviceResource
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Retrieves {@link Device} resource associated to the given IP address. */
+	/** TODO: Retrieves {@link Device} resource associated to the given IP address.
+	 * Implement IP address decoder to decode incoming IP address from Integer into String (design) */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	@RequestMapping(value = "/{ip}", method = { RequestMethod.GET })
+/*	@RequestMapping(value = "/ip/{ip}", method = { RequestMethod.GET })
 	@ResponseBody
 	public Device loadWithDeviceIp(@PathVariable String ip)
 	{
@@ -49,11 +52,12 @@ public class DeviceResource
 
 		return device;
 	}
+*/
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/** Retrieves {@link Device} resource associated to the given MAC address. */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	@RequestMapping(value = "/{mac}", method = { RequestMethod.GET })
+	@RequestMapping(value = "/mac/{mac}", method = { RequestMethod.GET })
 	@ResponseBody
 	public Device loadWithDeviceMac(@PathVariable String mac)
 	{
@@ -61,6 +65,19 @@ public class DeviceResource
 		Device device = deviceService.loadWithDeviceMac(mac);
 
 		return device;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Retrieves a collection of all {@link Device} resources. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value = "/all", method = { RequestMethod.GET })
+	@ResponseBody
+	public List<Device> loadAllDevices()
+	{
+		logger.info("loading all devices");
+		List<Device> devices = deviceService.findAll();
+
+		return devices;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------

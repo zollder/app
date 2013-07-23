@@ -1,5 +1,7 @@
 package com.app.dao.impl;
  
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -50,6 +52,15 @@ public abstract class AbstractDaoImpl<T extends AbstractBase<T>>  implements Abs
 		T entity = (T) getCurrentSession().get(getModelClass(), key);
 
 		return entity;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public List<T> findAll()
+	{
+		@SuppressWarnings("unchecked")
+		List<T> entities = getCurrentSession().createQuery("from " + getModelClass().getName()).list();
+
+		return entities;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------

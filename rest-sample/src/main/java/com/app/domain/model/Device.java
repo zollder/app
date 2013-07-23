@@ -30,15 +30,15 @@ public class Device extends AbstractBase<Device>
 	private static final long serialVersionUID = 1L;
 
 	@Basic
-	@Column(name = "devIp", unique=true)
+	@Column(name = "devIp", unique = true)
 	@Documentation(caption = "IP", comment = "Device's IP address.")
-	@NotNull
 	@Size(min = 7, max = 15)
+	@NotNull
 	@XmlElement
 	private String devIp;
 
 	@Basic
-	@Column(name = "devMac", unique=true)
+	@Column(name = "devMac", unique = true)
 	@Documentation(caption = "MAC address", comment = "MAC address of the device.")
 	@Size(min = 17, max = 17)
 	@XmlElement
@@ -55,7 +55,8 @@ public class Device extends AbstractBase<Device>
 	@Basic
 	@Column(name = "devName")
 	@Documentation(caption = "Device Name", comment = "Name of the device.")
-	@Size(max = 80)
+	@Size(max = 20)
+	@NotNull
 	@XmlElement
 	private String devName;
 

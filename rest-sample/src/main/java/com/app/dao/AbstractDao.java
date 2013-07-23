@@ -1,5 +1,7 @@
 package com.app.dao;
 
+import java.util.List;
+
 import com.app.domain.model.AbstractBase;
 
 
@@ -14,6 +16,11 @@ public interface AbstractDao<T extends AbstractBase<T>>
 	/** Loads given entity by primary key (id). Returns loaded entity. */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public T loadWithPrimaryKey(Long key);
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Loads all entities. Returns a list of entities. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public List<T> findAll();
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/** Saves given entity. Returns saved entity. */
