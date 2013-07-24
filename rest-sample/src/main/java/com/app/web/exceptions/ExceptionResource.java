@@ -114,6 +114,23 @@ public class ExceptionResource
 		return generateSingleViolation;
 	}
 
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** In our particular case, handles exceptions thrown by invalid enum values in saved entities. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	@ResponseBody
+	public ViolationList HttpMessageNotReadableExceptionHandler(HttpMessageNotReadableException exception)
+	{
+		log.debug("Unexpected exception: " + exception.getClass().getName() + " reported as HttpStatus.BAD_REQUEST", exception);
+
+		Violation violation = new Violation();
+		violation.setExtendedInfo(exception.getClass().getSimpleName());
+		violation.setMessage(exception.getCause().getMessage());
+
+		ViolationList vList = new ViolationList(Arrays.asList(new Violation[] { violation }));
+		return vList;
+	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/**

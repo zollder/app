@@ -10,9 +10,33 @@ CREATE  TABLE IF NOT EXISTS `device` (
   devMac varchar(17) DEFAULT NULL UNIQUE,
   devType bigint NOT NULL,
   devName varchar(20) NOT NULL UNIQUE,
-  devDescription varchar(240),
+  devLocation VARCHAR(128) default NULL,
+  firmwareVersion VARCHAR(4) default NULL,
+  devDescription varchar(240) default NULL,
   PRIMARY KEY (primaryKey)
 );
+
+
+DROP TABLE IF EXISTS `type_f`;
+CREATE  TABLE IF NOT EXISTS `type_f` (
+  primaryKey int(10) unsigned NOT NULL AUTO_INCREMENT,
+  deviceId int(10) unsigned NOT NULL,
+  latchActive boolean default NULL,
+  bPressLapse int unsigned default NULL ,
+  flickWarn boolean default NULL,
+  flickReps int unsigned default NULL,
+  offDelay int unsigned default NULL,
+  motionMuteDelay int unsigned default NULL,
+  dim int unsigned default NULL,
+  dimMin int unsigned default NULL,
+  dimMode ENUM('off','on','onFade') NOT NULL,
+  input boolean default NULL,
+  switchStatus ENUM('ovr','off','auto') NOT NULL,
+  networkOn boolean default NULL,
+  PRIMARY KEY (primaryKey),
+  CONSTRAINT `fk_type_g` FOREIGN KEY (`deviceId`) REFERENCES `device` (`primaryKey`)
+);
+
 
 
 -- Need to update with new version of contacts--

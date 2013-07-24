@@ -1,5 +1,6 @@
 package com.app.domain.services;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.app.domain.model.AbstractBase;
@@ -7,7 +8,7 @@ import com.app.domain.model.AbstractBase;
 //--------------------------------------------------------------------------------------------------------------------------------
 /** Implements standard services around any {@link AbstractBase} entity */
 //--------------------------------------------------------------------------------------------------------------------------------
-public interface AbstractService<T extends AbstractBase<T>>
+public interface AbstractService<T extends Serializable>
 {
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/** Loads the entity by primary key (id). Returns loaded entity. Throws DataNotFoundException. */

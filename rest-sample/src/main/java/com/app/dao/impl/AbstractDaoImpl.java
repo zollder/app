@@ -1,5 +1,6 @@
 package com.app.dao.impl;
  
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -14,7 +15,7 @@ import com.app.domain.model.AbstractBase;
 * Note: since Hibernate 3.0.1 the use of HibernateDaoSupport is not required due to availability of Spring transaction support.
 */
 //--------------------------------------------------------------------------------------------------------------------------------
-public abstract class AbstractDaoImpl<T extends AbstractBase<T>>  implements AbstractDao<T>
+public abstract class AbstractDaoImpl<T extends Serializable>  implements AbstractDao<T>
 {
 	private Class<T> modelClass;
 	private SessionFactory sessionFactory;

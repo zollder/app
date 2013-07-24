@@ -1,11 +1,12 @@
 package com.app.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.app.domain.model.AbstractBase;
 
 
-public interface AbstractDao<T extends AbstractBase<T>>
+public interface AbstractDao<T extends Serializable>
 {
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/** Returns current class. */

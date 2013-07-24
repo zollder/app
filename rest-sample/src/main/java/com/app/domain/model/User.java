@@ -1,8 +1,13 @@
 package com.app.domain.model;
  
+import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -23,10 +28,18 @@ import com.app.web.utils.Documentation;
 @Entity
 @Table(name="user")
 @Documentation(caption = "User", comment = "Rest-sample application user.")
-public class User extends AbstractBase<User>
+public class User implements Serializable
 {
 	// Default serial version ID
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Basic
+	@Column(name = "primaryKey")
+	@Documentation(caption = "Primary Key", comment = "Primary key assigned by the database.")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@XmlElement
+	private Long primaryKey;
 
 	@Basic
 	@Column(name = "firstName")
@@ -118,6 +131,14 @@ public class User extends AbstractBase<User>
 	// --------------------------------------------------------------------------------------------------------------------------------
 	//setters & getters
 	// --------------------------------------------------------------------------------------------------------------------------------
+
+	public Long getPrimaryKey() {
+		return primaryKey;
+	}
+
+	public void setPrimaryKey(Long primaryKey) {
+		this.primaryKey = primaryKey;
+	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public String getFirstName()

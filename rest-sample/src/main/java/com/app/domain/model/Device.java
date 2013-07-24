@@ -1,10 +1,15 @@
 package com.app.domain.model;
  
+import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,10 +29,18 @@ import com.app.web.utils.Documentation;
 @XmlRootElement(name="device")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Documentation(caption = "Device", comment = "Device entity.")
-public class Device extends AbstractBase<Device>
+public class Device implements Serializable
 {
 	// Default serial version ID
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Basic
+	@Column(name = "primaryKey")
+	@Documentation(caption = "Primary Key", comment = "Primary key assigned by the database.")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@XmlElement
+	private Long primaryKey;
 
 	@Basic
 	@Column(name = "devIp", unique = true)
@@ -39,7 +52,7 @@ public class Device extends AbstractBase<Device>
 
 	@Basic
 	@Column(name = "devMac", unique = true)
-	@Documentation(caption = "MAC address", comment = "MAC address of the device.")
+	@Documentation(caption = "MAC", comment = "MAC address of the device.")
 	@Size(min = 17, max = 17)
 	@XmlElement
 	private String devMac;
@@ -47,29 +60,54 @@ public class Device extends AbstractBase<Device>
 	@Basic
 	@Column(name = "devType")
 	@Enumerated(EnumType.ORDINAL)
-	@Documentation(caption = "Device type", comment = "Type (category) of the device.")
+	@Documentation(caption = "Type", comment = "Type (category) of the device.")
 	@NotNull
 	@XmlElement
 	private DeviceType devType;
 	
 	@Basic
 	@Column(name = "devName")
-	@Documentation(caption = "Device Name", comment = "Name of the device.")
+	@Documentation(caption = "Name", comment = "Name of the device.")
 	@Size(max = 20)
 	@NotNull
 	@XmlElement
 	private String devName;
 
 	@Basic
+	@Column(name = "devLocation")
+	@Documentation(caption = "Location", comment = "Location of the device.")
+	@Size(max = 128)
+	@XmlElement
+	private String devLocation;
+
+	@Basic
+	@Column(name = "firmwareVersion")
+	@Documentation(caption = "Version", comment = "Version of the device firmware.")
+	@Size(max = 4)
+	@XmlElement
+	private String firmwareVersion;
+	
+	@Basic
 	@Column(name = "devDescription")
 	@Documentation(caption = "Description", comment = "Device description containing optional details about the device.")
-	@Size(max = 240)
+	@Size(max = 250)
 	@XmlElement
 	private String devDescription;
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	//setters & getters
 	// --------------------------------------------------------------------------------------------------------------------------------
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Long getPrimaryKey()
+	{
+		return primaryKey;
+	}
+
+	public void setPrimaryKey(Long pk)
+	{
+		this.primaryKey = pk;
+	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public String getDevIp()
@@ -113,6 +151,28 @@ public class Device extends AbstractBase<Device>
 	public void setDevName(String name)
 	{
 		this.devName = name;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public String getDevLocation()
+	{
+		return devLocation;
+	}
+
+	public void setDevLocation(String devLocation)
+	{
+		this.devLocation = devLocation;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public String getFirmwareVersion()
+	{
+		return firmwareVersion;
+	}
+
+	public void setFirmwareVersion(String firmwareVersion)
+	{
+		this.firmwareVersion = firmwareVersion;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------

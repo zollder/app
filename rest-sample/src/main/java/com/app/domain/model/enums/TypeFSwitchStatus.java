@@ -3,18 +3,16 @@ package com.app.domain.model.enums;
 import com.app.domain.model.interfaces.NamedEnum;
 
 // --------------------------------------------------------------------------------------------------------------------------------
-public enum DeviceType implements NamedEnum
+public enum TypeFSwitchStatus implements NamedEnum
 {
-	TYPE_G("Type-G"),
-	TYPE_GM("Type-GM"),
-	TYPE_F("Type-F"),
-	TYPE_F2("Type-F2"),
-	TYPE_F4("Type-F4");
+	OVR("ovr"),
+	OFF("off"),
+	AUTO("auto");
 
 	private String name;
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	private DeviceType(String name)
+	private TypeFSwitchStatus(String name)
 	{
 		this.name = name;
 	}
