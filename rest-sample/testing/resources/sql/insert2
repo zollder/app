@@ -1,6 +1,6 @@
-INSERT INTO type_g (name, devices_dev_ip)
+INSERT INTO type_g (name, device_dev_ip)
 VALUES ('y1g','192.168.168.3');
-UPDATE `HybridDB`.`type_g` 
+UPDATE `test`.`type_g` 
 SET 
     `location` = 'test',
     `latchActive` = '1',
