@@ -81,7 +81,10 @@ public class DeviceResource
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Inserts the {@link Device} resource received in the payload. */
+	/**
+	 * Inserts {@link Device} resource received in the payload.
+	 * Creates an associated device parameters with default values in the associated device type table. 
+	 */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping(method = { RequestMethod.POST })
 	@ResponseBody

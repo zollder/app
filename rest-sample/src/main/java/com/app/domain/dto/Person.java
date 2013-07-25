@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 //--------------------------------------------------------------------------------------------------------------------------------
 /** Person DTO entity. */
 //--------------------------------------------------------------------------------------------------------------------------------
+
 @XmlRootElement(name="person")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Person implements Serializable

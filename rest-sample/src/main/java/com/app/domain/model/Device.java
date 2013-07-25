@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,11 +26,13 @@ import com.app.web.utils.Documentation;
 //--------------------------------------------------------------------------------------------------------------------------------
 /** Device entity. */
 //--------------------------------------------------------------------------------------------------------------------------------
+
 @Entity
 @Table(name="device")
+@Inheritance(strategy=InheritanceType.JOINED)
 @XmlRootElement(name="device")
 @XmlAccessorType(XmlAccessType.FIELD)
-@Documentation(caption = "Device", comment = "Device entity.")
+@Documentation(caption = "Device", comment = "Device entity: superclass for device type entities.")
 public class Device implements Serializable
 {
 	// Default serial version ID
@@ -36,15 +40,15 @@ public class Device implements Serializable
 
 	@Id
 	@Basic
-	@Column(name = "primaryKey")
-	@Documentation(caption = "Primary Key", comment = "Primary key assigned by the database.")
+	@Column(name = "primaryKey", unique = true)
+	@Documentation(caption = "Primary key",	comment = "Primary key assigned by the database, FK for device type tables.")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@XmlElement
 	private Long primaryKey;
 
 	@Basic
 	@Column(name = "devIp", unique = true)
-	@Documentation(caption = "IP", comment = "Device's IP address.")
+	@Documentation(caption = "IP", comment = "Device's IP address (unique).")
 	@Size(min = 7, max = 15)
 	@NotNull
 	@XmlElement
@@ -52,7 +56,7 @@ public class Device implements Serializable
 
 	@Basic
 	@Column(name = "devMac", unique = true)
-	@Documentation(caption = "MAC", comment = "MAC address of the device.")
+	@Documentation(caption = "MAC", comment = "MAC address of the device (unique).")
 	@Size(min = 17, max = 17)
 	@XmlElement
 	private String devMac;
@@ -66,8 +70,8 @@ public class Device implements Serializable
 	private DeviceType devType;
 	
 	@Basic
-	@Column(name = "devName")
-	@Documentation(caption = "Name", comment = "Name of the device.")
+	@Column(name = "devName", unique = true)
+	@Documentation(caption = "Name", comment = "Name of the device (unique).")
 	@Size(max = 20)
 	@NotNull
 	@XmlElement
@@ -75,7 +79,7 @@ public class Device implements Serializable
 
 	@Basic
 	@Column(name = "devLocation")
-	@Documentation(caption = "Location", comment = "Location of the device.")
+	@Documentation(caption = "Location", comment = "Device Location.")
 	@Size(max = 128)
 	@XmlElement
 	private String devLocation;
@@ -94,11 +98,11 @@ public class Device implements Serializable
 	@XmlElement
 	private String devDescription;
 
-	// --------------------------------------------------------------------------------------------------------------------------------
-	//setters & getters
-	// --------------------------------------------------------------------------------------------------------------------------------
 
 	// --------------------------------------------------------------------------------------------------------------------------------
+	// Setters & getters
+	// --------------------------------------------------------------------------------------------------------------------------------
+
 	public Long getPrimaryKey()
 	{
 		return primaryKey;

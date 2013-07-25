@@ -3,20 +3,16 @@ package com.app.domain.services.impl;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.RollbackException;
-
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.dao.AbstractDao;
 import com.app.domain.exceptions.DataNotFoundException;
-import com.app.domain.model.AbstractBase;
 import com.app.domain.services.AbstractService;
 
 //--------------------------------------------------------------------------------------------------------------------------------
-/**
-* Provides implementation for standard business services around any {@link AbstractBase} entity
-*/
+/** Provides implementation for standard business services around any entity */
 //--------------------------------------------------------------------------------------------------------------------------------
+
 public abstract class AbstractServiceImpl<T extends Serializable, D extends AbstractDao<T>> implements AbstractService<T>
 {
 	protected AbstractDao<T> entityDao;
@@ -69,18 +65,18 @@ public abstract class AbstractServiceImpl<T extends Serializable, D extends Abst
 	@Transactional
 	public T save(T entity)
 	{
-		T savedEntity = null;
-		try
-		{
-			savedEntity = entityDao.save(entity);
-		}
-		catch (RollbackException e)
-		{
-			System.err.println("transaction.RollbackException");
-		}
+		T savedEntity = entityDao.save(entity);
 
 		return (T) savedEntity;
-		
+	}
+	
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@Transactional
+	public Object save(Object object)
+	{
+		Object savedObject = entityDao.save(object);
+
+		return savedObject;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
@@ -90,6 +86,15 @@ public abstract class AbstractServiceImpl<T extends Serializable, D extends Abst
 		T updatedEntity = entityDao.update(entity);
 		
 		return updatedEntity;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@Transactional
+	public Object update(Object object)
+	{
+		Object updatedObject = entityDao.update(object);
+		
+		return updatedObject;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------

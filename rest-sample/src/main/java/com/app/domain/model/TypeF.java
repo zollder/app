@@ -1,18 +1,11 @@
 package com.app.domain.model;
  
-import java.io.Serializable;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.FetchType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -23,33 +16,20 @@ import com.app.domain.model.enums.TypeFDimMode;
 import com.app.domain.model.enums.TypeFSwitchStatus;
 import com.app.web.utils.Documentation;
 
+
 //--------------------------------------------------------------------------------------------------------------------------------
-/** Device entity. */
+/** Type-F entity. */
 //--------------------------------------------------------------------------------------------------------------------------------
+
 @Entity
-@Table(name="type-f")
-@XmlRootElement(name="type-f")
+@Table(name="type_f")
+@XmlRootElement(name="type_f")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Documentation(caption = "Type-F device", comment = "Type-F device: device ceiling mount oBIX variables.")
-public class TypeF implements Serializable
+public class TypeF extends Device
 {
 	// Default serial version ID
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@Basic
-	@Column(name = "primaryKey")
-	@Documentation(caption = "Primary Key", comment = "Primary key assigned by the database.")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@XmlElement
-	private Long primaryKey;
-
-	@Basic
-	@OneToOne(targetEntity = Device.class, fetch = FetchType.LAZY)
-	@Documentation(caption = "Device ID", comment = "Primary key of the associated device record (reference).")
-	@NotNull
-	@XmlElement
-	private Long devId;
 
 	@Basic
 	@Column(name = "latchActive")
@@ -127,35 +107,33 @@ public class TypeF implements Serializable
 	@XmlElement
 	private Boolean networkOn = Boolean.FALSE;
 
+	
 	// --------------------------------------------------------------------------------------------------------------------------------
-	//setters & getters
+	// Default constructor.
 	// --------------------------------------------------------------------------------------------------------------------------------
+	public TypeF()
+	{}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public Long getPrimaryKey()
+	// Custom device constructor: initializes superclass values before persisting device type object.
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public TypeF(Device device)
 	{
-		return primaryKey;
+		if (device.getPrimaryKey() != null)
+			this.setPrimaryKey(device.getPrimaryKey());
+
+		this.setDevIp(device.getDevIp());
+		this.setDevMac(device.getDevMac());
+		this.setDevType(device.getDevType());
+		this.setDevName(device.getDevName());
+		this.setDevLocation(device.getDevLocation());
+		this.setDevDescription(device.getDevDescription());
 	}
 
-	public void setPrimaryKey(Long primaryKey)
-	{
-		this.primaryKey = primaryKey;
-	}
-
-
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public Long getDevId()
-	{
-		return devId;
-	}
-
-	public void setDevId(Long id)
-	{
-		this.devId = id;
-	}
-
-
+	// Setters & getters
 	// --------------------------------------------------------------------------------------------------------------------------------
+
 	public Boolean getLatchActive()
 	{
 		return latchActive;

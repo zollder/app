@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.app.dao.AbstractDao;
-import com.app.domain.model.AbstractBase;
 
 //--------------------------------------------------------------------------------------------------------------------------------
 /**
@@ -15,6 +14,7 @@ import com.app.domain.model.AbstractBase;
 * Note: since Hibernate 3.0.1 the use of HibernateDaoSupport is not required due to availability of Spring transaction support.
 */
 //--------------------------------------------------------------------------------------------------------------------------------
+
 public abstract class AbstractDaoImpl<T extends Serializable>  implements AbstractDao<T>
 {
 	private Class<T> modelClass;
@@ -72,10 +72,24 @@ public abstract class AbstractDaoImpl<T extends Serializable>  implements Abstra
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
+	public Object save(Object object)
+	{
+		getCurrentSession().save(object);
+		return object;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	public T update(T entity)
 	{
 		getCurrentSession().merge(entity);		
 		return entity;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Object update(Object object)
+	{
+		getCurrentSession().merge(object);		
+		return object;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
