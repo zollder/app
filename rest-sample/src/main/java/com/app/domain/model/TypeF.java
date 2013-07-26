@@ -16,7 +16,6 @@ import com.app.domain.model.enums.TypeFDimMode;
 import com.app.domain.model.enums.TypeFSwitchStatus;
 import com.app.web.utils.Documentation;
 
-
 //--------------------------------------------------------------------------------------------------------------------------------
 /** Type-F entity. */
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -111,24 +110,8 @@ public class TypeF extends Device
 	// --------------------------------------------------------------------------------------------------------------------------------
 	// Default constructor.
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public TypeF()
-	{}
 
-	// --------------------------------------------------------------------------------------------------------------------------------
-	// Custom device constructor: initializes superclass values before persisting device type object.
-	// --------------------------------------------------------------------------------------------------------------------------------
-	public TypeF(Device device)
-	{
-		if (device.getPrimaryKey() != null)
-			this.setPrimaryKey(device.getPrimaryKey());
-
-		this.setDevIp(device.getDevIp());
-		this.setDevMac(device.getDevMac());
-		this.setDevType(device.getDevType());
-		this.setDevName(device.getDevName());
-		this.setDevLocation(device.getDevLocation());
-		this.setDevDescription(device.getDevDescription());
-	}
+	public TypeF(){}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	// Setters & getters

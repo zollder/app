@@ -72,24 +72,10 @@ public abstract class AbstractDaoImpl<T extends Serializable>  implements Abstra
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public Object save(Object object)
-	{
-		getCurrentSession().save(object);
-		return object;
-	}
-
-	// --------------------------------------------------------------------------------------------------------------------------------
 	public T update(T entity)
 	{
 		getCurrentSession().merge(entity);		
 		return entity;
-	}
-
-	// --------------------------------------------------------------------------------------------------------------------------------
-	public Object update(Object object)
-	{
-		getCurrentSession().merge(object);		
-		return object;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------

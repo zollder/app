@@ -72,29 +72,11 @@ public abstract class AbstractServiceImpl<T extends Serializable, D extends Abst
 	
 	// --------------------------------------------------------------------------------------------------------------------------------
 	@Transactional
-	public Object save(Object object)
-	{
-		Object savedObject = entityDao.save(object);
-
-		return savedObject;
-	}
-
-	// --------------------------------------------------------------------------------------------------------------------------------
-	@Transactional
 	public T update(T entity)
 	{
 		T updatedEntity = entityDao.update(entity);
 		
 		return updatedEntity;
-	}
-
-	// --------------------------------------------------------------------------------------------------------------------------------
-	@Transactional
-	public Object update(Object object)
-	{
-		Object updatedObject = entityDao.update(object);
-		
-		return updatedObject;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
