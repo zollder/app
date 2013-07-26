@@ -108,6 +108,14 @@ public class User implements Serializable
 	@JsonIgnore
 	protected PasswordEncoder passwordEncoder;
 
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	// Default constructor.
+	// --------------------------------------------------------------------------------------------------------------------------------
+
+	public User(){}
+
+	
 	// TODO: implement resetPassword and changePassword
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/**
@@ -129,15 +137,19 @@ public class User implements Serializable
 		this.setNewPassword(null);
 		this.setConfirmPassword(null);
 	}
+
+
 	// --------------------------------------------------------------------------------------------------------------------------------
 	//setters & getters
 	// --------------------------------------------------------------------------------------------------------------------------------
 
-	public Long getPrimaryKey() {
+	public Long getPrimaryKey()
+	{
 		return primaryKey;
 	}
 
-	public void setPrimaryKey(Long primaryKey) {
+	public void setPrimaryKey(Long primaryKey)
+	{
 		this.primaryKey = primaryKey;
 	}
 

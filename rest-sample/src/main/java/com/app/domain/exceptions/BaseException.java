@@ -9,6 +9,7 @@ import com.app.domain.dto.Violation;
 // --------------------------------------------------------------------------------------------------------------------------------
 /** Base exception class. */
 // --------------------------------------------------------------------------------------------------------------------------------
+
 public class BaseException extends RuntimeException
 {
 	private static final long serialVersionUID = -3737363614162576677L;

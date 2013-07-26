@@ -8,6 +8,7 @@ import com.app.domain.dto.Violation;
 //--------------------------------------------------------------------------------------------------------------------------------
 /** Data not found exception class. To be used when a data retrieval fails because the requested information doesn't exist. */
 //--------------------------------------------------------------------------------------------------------------------------------
+
 public class DataNotFoundException extends BaseException
 {
 	private static final long serialVersionUID = 2470837262313645109L;

@@ -5,6 +5,7 @@ import java.io.Serializable;
 //--------------------------------------------------------------------------------------------------------------------------------
 /** ResetPassword DTO entity. */
 //--------------------------------------------------------------------------------------------------------------------------------
+
 public class PasswordReset implements Serializable
 {
 	private static final long serialVersionUID = 1327585362175925002L;

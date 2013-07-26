@@ -6,6 +6,7 @@ package com.app.domain.exceptions;
  * by a GET operation has the same eTag/lastModificationDate/version as passed with the request
  */
 //--------------------------------------------------------------------------------------------------------------------------------
+
 public class NotModifiedException extends BaseException
 {
 	private static final long serialVersionUID = -3078714263062537007L;
