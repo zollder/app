@@ -3,16 +3,20 @@ package com.app.domain.model.enums;
 import com.app.domain.model.interfaces.NamedEnum;
 
 // --------------------------------------------------------------------------------------------------------------------------------
-public enum TypeFDimMode implements NamedEnum
+public enum LedOffColorEnum implements NamedEnum
 {
-	OFF("off"),
-	ON("on"),
-	ONFADE("onFade");
+	NONE("none"),
+	RED("red"),
+	GREEN("green"),
+	BLUE("blue"),
+	AMBER("amber"),
+	CYCLE("cycle"),
+	TOGGLE("toggle");
 
 	private String name;
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	private TypeFDimMode(String name)
+	private LedOffColorEnum(String name)
 	{
 		this.name = name;
 	}

@@ -32,9 +32,42 @@ CREATE  TABLE IF NOT EXISTS `type_f` (
   input boolean default NULL,
   switchStatus bigint NOT NULL,
   networkOn boolean default NULL,
+  CONSTRAINT `fk_type_f` FOREIGN KEY (`primaryKey`) REFERENCES `device` (`primaryKey`)
+);
+
+DROP TABLE IF EXISTS `type_g`;
+CREATE  TABLE IF NOT EXISTS `type_g` (
+  primaryKey int(10) unsigned NOT NULL,
+  latchActive boolean default NULL,
+  bPressLapse int unsigned default NULL,
+  flickWarn boolean default NULL,
+  flickReps int unsigned default NULL,
+  ledOnColor bigint NOT NULL,
+  ledOffColor bigint NOT NULL,
+  switchStatus bigint NOT NULL,
+  networkOn boolean default NULL,
   CONSTRAINT `fk_type_g` FOREIGN KEY (`primaryKey`) REFERENCES `device` (`primaryKey`)
 );
 
+DROP TABLE IF EXISTS `type_gm`;
+CREATE  TABLE IF NOT EXISTS `type_gm` (
+  primaryKey int(10) unsigned NOT NULL,
+  latchActive boolean default NULL,
+  bPressLapse int unsigned default NULL,
+  flickWarn boolean default NULL,
+  flickReps int unsigned default NULL,
+  ledOnColor bigint NOT NULL,
+  ledOffColor bigint NOT NULL,
+  pirSens int unsigned NULL ,
+  motionMuteDelay int unsigned NULL ,
+  noMotionTime int unsigned NULL ,
+  luminosity int unsigned NULL ,
+  lumFactor int unsigned NULL ,
+  mode bigint NOT NULL,
+  switchStatus bigint NOT NULL,
+  networkOn boolean default NULL,
+  CONSTRAINT `fk_type_gm` FOREIGN KEY (`primaryKey`) REFERENCES `device` (`primaryKey`)
+);
 
 -- Need to update with new version of contacts--
 DROP TABLE IF EXISTS `contacts`;

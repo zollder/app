@@ -12,20 +12,22 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.app.domain.model.enums.DimModeEnum;
+import com.app.domain.model.enums.GmModeEnum;
+import com.app.domain.model.enums.LedOffColorEnum;
+import com.app.domain.model.enums.LedOnColorEnum;
 import com.app.domain.model.enums.SwitchStatusEnum;
 import com.app.web.utils.Documentation;
 
 //--------------------------------------------------------------------------------------------------------------------------------
-/** Type-F entity. */
+/** Type-GM entity. */
 //--------------------------------------------------------------------------------------------------------------------------------
 
 @Entity
-@Table(name="type_f")
-@XmlRootElement(name="type_f")
+@Table(name="type_gm")
+@XmlRootElement(name="type_gm")
 @XmlAccessorType(XmlAccessType.FIELD)
-@Documentation(caption = "Type-F device", comment = "Type-F device: device ceiling mount oBIX variables.")
-public class TypeF extends Device
+@Documentation(caption = "Type-GM device", comment = "Type-GM device.")
+public class TypeGM extends Device
 {
 	// Default serial version ID
 	private static final long serialVersionUID = 1L;
@@ -53,13 +55,27 @@ public class TypeF extends Device
 	@Documentation(caption = "Flick repetitions", comment = "Flick repetitions (TODO: provide more details here).")
 	@XmlElement
 	private Integer flickReps = null;
+	
+	@Basic
+	@Column(name = "ledOnColor")
+	@Enumerated(EnumType.ORDINAL)
+	@Documentation(caption = "LED color", comment = "Status LED color in ON state.")
+	@XmlElement
+	private LedOnColorEnum ledOnColor = LedOnColorEnum.NONE;
 
 	@Basic
-	@Column(name = "offDelay")
-	@Documentation(caption = "Turn-off delay", comment = "Time delay before the device is turned off.")
+	@Column(name = "ledOffColor")
+	@Enumerated(EnumType.ORDINAL)
+	@Documentation(caption = "LED color", comment = "Status LED color in OFF state.")
 	@XmlElement
-	private Integer offDelay = null;
-	
+	private LedOffColorEnum ledOffColor = LedOffColorEnum.NONE;
+
+	@Basic
+	@Column(name = "pirSens")
+	@Documentation(caption = "Pir Sensor", comment = "Pir sensor value.")
+	@XmlElement
+	private Integer pirSens = null;
+
 	@Basic
 	@Column(name = "motionMuteDelay")
 	@Documentation(caption = "Motion mute delay", comment = "Time delay before the motion sensor is muted.")
@@ -67,30 +83,29 @@ public class TypeF extends Device
 	private Integer motionMuteDelay = null;
 
 	@Basic
-	@Column(name = "dim")
-	@Documentation(caption = "Dim level", comment = "Dim level of the device.")
+	@Column(name = "noMotionTime")
+	@Documentation(caption = "Pir Sensor", comment = "Pir sensor value.")
 	@XmlElement
-	private Integer dim = null;
+	private Integer noMotionTime = null;
 
 	@Basic
-	@Column(name = "dimMin")
-	@Documentation(caption = "Minimal dim level", comment = "Minimal dim level of the device.")
+	@Column(name = "luminosity")
+	@Documentation(caption = "Luminocity", comment = "Luminosity level.")
 	@XmlElement
-	private Integer dimMin = null;
+	private Integer luminosity = null;
 
 	@Basic
-	@Column(name = "dimMode")
+	@Column(name = "lumFactor")
+	@Documentation(caption = "Luminocity factor", comment = "Luminosity factor value.")
+	@XmlElement
+	private Integer lumFactor = null;
+
+	@Basic
+	@Column(name = "mode")
 	@Enumerated(EnumType.ORDINAL)
-	@Documentation(caption = "Dim mode", comment = "Device dim modes (refer to TypeFDimMode enum definition for details).")
-	@NotNull
+	@Documentation(caption = "LED color", comment = "Status LED color in OFF state.")
 	@XmlElement
-	private DimModeEnum dimMode = DimModeEnum.OFF;
-
-	@Basic
-	@Column(name = "input")
-	@Documentation(caption = "Input status", comment = "Device input status: 0(input off), 1(input on).")
-	@XmlElement
-	private Boolean input = null;
+	private GmModeEnum mode = GmModeEnum.AUTO_ON_OFF;
 
 	@Basic
 	@Column(name = "switchStatus")
@@ -111,7 +126,7 @@ public class TypeF extends Device
 	// Default constructor.
 	// --------------------------------------------------------------------------------------------------------------------------------
 
-	public TypeF(){}
+	public TypeGM(){}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	// Setters & getters
@@ -165,14 +180,38 @@ public class TypeF extends Device
 
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public Integer getOffDelay()
+	public LedOnColorEnum getLedOnColor()
 	{
-		return offDelay;
+		return ledOnColor;
 	}
 
-	public void setOffDelay(Integer offDelay)
+	public void setLedOnColor(LedOnColorEnum ledOnColor)
 	{
-		this.offDelay = offDelay;
+		this.ledOnColor = ledOnColor;
+	}
+
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public LedOffColorEnum getLedOffColor()
+	{
+		return ledOffColor;
+	}
+
+	public void setLedOffColor(LedOffColorEnum ledOffColor)
+	{
+		this.ledOffColor = ledOffColor;
+	}
+
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Integer getPirSens()
+	{
+		return pirSens;
+	}
+
+	public void setPirSens(Integer pirSens)
+	{
+		this.pirSens = pirSens;
 	}
 
 
@@ -189,50 +228,50 @@ public class TypeF extends Device
 
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public Integer getDim()
+	public Integer getNoMotionTime()
 	{
-		return dim;
+		return noMotionTime;
 	}
 
-	public void setDim(Integer dim)
+	public void setNoMotionTime(Integer noMotionTime)
 	{
-		this.dim = dim;
-	}
-
-
-	// --------------------------------------------------------------------------------------------------------------------------------
-	public Integer getDimMin()
-	{
-		return dimMin;
-	}
-
-	public void setDimMin(Integer dimMin)
-	{
-		this.dimMin = dimMin;
+		this.noMotionTime = noMotionTime;
 	}
 
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public DimModeEnum getDimMode()
+	public Integer getLuminosity()
 	{
-		return dimMode;
+		return luminosity;
 	}
 
-	public void setDimMode(DimModeEnum dimMode)
+	public void setLuminosity(Integer luminosity)
 	{
-		this.dimMode = dimMode;
+		this.luminosity = luminosity;
 	}
 
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public Boolean getInput()
+	public Integer getLumFactor()
 	{
-		return input;
+		return lumFactor;
 	}
 
-	public void setInput(Boolean input)
+	public void setLumFactor(Integer lumFactor)
 	{
-		this.input = input;
+		this.lumFactor = lumFactor;
+	}
+
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public GmModeEnum getMode()
+	{
+		return mode;
+	}
+
+	public void setMode(GmModeEnum mode)
+	{
+		this.mode = mode;
 	}
 
 
