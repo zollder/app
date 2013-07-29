@@ -6,7 +6,7 @@ import com.app.domain.model.interfaces.NamedEnum;
 public enum DeviceType implements NamedEnum
 {
 	TYPE_G("TypeG"),
-	TYPE_GM("TypeGM"),
+	TYPE_GM("TypeGm"),
 	TYPE_F("TypeF"),
 	TYPE_F2("TypeF2"),
 	TYPE_F4("TypeF4");

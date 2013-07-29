@@ -91,6 +91,22 @@ public class TypeG extends Device
 	public TypeG(){}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
+	// Custom device constructor: initializes superclass values before persisting device type object.
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public TypeG(Device device)
+	{
+		if (device.getPrimaryKey() != null)
+			this.setPrimaryKey(device.getPrimaryKey());
+
+		this.setDevIp(device.getDevIp());
+		this.setDevMac(device.getDevMac());
+		this.setDevType(device.getDevType());
+		this.setDevName(device.getDevName());
+		this.setDevLocation(device.getDevLocation());
+		this.setDevDescription(device.getDevDescription());
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	// Setters & getters
 	// --------------------------------------------------------------------------------------------------------------------------------
 

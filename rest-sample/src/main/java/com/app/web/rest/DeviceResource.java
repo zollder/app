@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.app.domain.model.Device;
-import com.app.domain.model.TypeF;
 import com.app.domain.services.DeviceService;
-import com.app.domain.services.TypeFService;
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 @Controller
@@ -27,12 +25,6 @@ public class DeviceResource
 	// --------------------------------------------------------------------------------------------------------------------------------
 	@Autowired
 	private DeviceService deviceService;
-
-	@Autowired
-	private TypeFService typeFService;
-
-
-	// ========================= Common Device resources =========================
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/** Retrieves {@link Device} resource associated to the given key. */
@@ -99,37 +91,34 @@ public class DeviceResource
 		deviceService.delete(key);
 	}
 
-
-	// ========================= Type-F Device resources =========================
-
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/**
-	 * Inserts {@link TypeF} device resource.
-	 * Creates device of specified type and associated device parameters (default) in the TypeF table. 
+	 * Inserts {@link Device} resource received in the payload.
+	 * Creates device parameters with default values in the associated device type table. 
 	 */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	@RequestMapping(value = "/typef", method = { RequestMethod.POST })
+	@RequestMapping(method = { RequestMethod.POST })
 	@ResponseBody
-	public TypeF save(@RequestBody TypeF device)
+	public Device save(@RequestBody Device device)
 	{
 		logger.info("saving device with device name:" + device.getDevName());
-		TypeF savedDevice = typeFService.save(device);
-		typeFService.refresh(savedDevice);
+		Device savedDevice = deviceService.save(device);
+		deviceService.refresh(savedDevice);
 
 		return savedDevice;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Updates the {@link Device} resource. */
+	/** Updates {@link Device} resource and its associated parameters. */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	@RequestMapping(value = "/typef/{key}", method = { RequestMethod.PUT })
+	@RequestMapping(value = "/{key}", method = { RequestMethod.PUT })
 	@ResponseBody
-	public TypeF update(@PathVariable Long key, @RequestBody TypeF device)
+	public Device update(@PathVariable Long key, @RequestBody Device device)
 	{
 		logger.info("update device with name:" + device.getDevName());
 		device.setPrimaryKey(key);
-		TypeF updatedDevice = typeFService.update(device);
-		typeFService.refresh(updatedDevice);
+		Device updatedDevice = deviceService.update(device);
+		deviceService.refresh(updatedDevice);
 
 		return updatedDevice;
 	}

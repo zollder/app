@@ -62,7 +62,7 @@ public class Device implements Serializable
 	private String devMac;
 
 	@Basic
-	@Column(name = "devType")
+	@Column(name = "devType", updatable = false)
 	@Enumerated(EnumType.ORDINAL)
 	@Documentation(caption = "Type", comment = "Type (category) of the device.")
 	@NotNull

@@ -27,7 +27,7 @@ import com.app.web.utils.Documentation;
 @XmlRootElement(name="type_gm")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Documentation(caption = "Type-GM device", comment = "Type-GM device.")
-public class TypeGM extends Device
+public class TypeGm extends Device
 {
 	// Default serial version ID
 	private static final long serialVersionUID = 1L;
@@ -126,7 +126,23 @@ public class TypeGM extends Device
 	// Default constructor.
 	// --------------------------------------------------------------------------------------------------------------------------------
 
-	public TypeGM(){}
+	public TypeGm(){}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	// Custom device constructor: initializes superclass values before persisting device type object.
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public TypeGm(Device device)
+	{
+		if (device.getPrimaryKey() != null)
+			this.setPrimaryKey(device.getPrimaryKey());
+
+		this.setDevIp(device.getDevIp());
+		this.setDevMac(device.getDevMac());
+		this.setDevType(device.getDevType());
+		this.setDevName(device.getDevName());
+		this.setDevLocation(device.getDevLocation());
+		this.setDevDescription(device.getDevDescription());
+	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	// Setters & getters
