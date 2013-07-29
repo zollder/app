@@ -57,21 +57,21 @@ public class TypeG extends Device
 	
 	@Basic
 	@Column(name = "ledOnColor")
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(value = EnumType.STRING)
 	@Documentation(caption = "LED color", comment = "Status LED color in ON state.")
 	@XmlElement
 	private LedOnColorEnum ledOnColor = LedOnColorEnum.NONE;
 
 	@Basic
 	@Column(name = "ledOffColor")
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(value = EnumType.STRING)
 	@Documentation(caption = "LED color", comment = "Status LED color in OFF state.")
 	@XmlElement
 	private LedOffColorEnum ledOffColor = LedOffColorEnum.NONE;
 
 	@Basic
 	@Column(name = "switchStatus")
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(value = EnumType.STRING)
 	@Documentation(caption = "Switch status", comment = "Device switch statuses (refer to TypeFSwitchStatus enum definition for details).")
 	@NotNull
 	@XmlElement

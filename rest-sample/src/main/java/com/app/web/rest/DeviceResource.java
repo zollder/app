@@ -68,6 +68,19 @@ public class DeviceResource
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Retrieves a collection of all {@link Device} resources of specified type. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value = "/type/{type}", method = { RequestMethod.GET })
+	@ResponseBody
+	public List<Device> loadWithDeviceType(@PathVariable String type)
+	{
+		logger.info("loading all devices of specified type");
+		List<Device> devices = deviceService.loadAllByType(type);
+
+		return devices;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
 	/** Retrieves a collection of all {@link Device} resources. */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/all", method = { RequestMethod.GET })

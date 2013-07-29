@@ -8,7 +8,7 @@ CREATE  TABLE IF NOT EXISTS `device` (
   primaryKey int(10) unsigned NOT NULL AUTO_INCREMENT,
   devIp varchar(15) NOT NULL UNIQUE,
   devMac varchar(17) DEFAULT NULL UNIQUE,
-  devType bigint NOT NULL,
+  devType varchar(7) NOT NULL,
   devName varchar(20) NOT NULL UNIQUE,
   devLocation VARCHAR(128) default NULL,
   firmwareVersion VARCHAR(4) default NULL,
@@ -28,9 +28,9 @@ CREATE  TABLE IF NOT EXISTS `type_f` (
   motionMuteDelay int unsigned default NULL,
   dim int unsigned default NULL,
   dimMin int unsigned default NULL,
-  dimMode bigint NOT NULL,
+  dimMode varchar(6) NOT NULL,
   input boolean default NULL,
-  switchStatus bigint NOT NULL,
+  switchStatus varchar(4) NOT NULL,
   networkOn boolean default NULL,
   CONSTRAINT `fk_type_f` FOREIGN KEY (`primaryKey`) REFERENCES `device` (`primaryKey`)
 );
@@ -42,9 +42,9 @@ CREATE  TABLE IF NOT EXISTS `type_g` (
   bPressLapse int unsigned default NULL,
   flickWarn boolean default NULL,
   flickReps int unsigned default NULL,
-  ledOnColor bigint NOT NULL,
-  ledOffColor bigint NOT NULL,
-  switchStatus bigint NOT NULL,
+  ledOnColor varchar(6) NOT NULL,
+  ledOffColor varchar(6) NOT NULL,
+  switchStatus varchar(4) NOT NULL,
   networkOn boolean default NULL,
   CONSTRAINT `fk_type_g` FOREIGN KEY (`primaryKey`) REFERENCES `device` (`primaryKey`)
 );
@@ -56,15 +56,15 @@ CREATE  TABLE IF NOT EXISTS `type_gm` (
   bPressLapse int unsigned default NULL,
   flickWarn boolean default NULL,
   flickReps int unsigned default NULL,
-  ledOnColor bigint NOT NULL,
-  ledOffColor bigint NOT NULL,
+  ledOnColor varchar(6) NOT NULL,
+  ledOffColor varchar(6) NOT NULL,
   pirSens int unsigned NULL ,
   motionMuteDelay int unsigned NULL ,
   noMotionTime int unsigned NULL ,
   luminosity int unsigned NULL ,
   lumFactor int unsigned NULL ,
-  mode bigint NOT NULL,
-  switchStatus bigint NOT NULL,
+  mode varchar(15) NOT NULL,
+  switchStatus varchar(10) NOT NULL,
   networkOn boolean default NULL,
   CONSTRAINT `fk_type_gm` FOREIGN KEY (`primaryKey`) REFERENCES `device` (`primaryKey`)
 );

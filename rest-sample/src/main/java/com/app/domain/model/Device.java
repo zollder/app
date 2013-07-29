@@ -63,7 +63,7 @@ public class Device implements Serializable
 
 	@Basic
 	@Column(name = "devType", updatable = false)
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(value = EnumType.STRING)
 	@Documentation(caption = "Type", comment = "Type (category) of the device.")
 	@NotNull
 	@XmlElement

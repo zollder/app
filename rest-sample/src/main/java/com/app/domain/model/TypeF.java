@@ -80,7 +80,7 @@ public class TypeF extends Device
 
 	@Basic
 	@Column(name = "dimMode")
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(value = EnumType.STRING)
 	@Documentation(caption = "Dim mode", comment = "Device dim modes (refer to TypeFDimMode enum definition for details).")
 	@NotNull
 	@XmlElement
@@ -94,7 +94,7 @@ public class TypeF extends Device
 
 	@Basic
 	@Column(name = "switchStatus")
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(value = EnumType.STRING)
 	@Documentation(caption = "Switch status", comment = "Device switch statuses (refer to TypeFSwitchStatus enum definition for details).")
 	@NotNull
 	@XmlElement

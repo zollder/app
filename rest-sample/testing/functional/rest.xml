@@ -370,1309 +370,13 @@
     </con:settings>
     <con:runType>SEQUENTIAL</con:runType>
     
-    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="true" maxResults="0" name="Type device CRUD (atomic)" searchProperties="true" id="812c7000-515b-47bc-bd6a-7fb3bcade14f" disabled="true">
+    <con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="true" maxResults="0" name="TYPE_F device CRUD (atomic)" searchProperties="true" id="a6f26a91-a723-4d6b-be2a-abc0204f1bc9">
       <con:settings/>
       
       
       
       
       <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property><con:property><con:name>---------------------------------------create</con:name><con:value/></con:property><con:property><con:name>device.key</con:name><con:value>1</con:value></con:property><con:property><con:name>device.ip</con:name><con:value>192.168.1.7</con:value></con:property><con:property><con:name>device.mac</con:name><con:value>ab:cd:ef:20:34:56</con:value></con:property><con:property><con:name>device.name</con:name><con:value>test-device-json</con:value></con:property><con:property><con:name>device.type</con:name><con:value>TYPE_F</con:value></con:property><con:property><con:name>---------------------------------------update</con:name><con:value/></con:property><con:property><con:name>device-update.ip</con:name><con:value>10.10.10.10</con:value></con:property><con:property><con:name>device-update.mac</con:name><con:value>aa:bb:cc:dd:ee:11</con:value></con:property><con:property><con:name>device-update.name</con:name><con:value>updated-device</con:value></con:property><con:property><con:name>device-update.type</con:name><con:value>TYPE_F</con:value></con:property><con:property><con:name>----------------------------------------defaultParameters</con:name><con:value/></con:property><con:property><con:name>latchActive</con:name><con:value>false</con:value></con:property><con:property><con:name>bPressLapse</con:name><con:value>null</con:value></con:property><con:property><con:name>flickWarn</con:name><con:value>false</con:value></con:property><con:property><con:name>flickReps</con:name><con:value>null</con:value></con:property><con:property><con:name>offDelay</con:name><con:value>null</con:value></con:property><con:property><con:name>motionMuteDelay</con:name><con:value>null</con:value></con:property><con:property><con:name>dim</con:name><con:value>null</con:value></con:property><con:property><con:name>dimMin</con:name><con:value>null</con:value></con:property><con:property><con:name>dimMode</con:name><con:value>OFF</con:value></con:property><con:property><con:name>input</con:name><con:value>null</con:value></con:property><con:property><con:name>switchStatus</con:name><con:value>OFF</con:value></con:property><con:property><con:name>networkOn</con:name><con:value>false</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create device with params" disabled="true">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create device with params" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp": "192.168.1.7",
-   "devMac": "ab:cd:ef:20:34:56",
-   "devType": "TYPE_F",
-   "devName": "test-device-json",
-   "devLocation": "null",
-   "firmwareVersion": null,
-   "devDescription": "this is a test device",
-   "latchActive": false,
-   "bPressLapse": null,
-   "flickWarn": false,
-   "flickReps": null,
-   "offDelay": null,
-   "motionMuteDelay": null,
-   "dim": null,
-   "dimMin": null,
-   "dimMode": "OFF",
-   "input": null,
-   "switchStatus": "OFF",
-   "networkOn": false
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid device IP returned"><con:configuration><path>//*:Response/*:devIp</path><content>${device.ip}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device MAC returned"><con:configuration><path>//*:Response/*:devMac</path><content>${device.mac}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device name returned"><con:configuration><path>//*:Response/*:devName</path><content>${device.name}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device type returned"><con:configuration><path>//*:Response/*:devType</path><content>${device.type}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="create device" id="31d2ccef-575f-4b86-b391-ba937e3603b5">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create device" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"${device.ip}",
-   "devMac":"${device.mac}",
-   "devType":"${device.type}",
-   "devName":"${device.name}",
-   "devLocation":"null",
-   "firmwareVersion":"null",
-   "devDescription":"this is a test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid device IP returned"><con:configuration><path>//*:Response/*:devIp</path><content>${device.ip}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device MAC returned"><con:configuration><path>//*:Response/*:devMac</path><content>${device.mac}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device name returned"><con:configuration><path>//*:Response/*:devName</path><content>${device.name}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device type returned"><con:configuration><path>//*:Response/*:devType</path><content>${device.type}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;dim&quot; value returned"><con:configuration><path>//*:Response/*:dim/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;dimMin&quot; value returned"><con:configuration><path>//*:Response/*:dimMin/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;dimMode&quot; value returned"><con:configuration><path>//*:Response/*:dimMode</path><content>OFF</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;bPressLapse&quot; value returned"><con:configuration><path>//*:Response/*:bPressLapse/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;flickReps&quot; value returned"><con:configuration><path>//*:Response/*:flickReps/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;flickWarn&quot; value returned"><con:configuration><path>//*:Response/*:flickWarn</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;input&quot; value returned"><con:configuration><path>//*:Response/*:input/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;latchActive&quot; value returned"><con:configuration><path>//*:Response/*:latchActive</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;motionMuteDelay&quot; value returned"><con:configuration><path>//*:Response/*:motionMuteDelay/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;networkOn&quot; value returned"><con:configuration><path>//*:Response/*:networkOn</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;offDelay&quot; value returned"><con:configuration><path>//*:Response/*:offDelay/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;switchStatus&quot; value returned"><con:configuration><path>//*:Response/*:switchStatus</path><content>OFF</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <con:testStep type="transfer" name="transfer key"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>primaryKey</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>create device</con:sourceStep><con:sourcePath>//*:Response/*:primaryKey</con:sourcePath><con:targetType>device.key</con:targetType><con:targetStep>Properties</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="validate create">
-        <con:settings/>
-        <con:config method="GET" xsi:type="con:HttpRequest" name="validate create" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/${device.key}</con:endpoint>
-          <con:request/>
-          
-          
-          <con:assertion type="XPath Match" name="valid primary key returned"><con:configuration><path>//*:Response/*:primaryKey</path><content>${device.key}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid IP returned"><con:configuration><path>//*:Response/*:devIp</path><content>${device.ip}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid MAC returned"><con:configuration><path>//*:Response/*:devMac</path><content>${device.mac}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device name returned"><con:configuration><path>//*:Response/*:devName</path><content>${device.name}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device type returned"><con:configuration><path>//*:Response/*:devType</path><content>${device.type}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;dim&quot; value returned"><con:configuration><path>//*:Response/*:dim/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;dimMin&quot; value returned"><con:configuration><path>//*:Response/*:dimMin/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;dimMode&quot; value returned"><con:configuration><path>//*:Response/*:dimMode</path><content>OFF</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;bPressLapse&quot; value returned"><con:configuration><path>//*:Response/*:bPressLapse/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;flickReps&quot; value returned"><con:configuration><path>//*:Response/*:flickReps/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;flickWarn&quot; value returned"><con:configuration><path>//*:Response/*:flickWarn</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;input&quot; value returned"><con:configuration><path>//*:Response/*:input/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;latchActive&quot; value returned"><con:configuration><path>//*:Response/*:latchActive</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;motionMuteDelay&quot; value returned"><con:configuration><path>//*:Response/*:motionMuteDelay/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;networkOn&quot; value returned"><con:configuration><path>//*:Response/*:networkOn</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;offDelay&quot; value returned"><con:configuration><path>//*:Response/*:offDelay/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;switchStatus&quot; value returned"><con:configuration><path>//*:Response/*:switchStatus</path><content>OFF</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="update device">
-        <con:settings/>
-        <con:config method="PUT" xsi:type="con:HttpRequest" name="update device" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef/${device.key}</con:endpoint>
-          <con:request>{
-   "primaryKey":"${device.key}",
-   "devIp":"${device-update.ip}",
-   "devMac":"${device-update.mac}",
-   "devType":"${device.type}",
-   "devName":"${device-update.name}",
-   "devLocation":"1st floor",
-   "firmwareVersion":"1.0",
-   "devDescription":"this is an updated test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid device ip returned"><con:configuration><path>//*:Response/*:devIp</path><content>${device-update.ip}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device mac returned"><con:configuration><path>//*:Response/*:devMac</path><content>${device-update.mac}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device name returned"><con:configuration><path>//*:Response/*:devName</path><content>${device-update.name}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device type returned"><con:configuration><path>//*:Response/*:devType</path><content>${device.type}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device description returned"><con:configuration><path>//*:Response/*:devDescription</path><content>this is an updated test device</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="validate update">
-        <con:settings/>
-        <con:config method="GET" xsi:type="con:HttpRequest" name="validate update" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/${device.key}</con:endpoint>
-          <con:request/>
-          
-          
-          <con:assertion type="XPath Match" name="valid primary key returned"><con:configuration><path>//*:Response/*:primaryKey</path><content>${device.key}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid IP returned"><con:configuration><path>//*:Response/*:devIp</path><content>${device-update.ip}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid MAC returned"><con:configuration><path>//*:Response/*:devMac</path><content>${device-update.mac}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device name returned"><con:configuration><path>//*:Response/*:devName</path><content>${device-update.name}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device type returned"><con:configuration><path>//*:Response/*:devType</path><content>${device.type}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;dim&quot; value returned"><con:configuration><path>//*:Response/*:dim/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;dimMin&quot; value returned"><con:configuration><path>//*:Response/*:dimMin/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;dimMode&quot; value returned"><con:configuration><path>//*:Response/*:dimMode</path><content>OFF</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;bPressLapse&quot; value returned"><con:configuration><path>//*:Response/*:bPressLapse/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;flickReps&quot; value returned"><con:configuration><path>//*:Response/*:flickReps/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;flickWarn&quot; value returned"><con:configuration><path>//*:Response/*:flickWarn</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;input&quot; value returned"><con:configuration><path>//*:Response/*:input/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;latchActive&quot; value returned"><con:configuration><path>//*:Response/*:latchActive</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;motionMuteDelay&quot; value returned"><con:configuration><path>//*:Response/*:motionMuteDelay/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;networkOn&quot; value returned"><con:configuration><path>//*:Response/*:networkOn</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;offDelay&quot; value returned"><con:configuration><path>//*:Response/*:offDelay/@null</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid &quot;switchStatus&quot; value returned"><con:configuration><path>//*:Response/*:switchStatus</path><content>OFF</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="delete device">
-        <con:settings/>
-        <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete device" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/${device.key}</con:endpoint>
-          <con:request>{
-   "id":"",
-   "name":"updated contact",
-   "address":"updated address",
-   "gender":"F",
-   "dob":"2001-04-16",
-   "email":"updated-test@email.com",
-   "mobile":"5145145111",
-   "phone":"5145145121"
-}</con:request>
-          
-          
-          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code returned"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="validate delete">
-        <con:settings/>
-        <con:config method="GET" xsi:type="con:HttpRequest" name="validate delete" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/${device.key}</con:endpoint>
-          <con:request/>
-          
-          
-          <con:assertion type="XPath Match" name="valid error message returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:message</path><content>Device with primarykey '${device.key}' not found</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:properties/>
-      <con:reportParameters/>
-      <con:breakPoints>
-        <con:testStepId>16cf45a0-c1af-4c33-8819-0a4ea8276756</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>1342966e-515f-4ec0-9a4c-9d7c51c48542</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>1fb764e4-1840-4cf8-af80-00f7f2c2ece6</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>3b800581-6387-44ff-b35b-945408787b7c</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>edfd8dac-0104-4730-8cc6-0428d656d0ad</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>6a97c497-6e1b-4cef-b11d-07bf8213303c</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>f90e9cac-ab42-46ea-98df-be81bfe12c6a</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>0d0d0e4d-ae89-44ba-8a1f-a351325fb2ac</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>335a9d86-8bef-4093-94b6-f118d2b94d26</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>8cc6b576-1299-4a62-a3cb-02dba18d783c</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>3d446bb9-7f2d-437d-ba9d-538c8544ebca</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>887ed9bf-ef65-4cd6-8d63-fe63059b6114</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>5e49a61f-6c85-495d-9b4a-4cb38df93a4c</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>ff9f7042-ba4f-437e-a043-8021225671b8</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>d76aa335-29eb-4aa2-91cd-16d24dbca2ba</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>679e8216-4253-4db8-8c5d-14aaa0c542fd</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>71a6c31e-5f1d-4b27-b2a7-44b62806bf64</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>5a75c453-48bd-46bc-b1f3-1987ee84ae9b</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>5acde369-b009-4471-a36a-146d0396a252</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>fd95a9ee-7a42-47ac-acef-a96cb56e687c</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>3b97c817-b31a-4a3f-b8ff-409f243cff67</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>e2cdbfdb-8bb7-4def-9ab4-51a9f9aa9b35</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>a461e16f-8295-44f1-8150-5ac5d8413f25</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>8c722f3e-448b-48cb-9417-916e6c71f2a4</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>b5ffe9da-6232-45b2-8878-ff6d59663ebd</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>f9f33afa-18df-4001-b902-af22172b09c9</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>f41cff6a-ef96-412a-88b1-035cd578ec10</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>bf010173-19fa-4baf-b5f4-0aa02758a4ca</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>c9f13830-2d42-4ea7-afff-1a1c3960b124</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-    <con:breakPoints><con:testStepId>18313ee5-9be5-461b-bbef-4ac16dc18a16</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>629d7ffd-2eeb-46e3-bb04-778428631c99</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c1469165-8392-4ede-ae0c-08bc0ba0118c</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>ad757a15-193d-485b-b74a-1df88eea7360</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="true" maxResults="0" name="Constraint validation (revise)" searchProperties="true" id="cf92a8b7-98db-493d-be12-430e0faf1814" disabled="true">
-      <con:settings/>
-      
-      
-      
-      
-      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property><con:property><con:name>---------------------------------------json</con:name><con:value/></con:property><con:property><con:name>device.key</con:name><con:value>2</con:value></con:property><con:property><con:name>device.ip</con:name><con:value>192.168.1.7</con:value></con:property><con:property><con:name>device.mac</con:name><con:value>ab:cd:ef:20:34:56</con:value></con:property><con:property><con:name>device.name</con:name><con:value>test-device-json</con:value></con:property><con:property><con:name>device.type</con:name><con:value>TYPE_F</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create with missing ip">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create with missing ip" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"",
-   "devMac":"${device.mac}",
-   "devType":"${device.type}",
-   "devName":"${device.name}",
-   "devDescription":"this is a test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid entity returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:entity</path><content>com.app.domain.model.TypeF</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid error message returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:message</path><content>size must be between 7 and 15</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid message key returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:messageKey</path><content>{javax.validation.constraints.Size.message}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid property returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:property</path><content>devIp</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <con:testStep type="httprequest" name="create with wrong (short) ip" id="7d3b97a6-ad1c-4ec9-a9a4-4e91f2c5947d">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create with wrong (short) ip" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"1.1.1.",
-   "devMac":"${device.mac}",
-   "devType":"${device.type}",
-   "devName":"${device.name}",
-   "devDescription":"this is a test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid entity returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:entity</path><content>com.app.domain.model.TypeF</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid error message returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:message</path><content>size must be between 7 and 15</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid message key returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:messageKey</path><content>{javax.validation.constraints.Size.message}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid property returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:property</path><content>devIp</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="create with wrong (long) ip">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create with wrong (long) ip" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"255.255.255.2551",
-   "devMac":"${device.mac}",
-   "devType":"${device.type}",
-   "devName":"${device.name}",
-   "devDescription":"this is a test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid entity returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:entity</path><content>com.app.domain.model.TypeF</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid error message returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:message</path><content>size must be between 7 and 15</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid message key returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:messageKey</path><content>{javax.validation.constraints.Size.message}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid property returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:property</path><content>devIp</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="create with missing mac">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create with missing mac" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"${device.ip}",
-   "devMac":"",
-   "devType":"${device.type}",
-   "devName":"${device.name}",
-   "devDescription":"this is a test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid entity returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:entity</path><content>com.app.domain.model.TypeF</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid error message returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:message</path><content>size must be between 17 and 17</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid message key returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:messageKey</path><content>{javax.validation.constraints.Size.message}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid property returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:property</path><content>devMac</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="create with wrong (short) mac">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create with wrong (short) mac" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"${device.ip}",
-   "devMac":"11:22:33:44:55:6",
-   "devType":"${device.type}",
-   "devName":"${device.name}",
-   "devDescription":"this is a test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid entity returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:entity</path><content>com.app.domain.model.TypeF</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid error message returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:message</path><content>size must be between 17 and 17</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid message key returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:messageKey</path><content>{javax.validation.constraints.Size.message}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid property returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:property</path><content>devMac</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="create with wrong (long) mac">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create with wrong (long) mac" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"${device.ip}",
-   "devMac":"11:22:33:44:55:66:",
-   "devType":"${device.type}",
-   "devName":"${device.name}",
-   "devDescription":"this is a test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid entity returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:entity</path><content>com.app.domain.model.TypeF</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid error message returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:message</path><content>size must be between 17 and 17</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid message key returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:messageKey</path><content>{javax.validation.constraints.Size.message}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid property returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:property</path><content>devMac</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="create with missing type">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create with missing type" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"${device.ip}",
-   "devMac":"${device.mac}",
-   "devName":"${device.name}",
-   "devDescription":"this is a test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid entity returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:entity</path><content>com.app.domain.model.TypeF</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid error message returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:message</path><content>may not be null</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid message key returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:messageKey</path><content>{javax.validation.constraints.NotNull.message}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid property returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:property</path><content>devType</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="create with wrong type (revise)" disabled="true">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create with wrong type (revise)" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"${device.ip}",
-   "devMac":"${device.mac}",
-   "devType":"wrong-type",
-   "devName":"${device.name}",
-   "devDescription":"this is a test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid error message returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:message</path><content>Can not construct instance of com.app.domain.model.enums.DeviceType from String value 'wrong-type': value not one of declared Enum instance names
- at [Source: org.apache.catalina.connector.CoyoteInputStream@38ef9337; line: 4, column: 32] (through reference chain: com.app.domain.model.Device["devType"])</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>true</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid exception name returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:extendedInfo</path><content>HttpMessageNotReadableException</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="create with missing name">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create with missing name" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"${device.ip}",
-   "devMac":"${device.mac}",
-   "devType":"${device.type}",
-   "devDescription":"this is a test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid entity returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:entity</path><content>com.app.domain.model.TypeF</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid error message returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:message</path><content>may not be null</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid message key returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:messageKey</path><content>{javax.validation.constraints.NotNull.message}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid property returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:property</path><content>devName</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="create with name>20">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create with name>20" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"${device.ip}",
-   "devMac":"${device.mac}",
-   "devType":"${device.type}",
-   "devName":"veeeeery_looooooong_deeevice_naaaaaaame",
-   "devDescription":"this is a test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid entity returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:entity</path><content>com.app.domain.model.TypeF</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid error message returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:message</path><content>size must be between 0 and 20</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid message key returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:messageKey</path><content>{javax.validation.constraints.Size.message}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid property returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:property</path><content>devName</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="create valid device">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create valid device" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"${device.ip}",
-   "devMac":"${device.mac}",
-   "devType":"${device.type}",
-   "devName":"${device.name}",
-   "devDescription":"this is a test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid ip returned"><con:configuration><path>//*:Response/*:devIp</path><content>${device.ip}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid mac returned"><con:configuration><path>//*:Response/*:devMac</path><content>${device.mac}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid name returned"><con:configuration><path>//*:Response/*:devName</path><content>${device.name}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="transfer" name="transfer key"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>primaryKey1</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>create valid device</con:sourceStep><con:sourcePath>//*:Response/*:primaryKey</con:sourcePath><con:targetType>device.key</con:targetType><con:targetStep>Properties</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="create with existing ip">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create with existing ip" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"${device.ip}",
-   "devMac":"11:22:33:44:55:66",
-   "devType":"TYPE_G",
-   "devName":"test1",
-   "devDescription":"this is a test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid exception cought"><con:configuration><path>//*:Fault/*:violations/*:e/*:extendedInfo</path><content>org.springframework.dao.DataIntegrityViolationException</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid message returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:message</path><content>Duplicate entry '192.168.1.7' for key 'devIp'</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="create with existing mac">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create with existing mac" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"123.123.123.123",
-   "devMac":"${device.mac}",
-   "devType":"TYPE_G",
-   "devName":"test1",
-   "devDescription":"this is a test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid exception cought"><con:configuration><path>//*:Fault/*:violations/*:e/*:extendedInfo</path><content>org.springframework.dao.DataIntegrityViolationException</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid message returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:message</path><content>Duplicate entry 'ab:cd:ef:20:34:56' for key 'devMac'</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="create with existing name">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create with existing name" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"123.123.123.123",
-   "devMac":"12:34:56:78:91:bb",
-   "devType":"TYPE_G",
-   "devName":"${device.name}",
-   "devDescription":"this is a test device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid exception cought"><con:configuration><path>//*:Fault/*:violations/*:e/*:extendedInfo</path><content>org.springframework.dao.DataIntegrityViolationException</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid message returned"><con:configuration><path>//*:Fault/*:violations/*:e/*:message</path><content>Duplicate entry 'test-device-json' for key 'devName'</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="delete valid device">
-        <con:settings/>
-        <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete valid device" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/${device.key}</con:endpoint>
-          <con:request>{
-   "id":"",
-   "name":"updated contact",
-   "address":"updated address",
-   "gender":"F",
-   "dob":"2001-04-16",
-   "email":"updated-test@email.com",
-   "mobile":"5145145111",
-   "phone":"5145145121"
-}</con:request>
-          
-          
-          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code returned"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:properties/>
-      <con:reportParameters/>
-      <con:breakPoints>
-        <con:testStepId>16cf45a0-c1af-4c33-8819-0a4ea8276756</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>1342966e-515f-4ec0-9a4c-9d7c51c48542</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>1fb764e4-1840-4cf8-af80-00f7f2c2ece6</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>3b800581-6387-44ff-b35b-945408787b7c</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>edfd8dac-0104-4730-8cc6-0428d656d0ad</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>6a97c497-6e1b-4cef-b11d-07bf8213303c</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>f90e9cac-ab42-46ea-98df-be81bfe12c6a</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>0d0d0e4d-ae89-44ba-8a1f-a351325fb2ac</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>335a9d86-8bef-4093-94b6-f118d2b94d26</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>8cc6b576-1299-4a62-a3cb-02dba18d783c</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>3d446bb9-7f2d-437d-ba9d-538c8544ebca</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>887ed9bf-ef65-4cd6-8d63-fe63059b6114</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>5e49a61f-6c85-495d-9b4a-4cb38df93a4c</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>ff9f7042-ba4f-437e-a043-8021225671b8</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>d76aa335-29eb-4aa2-91cd-16d24dbca2ba</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>679e8216-4253-4db8-8c5d-14aaa0c542fd</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>71a6c31e-5f1d-4b27-b2a7-44b62806bf64</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>5a75c453-48bd-46bc-b1f3-1987ee84ae9b</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>5acde369-b009-4471-a36a-146d0396a252</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>fd95a9ee-7a42-47ac-acef-a96cb56e687c</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>3b97c817-b31a-4a3f-b8ff-409f243cff67</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>e2cdbfdb-8bb7-4def-9ab4-51a9f9aa9b35</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>a461e16f-8295-44f1-8150-5ac5d8413f25</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>8c722f3e-448b-48cb-9417-916e6c71f2a4</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>b5ffe9da-6232-45b2-8878-ff6d59663ebd</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>f9f33afa-18df-4001-b902-af22172b09c9</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>f41cff6a-ef96-412a-88b1-035cd578ec10</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>bf010173-19fa-4baf-b5f4-0aa02758a4ca</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>c9f13830-2d42-4ea7-afff-1a1c3960b124</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-    <con:breakPoints><con:testStepId>18313ee5-9be5-461b-bbef-4ac16dc18a16</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>629d7ffd-2eeb-46e3-bb04-778428631c99</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c1469165-8392-4ede-ae0c-08bc0ba0118c</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>ad757a15-193d-485b-b74a-1df88eea7360</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>7d3b97a6-ad1c-4ec9-a9a4-4e91f2c5947d</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="true" maxResults="0" name="TypeF device - load multiple" searchProperties="true" id="6218082d-002c-46a3-a198-76b77f74b544" disabled="true">
-      <con:settings/>
-      
-      
-      
-      
-      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property><con:property><con:name>---------------------------------------json</con:name><con:value/></con:property><con:property><con:name>device1.key</con:name><con:value>6</con:value></con:property><con:property><con:name>device2.key</con:name><con:value>7</con:value></con:property><con:property><con:name>device3.key</con:name><con:value>8</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create 1">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create 1" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"10.10.10.1",
-   "devMac":"11:11:11:11:11:11",
-   "devType":"TYPE_F",
-   "devName":"test1",
-   "devDescription":"test1 device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid device IP returned"><con:configuration><path>//*:Response/*:devIp</path><content>10.10.10.1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device MAC returned"><con:configuration><path>//*:Response/*:devMac</path><content>11:11:11:11:11:11</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device name returned"><con:configuration><path>//*:Response/*:devName</path><content>test1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device type returned"><con:configuration><path>//*:Response/*:devType</path><content>TYPE_F</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <con:testStep type="httprequest" name="create 2">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create 2" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"10.10.10.2",
-   "devMac":"11:11:11:11:11:12",
-   "devType":"TYPE_F",
-   "devName":"test2",
-   "devDescription":"test2 device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid device IP returned"><con:configuration><path>//*:Response/*:devIp</path><content>10.10.10.2</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device MAC returned"><con:configuration><path>//*:Response/*:devMac</path><content>11:11:11:11:11:12</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device name returned"><con:configuration><path>//*:Response/*:devName</path><content>test2</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device type returned"><con:configuration><path>//*:Response/*:devType</path><content>TYPE_F</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="create 3">
-        <con:settings/>
-        <con:config method="POST" xsi:type="con:HttpRequest" name="create 3" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/typef</con:endpoint>
-          <con:request>{
-   "primaryKey":"",
-   "devIp":"10.10.10.3",
-   "devMac":"11:11:11:11:11:13",
-   "devType":"TYPE_F",
-   "devName":"test3",
-   "devDescription":"test3 device"
-}</con:request>
-          
-          
-          <con:assertion type="XPath Match" name="valid device IP returned"><con:configuration><path>//*:Response/*:devIp</path><content>10.10.10.3</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device MAC returned"><con:configuration><path>//*:Response/*:devMac</path><content>11:11:11:11:11:13</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device name returned"><con:configuration><path>//*:Response/*:devName</path><content>test3</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device type returned"><con:configuration><path>//*:Response/*:devType</path><content>TYPE_F</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="transfer" name="transfer key"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>primaryKey1</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>create 1</con:sourceStep><con:sourcePath>//*:Response/*:primaryKey</con:sourcePath><con:targetType>device1.key</con:targetType><con:targetStep>Properties</con:targetStep></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>primaryKey2</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>create 2</con:sourceStep><con:sourcePath>//*:Response/*:primaryKey</con:sourcePath><con:targetType>device2.key</con:targetType><con:targetStep>Properties</con:targetStep></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" disabled="false" entitize="false" ignoreEmpty="false" transferChildNodes="false" transferToAll="false" useXQuery="false"><con:name>primaryKey3</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>create 3</con:sourceStep><con:sourcePath>//*:Response/*:primaryKey</con:sourcePath><con:targetType>device3.key</con:targetType><con:targetStep>Properties</con:targetStep><con:targetPath xsi:nil="true"/></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="load all devices">
-        <con:settings/>
-        <con:config method="GET" xsi:type="con:HttpRequest" name="load all devices" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/all</con:endpoint>
-          <con:request/>
-          
-          
-          <con:assertion type="XPath Match" name="Expected number of devices returned"><con:configuration><path>count( //Response/e)</path><content>3</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="TYPE_F device returned 3 times"><con:configuration><path>count(//Response/e[devType="TYPE_F"])</path><content>3</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="delete 1" id="d338a591-8391-4eb3-8099-83a02e0e9fbc">
-        <con:settings/>
-        <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete 1" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/${device1.key}</con:endpoint>
-          <con:request>{
-   "id":"",
-   "name":"updated contact",
-   "address":"updated address",
-   "gender":"F",
-   "dob":"2001-04-16",
-   "email":"updated-test@email.com",
-   "mobile":"5145145111",
-   "phone":"5145145121"
-}</con:request>
-          
-          
-          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code returned"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="delete 2" id="5a5311f1-406e-4d32-8af2-996296937d9b">
-        <con:settings/>
-        <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete 2" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/${device2.key}</con:endpoint>
-          <con:request>{
-   "id":"",
-   "name":"updated contact",
-   "address":"updated address",
-   "gender":"F",
-   "dob":"2001-04-16",
-   "email":"updated-test@email.com",
-   "mobile":"5145145111",
-   "phone":"5145145121"
-}</con:request>
-          
-          
-          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code returned"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:testStep type="httprequest" name="delete 3">
-        <con:settings/>
-        <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete 3" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:settings>
-            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-          </con:settings>
-          <con:endpoint>${test.http.host.rest}/device/${device3.key}</con:endpoint>
-          <con:request>{
-   "id":"",
-   "name":"updated contact",
-   "address":"updated address",
-   "gender":"F",
-   "dob":"2001-04-16",
-   "email":"updated-test@email.com",
-   "mobile":"5145145111",
-   "phone":"5145145121"
-}</con:request>
-          
-          
-          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code returned"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
-            <con:username>${app.username}</con:username>
-            <con:password>${app.password}</con:password>
-            <con:authType>Preemptive</con:authType>
-          </con:credentials>
-          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-          <con:jmsPropertyConfig/>
-          <con:parameters/>
-        </con:config>
-      </con:testStep><con:properties/>
-      <con:reportParameters/>
-      <con:breakPoints>
-        <con:testStepId>16cf45a0-c1af-4c33-8819-0a4ea8276756</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>1342966e-515f-4ec0-9a4c-9d7c51c48542</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>1fb764e4-1840-4cf8-af80-00f7f2c2ece6</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>3b800581-6387-44ff-b35b-945408787b7c</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>edfd8dac-0104-4730-8cc6-0428d656d0ad</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>6a97c497-6e1b-4cef-b11d-07bf8213303c</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>f90e9cac-ab42-46ea-98df-be81bfe12c6a</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>0d0d0e4d-ae89-44ba-8a1f-a351325fb2ac</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>335a9d86-8bef-4093-94b6-f118d2b94d26</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>8cc6b576-1299-4a62-a3cb-02dba18d783c</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>3d446bb9-7f2d-437d-ba9d-538c8544ebca</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>887ed9bf-ef65-4cd6-8d63-fe63059b6114</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>5e49a61f-6c85-495d-9b4a-4cb38df93a4c</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>ff9f7042-ba4f-437e-a043-8021225671b8</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>d76aa335-29eb-4aa2-91cd-16d24dbca2ba</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>679e8216-4253-4db8-8c5d-14aaa0c542fd</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>71a6c31e-5f1d-4b27-b2a7-44b62806bf64</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>5a75c453-48bd-46bc-b1f3-1987ee84ae9b</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>5acde369-b009-4471-a36a-146d0396a252</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>fd95a9ee-7a42-47ac-acef-a96cb56e687c</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>3b97c817-b31a-4a3f-b8ff-409f243cff67</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>e2cdbfdb-8bb7-4def-9ab4-51a9f9aa9b35</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>a461e16f-8295-44f1-8150-5ac5d8413f25</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>8c722f3e-448b-48cb-9417-916e6c71f2a4</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>b5ffe9da-6232-45b2-8878-ff6d59663ebd</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>f9f33afa-18df-4001-b902-af22172b09c9</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>f41cff6a-ef96-412a-88b1-035cd578ec10</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>bf010173-19fa-4baf-b5f4-0aa02758a4ca</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-      <con:breakPoints>
-        <con:testStepId>c9f13830-2d42-4ea7-afff-1a1c3960b124</con:testStepId>
-        <con:status>NONE</con:status>
-        <con:properties/>
-      </con:breakPoints>
-    <con:breakPoints><con:testStepId>18313ee5-9be5-461b-bbef-4ac16dc18a16</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>629d7ffd-2eeb-46e3-bb04-778428631c99</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c1469165-8392-4ede-ae0c-08bc0ba0118c</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>ad757a15-193d-485b-b74a-1df88eea7360</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>d338a591-8391-4eb3-8099-83a02e0e9fbc</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>5a5311f1-406e-4d32-8af2-996296937d9b</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>31d2ccef-575f-4b86-b391-ba937e3603b5</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="true" maxResults="0" name="TYPE_F device CRUD (atomic)" searchProperties="true" id="a6f26a91-a723-4d6b-be2a-abc0204f1bc9">
-      <con:settings/>
-      
-      
-      
-      
-      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property><con:property><con:name>---------------------------------------create</con:name><con:value/></con:property><con:property><con:name>device.key</con:name><con:value>20</con:value></con:property><con:property><con:name>device.ip</con:name><con:value>192.168.1.7</con:value></con:property><con:property><con:name>device.mac</con:name><con:value>ab:cd:ef:20:34:56</con:value></con:property><con:property><con:name>device.name</con:name><con:value>test-device-json</con:value></con:property><con:property><con:name>device.type</con:name><con:value>TYPE_F</con:value></con:property><con:property><con:name>---------------------------------------update</con:name><con:value/></con:property><con:property><con:name>device-update.ip</con:name><con:value>10.10.10.10</con:value></con:property><con:property><con:name>device-update.mac</con:name><con:value>aa:bb:cc:dd:ee:11</con:value></con:property><con:property><con:name>device-update.name</con:name><con:value>updated-device</con:value></con:property><con:property><con:name>device-update.type</con:name><con:value>TYPE_F</con:value></con:property><con:property><con:name>----------------------------------------defaultParameters</con:name><con:value/></con:property><con:property><con:name>latchActive</con:name><con:value>false</con:value></con:property><con:property><con:name>bPressLapse</con:name><con:value>null</con:value></con:property><con:property><con:name>flickWarn</con:name><con:value>false</con:value></con:property><con:property><con:name>flickReps</con:name><con:value>null</con:value></con:property><con:property><con:name>offDelay</con:name><con:value>null</con:value></con:property><con:property><con:name>motionMuteDelay</con:name><con:value>null</con:value></con:property><con:property><con:name>dim</con:name><con:value>null</con:value></con:property><con:property><con:name>dimMin</con:name><con:value>null</con:value></con:property><con:property><con:name>dimMode</con:name><con:value>OFF</con:value></con:property><con:property><con:name>input</con:name><con:value>null</con:value></con:property><con:property><con:name>switchStatus</con:name><con:value>OFF</con:value></con:property><con:property><con:name>networkOn</con:name><con:value>false</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create device with params" disabled="true">
         <con:settings/>
         <con:config method="POST" xsi:type="con:HttpRequest" name="create device with params" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
@@ -2034,7 +738,7 @@
       
       
       
-      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property><con:property><con:name>---------------------------------------create</con:name><con:value/></con:property><con:property><con:name>device.key</con:name><con:value>21</con:value></con:property><con:property><con:name>device.ip</con:name><con:value>192.168.1.7</con:value></con:property><con:property><con:name>device.mac</con:name><con:value>ab:cd:ef:20:34:56</con:value></con:property><con:property><con:name>device.name</con:name><con:value>test-device-json</con:value></con:property><con:property><con:name>device.type</con:name><con:value>TYPE_G</con:value></con:property><con:property><con:name>---------------------------------------update</con:name><con:value/></con:property><con:property><con:name>device-update.ip</con:name><con:value>10.10.10.10</con:value></con:property><con:property><con:name>device-update.mac</con:name><con:value>aa:bb:cc:dd:ee:11</con:value></con:property><con:property><con:name>device-update.name</con:name><con:value>updated-device</con:value></con:property><con:property><con:name>device-update.type</con:name><con:value>TYPE_G</con:value></con:property><con:property><con:name>----------------------------------------defaultParameters</con:name><con:value/></con:property><con:property><con:name>latchActive</con:name><con:value>false</con:value></con:property><con:property><con:name>bPressLapse</con:name><con:value>null</con:value></con:property><con:property><con:name>flickWarn</con:name><con:value>false</con:value></con:property><con:property><con:name>flickReps</con:name><con:value>null</con:value></con:property><con:property><con:name>offDelay</con:name><con:value>null</con:value></con:property><con:property><con:name>motionMuteDelay</con:name><con:value>null</con:value></con:property><con:property><con:name>dim</con:name><con:value>null</con:value></con:property><con:property><con:name>dimMin</con:name><con:value>null</con:value></con:property><con:property><con:name>dimMode</con:name><con:value>OFF</con:value></con:property><con:property><con:name>input</con:name><con:value>null</con:value></con:property><con:property><con:name>switchStatus</con:name><con:value>OFF</con:value></con:property><con:property><con:name>networkOn</con:name><con:value>false</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create device with params" disabled="true">
+      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property><con:property><con:name>---------------------------------------create</con:name><con:value/></con:property><con:property><con:name>device.key</con:name><con:value>2</con:value></con:property><con:property><con:name>device.ip</con:name><con:value>192.168.1.7</con:value></con:property><con:property><con:name>device.mac</con:name><con:value>ab:cd:ef:20:34:56</con:value></con:property><con:property><con:name>device.name</con:name><con:value>test-device-json</con:value></con:property><con:property><con:name>device.type</con:name><con:value>TYPE_G</con:value></con:property><con:property><con:name>---------------------------------------update</con:name><con:value/></con:property><con:property><con:name>device-update.ip</con:name><con:value>10.10.10.10</con:value></con:property><con:property><con:name>device-update.mac</con:name><con:value>aa:bb:cc:dd:ee:11</con:value></con:property><con:property><con:name>device-update.name</con:name><con:value>updated-device</con:value></con:property><con:property><con:name>device-update.type</con:name><con:value>TYPE_G</con:value></con:property><con:property><con:name>----------------------------------------defaultParameters</con:name><con:value/></con:property><con:property><con:name>latchActive</con:name><con:value>false</con:value></con:property><con:property><con:name>bPressLapse</con:name><con:value>null</con:value></con:property><con:property><con:name>flickWarn</con:name><con:value>false</con:value></con:property><con:property><con:name>flickReps</con:name><con:value>null</con:value></con:property><con:property><con:name>offDelay</con:name><con:value>null</con:value></con:property><con:property><con:name>motionMuteDelay</con:name><con:value>null</con:value></con:property><con:property><con:name>dim</con:name><con:value>null</con:value></con:property><con:property><con:name>dimMin</con:name><con:value>null</con:value></con:property><con:property><con:name>dimMode</con:name><con:value>OFF</con:value></con:property><con:property><con:name>input</con:name><con:value>null</con:value></con:property><con:property><con:name>switchStatus</con:name><con:value>OFF</con:value></con:property><con:property><con:name>networkOn</con:name><con:value>false</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create device with params" disabled="true">
         <con:settings/>
         <con:config method="POST" xsi:type="con:HttpRequest" name="create device with params" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
@@ -2396,7 +1100,7 @@
       
       
       
-      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property><con:property><con:name>---------------------------------------create</con:name><con:value/></con:property><con:property><con:name>device.key</con:name><con:value>22</con:value></con:property><con:property><con:name>device.ip</con:name><con:value>192.168.1.7</con:value></con:property><con:property><con:name>device.mac</con:name><con:value>ab:cd:ef:20:34:56</con:value></con:property><con:property><con:name>device.name</con:name><con:value>test-device-json</con:value></con:property><con:property><con:name>device.type</con:name><con:value>TYPE_G</con:value></con:property><con:property><con:name>---------------------------------------update</con:name><con:value/></con:property><con:property><con:name>device-update.ip</con:name><con:value>10.10.10.10</con:value></con:property><con:property><con:name>device-update.mac</con:name><con:value>aa:bb:cc:dd:ee:11</con:value></con:property><con:property><con:name>device-update.name</con:name><con:value>updated-device</con:value></con:property><con:property><con:name>device-update.type</con:name><con:value>TYPE_GM</con:value></con:property><con:property><con:name>----------------------------------------defaultParameters</con:name><con:value/></con:property><con:property><con:name>latchActive</con:name><con:value>false</con:value></con:property><con:property><con:name>bPressLapse</con:name><con:value>null</con:value></con:property><con:property><con:name>flickWarn</con:name><con:value>false</con:value></con:property><con:property><con:name>flickReps</con:name><con:value>null</con:value></con:property><con:property><con:name>offDelay</con:name><con:value>null</con:value></con:property><con:property><con:name>motionMuteDelay</con:name><con:value>null</con:value></con:property><con:property><con:name>dim</con:name><con:value>null</con:value></con:property><con:property><con:name>dimMin</con:name><con:value>null</con:value></con:property><con:property><con:name>dimMode</con:name><con:value>OFF</con:value></con:property><con:property><con:name>input</con:name><con:value>null</con:value></con:property><con:property><con:name>switchStatus</con:name><con:value>OFF</con:value></con:property><con:property><con:name>networkOn</con:name><con:value>false</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create device with params" disabled="true">
+      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property><con:property><con:name>---------------------------------------create</con:name><con:value/></con:property><con:property><con:name>device.key</con:name><con:value>3</con:value></con:property><con:property><con:name>device.ip</con:name><con:value>192.168.1.7</con:value></con:property><con:property><con:name>device.mac</con:name><con:value>ab:cd:ef:20:34:56</con:value></con:property><con:property><con:name>device.name</con:name><con:value>test-device-json</con:value></con:property><con:property><con:name>device.type</con:name><con:value>TYPE_G</con:value></con:property><con:property><con:name>---------------------------------------update</con:name><con:value/></con:property><con:property><con:name>device-update.ip</con:name><con:value>10.10.10.10</con:value></con:property><con:property><con:name>device-update.mac</con:name><con:value>aa:bb:cc:dd:ee:11</con:value></con:property><con:property><con:name>device-update.name</con:name><con:value>updated-device</con:value></con:property><con:property><con:name>device-update.type</con:name><con:value>TYPE_GM</con:value></con:property><con:property><con:name>----------------------------------------defaultParameters</con:name><con:value/></con:property><con:property><con:name>latchActive</con:name><con:value>false</con:value></con:property><con:property><con:name>bPressLapse</con:name><con:value>null</con:value></con:property><con:property><con:name>flickWarn</con:name><con:value>false</con:value></con:property><con:property><con:name>flickReps</con:name><con:value>null</con:value></con:property><con:property><con:name>offDelay</con:name><con:value>null</con:value></con:property><con:property><con:name>motionMuteDelay</con:name><con:value>null</con:value></con:property><con:property><con:name>dim</con:name><con:value>null</con:value></con:property><con:property><con:name>dimMin</con:name><con:value>null</con:value></con:property><con:property><con:name>dimMode</con:name><con:value>OFF</con:value></con:property><con:property><con:name>input</con:name><con:value>null</con:value></con:property><con:property><con:name>switchStatus</con:name><con:value>OFF</con:value></con:property><con:property><con:name>networkOn</con:name><con:value>false</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create device with params" disabled="true">
         <con:settings/>
         <con:config method="POST" xsi:type="con:HttpRequest" name="create device with params" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
@@ -2758,7 +1462,7 @@
       
       
       
-      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property><con:property><con:name>---------------------------------------json</con:name><con:value/></con:property><con:property><con:name>device.key</con:name><con:value>23</con:value></con:property><con:property><con:name>device.ip</con:name><con:value>192.168.1.7</con:value></con:property><con:property><con:name>device.mac</con:name><con:value>ab:cd:ef:20:34:56</con:value></con:property><con:property><con:name>device.name</con:name><con:value>test-device-json</con:value></con:property><con:property><con:name>device.type</con:name><con:value>TYPE_F</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create with missing ip">
+      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property><con:property><con:name>---------------------------------------json</con:name><con:value/></con:property><con:property><con:name>device.key</con:name><con:value>4</con:value></con:property><con:property><con:name>device.ip</con:name><con:value>192.168.1.7</con:value></con:property><con:property><con:name>device.mac</con:name><con:value>ab:cd:ef:20:34:56</con:value></con:property><con:property><con:name>device.name</con:name><con:value>test-device-json</con:value></con:property><con:property><con:name>device.type</con:name><con:value>TYPE_F</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create with missing ip">
         <con:settings/>
         <con:config method="POST" xsi:type="con:HttpRequest" name="create with missing ip" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
@@ -3330,7 +2034,7 @@
       
       
       
-      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property><con:property><con:name>---------------------------------------json</con:name><con:value/></con:property><con:property><con:name>device.key</con:name><con:value>27</con:value></con:property><con:property><con:name>device.ip</con:name><con:value>192.168.1.7</con:value></con:property><con:property><con:name>device.mac</con:name><con:value>ab:cd:ef:20:34:56</con:value></con:property><con:property><con:name>device.name</con:name><con:value>test-device-json</con:value></con:property><con:property><con:name>device.type</con:name><con:value>TYPE_G</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create with missing ip">
+      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property><con:property><con:name>---------------------------------------json</con:name><con:value/></con:property><con:property><con:name>device.key</con:name><con:value>8</con:value></con:property><con:property><con:name>device.ip</con:name><con:value>192.168.1.7</con:value></con:property><con:property><con:name>device.mac</con:name><con:value>ab:cd:ef:20:34:56</con:value></con:property><con:property><con:name>device.name</con:name><con:value>test-device-json</con:value></con:property><con:property><con:name>device.type</con:name><con:value>TYPE_G</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create with missing ip">
         <con:settings/>
         <con:config method="POST" xsi:type="con:HttpRequest" name="create with missing ip" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
@@ -3902,7 +2606,7 @@
       
       
       
-      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property><con:property><con:name>---------------------------------------json</con:name><con:value/></con:property><con:property><con:name>device.key</con:name><con:value>31</con:value></con:property><con:property><con:name>device.ip</con:name><con:value>192.168.1.7</con:value></con:property><con:property><con:name>device.mac</con:name><con:value>ab:cd:ef:20:34:56</con:value></con:property><con:property><con:name>device.name</con:name><con:value>test-device-json</con:value></con:property><con:property><con:name>device.type</con:name><con:value>TYPE_GM</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create with missing ip">
+      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property><con:property><con:name>---------------------------------------json</con:name><con:value/></con:property><con:property><con:name>device.key</con:name><con:value>12</con:value></con:property><con:property><con:name>device.ip</con:name><con:value>192.168.1.7</con:value></con:property><con:property><con:name>device.mac</con:name><con:value>ab:cd:ef:20:34:56</con:value></con:property><con:property><con:name>device.name</con:name><con:value>test-device-json</con:value></con:property><con:property><con:name>device.type</con:name><con:value>TYPE_GM</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create with missing ip">
         <con:settings/>
         <con:config method="POST" xsi:type="con:HttpRequest" name="create with missing ip" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
@@ -4468,7 +3172,531 @@
         <con:status>NONE</con:status>
         <con:properties/>
       </con:breakPoints>
-    <con:breakPoints><con:testStepId>18313ee5-9be5-461b-bbef-4ac16dc18a16</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>629d7ffd-2eeb-46e3-bb04-778428631c99</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c1469165-8392-4ede-ae0c-08bc0ba0118c</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>ad757a15-193d-485b-b74a-1df88eea7360</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>7d3b97a6-ad1c-4ec9-a9a4-4e91f2c5947d</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:properties/>
+    <con:breakPoints><con:testStepId>18313ee5-9be5-461b-bbef-4ac16dc18a16</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>629d7ffd-2eeb-46e3-bb04-778428631c99</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c1469165-8392-4ede-ae0c-08bc0ba0118c</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>ad757a15-193d-485b-b74a-1df88eea7360</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>7d3b97a6-ad1c-4ec9-a9a4-4e91f2c5947d</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="true" maxResults="0" name="Load all devices" searchProperties="true" id="6218082d-002c-46a3-a198-76b77f74b544">
+      <con:settings/>
+      
+      
+      
+      
+      <con:testStep type="properties" name="Properties"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>app.username</con:name><con:value>adminuser</con:value></con:property><con:property><con:name>app.password</con:name><con:value>adminpass</con:value></con:property><con:property><con:name>---------------------------------------json</con:name><con:value/></con:property><con:property><con:name>device-1-1.key</con:name><con:value>1</con:value></con:property><con:property><con:name>device-1-2.key</con:name><con:value>2</con:value></con:property><con:property><con:name>device-2-1.key</con:name><con:value>3</con:value></con:property><con:property><con:name>device-2-2.key</con:name><con:value>4</con:value></con:property><con:property><con:name>device-3-1.key</con:name><con:value>5</con:value></con:property><con:property><con:name>device-3-2.key</con:name><con:value>6</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="httprequest" name="create 1.1">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="create 1.1" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/device</con:endpoint>
+          <con:request>{
+   "primaryKey":"",
+   "devIp":"10.10.1.1",
+   "devMac":"11:11:11:11:11:11",
+   "devType":"TYPE_F",
+   "devName":"test-1-1",
+   "devDescription":"test-1-1 device"
+}</con:request>
+          
+          
+          <con:assertion type="XPath Match" name="valid device IP returned"><con:configuration><path>//*:Response/*:devIp</path><content>10.10.1.1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device MAC returned"><con:configuration><path>//*:Response/*:devMac</path><content>11:11:11:11:11:11</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device name returned"><con:configuration><path>//*:Response/*:devName</path><content>test-1-1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device type returned"><con:configuration><path>//*:Response/*:devType</path><content>TYPE_F</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <con:testStep type="httprequest" name="create 1.2">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="create 1.2" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/device</con:endpoint>
+          <con:request>{
+   "primaryKey":"",
+   "devIp":"10.10.1.2",
+   "devMac":"11:11:11:11:11:12",
+   "devType":"TYPE_F",
+   "devName":"test-1-2",
+   "devDescription":"test-1-2 device"
+}</con:request>
+          
+          
+          <con:assertion type="XPath Match" name="valid device IP returned"><con:configuration><path>//*:Response/*:devIp</path><content>10.10.1.2</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device MAC returned"><con:configuration><path>//*:Response/*:devMac</path><content>11:11:11:11:11:12</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device name returned"><con:configuration><path>//*:Response/*:devName</path><content>test-1-2</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device type returned"><con:configuration><path>//*:Response/*:devType</path><content>TYPE_F</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="create 2.1">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="create 2.1" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/device</con:endpoint>
+          <con:request>{
+   "primaryKey":"",
+   "devIp":"10.10.2.1",
+   "devMac":"11:11:11:11:11:21",
+   "devType":"TYPE_G",
+   "devName":"test-2-1",
+   "devDescription":"test-2-1 device"
+}</con:request>
+          
+          
+          <con:assertion type="XPath Match" name="valid device IP returned"><con:configuration><path>//*:Response/*:devIp</path><content>10.10.2.1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device MAC returned"><con:configuration><path>//*:Response/*:devMac</path><content>11:11:11:11:11:21</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device name returned"><con:configuration><path>//*:Response/*:devName</path><content>test-2-1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device type returned"><con:configuration><path>//*:Response/*:devType</path><content>TYPE_G</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="create 2.2">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="create 2.2" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/device</con:endpoint>
+          <con:request>{
+   "primaryKey":"",
+   "devIp":"10.10.2.2",
+   "devMac":"11:11:11:11:11:22",
+   "devType":"TYPE_G",
+   "devName":"test-2-2",
+   "devDescription":"test-2-2 device"
+}</con:request>
+          
+          
+          <con:assertion type="XPath Match" name="valid device IP returned"><con:configuration><path>//*:Response/*:devIp</path><content>10.10.2.2</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device MAC returned"><con:configuration><path>//*:Response/*:devMac</path><content>11:11:11:11:11:22</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device name returned"><con:configuration><path>//*:Response/*:devName</path><content>test-2-2</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device type returned"><con:configuration><path>//*:Response/*:devType</path><content>TYPE_G</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="create 3.1">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="create 3.1" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/device</con:endpoint>
+          <con:request>{
+   "primaryKey":"",
+   "devIp":"10.10.3.1",
+   "devMac":"11:11:11:11:11:31",
+   "devType":"TYPE_GM",
+   "devName":"test-3-1",
+   "devDescription":"test-3-1 device"
+}</con:request>
+          
+          
+          <con:assertion type="XPath Match" name="valid device IP returned"><con:configuration><path>//*:Response/*:devIp</path><content>10.10.3.1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device MAC returned"><con:configuration><path>//*:Response/*:devMac</path><content>11:11:11:11:11:31</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device name returned"><con:configuration><path>//*:Response/*:devName</path><content>test-3-1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device type returned"><con:configuration><path>//*:Response/*:devType</path><content>TYPE_GM</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="create 3.2">
+        <con:settings/>
+        <con:config method="POST" xsi:type="con:HttpRequest" name="create 3.2" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/device</con:endpoint>
+          <con:request>{
+   "primaryKey":"",
+   "devIp":"10.10.3.2",
+   "devMac":"11:11:11:11:11:32",
+   "devType":"TYPE_GM",
+   "devName":"test-3-2",
+   "devDescription":"test-3-2 device"
+}</con:request>
+          
+          
+          <con:assertion type="XPath Match" name="valid device IP returned"><con:configuration><path>//*:Response/*:devIp</path><content>10.10.3.2</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device MAC returned"><con:configuration><path>//*:Response/*:devMac</path><content>11:11:11:11:11:32</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device name returned"><con:configuration><path>//*:Response/*:devName</path><content>test-3-2</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="valid device type returned"><con:configuration><path>//*:Response/*:devType</path><content>TYPE_GM</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="transfer" name="transfer keys"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>primaryKey11</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>create 1.1</con:sourceStep><con:sourcePath>//*:Response/*:primaryKey</con:sourcePath><con:targetType>device-1-1.key</con:targetType><con:targetStep>Properties</con:targetStep></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>primaryKey12</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>create 1.2</con:sourceStep><con:sourcePath>//*:Response/*:primaryKey</con:sourcePath><con:targetType>device-1-2.key</con:targetType><con:targetStep>Properties</con:targetStep></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" disabled="false" entitize="false" ignoreEmpty="false" transferChildNodes="false" transferToAll="false" useXQuery="false"><con:name>primaryKey21</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>create 2.1</con:sourceStep><con:sourcePath>//*:Response/*:primaryKey</con:sourcePath><con:targetType>device-2-1.key</con:targetType><con:targetStep>Properties</con:targetStep><con:targetPath xsi:nil="true"/></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" disabled="false" entitize="false" ignoreEmpty="false" transferChildNodes="false" transferToAll="false" useXQuery="false"><con:name>primaryKey22</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>create 2.2</con:sourceStep><con:sourcePath>//*:Response/*:primaryKey</con:sourcePath><con:targetType>device-2-2.key</con:targetType><con:targetStep>Properties</con:targetStep><con:targetPath xsi:nil="true"/></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" disabled="false" entitize="false" ignoreEmpty="false" transferChildNodes="false" transferToAll="false" useXQuery="false"><con:name>primaryKey31</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>create 3.1</con:sourceStep><con:sourcePath>//*:Response/*:primaryKey</con:sourcePath><con:targetType>device-3-1.key</con:targetType><con:targetStep>Properties</con:targetStep><con:targetPath xsi:nil="true"/></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" disabled="false" entitize="false" ignoreEmpty="false" transferChildNodes="false" transferToAll="false" useXQuery="false"><con:name>primaryKey32</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>create 3.2</con:sourceStep><con:sourcePath>//*:Response/*:primaryKey</con:sourcePath><con:targetType>device-3-2.key</con:targetType><con:targetStep>Properties</con:targetStep><con:targetPath xsi:nil="true"/></con:transfers></con:config></con:testStep><con:testStep type="httprequest" name="load all devices">
+        <con:settings/>
+        <con:config method="GET" xsi:type="con:HttpRequest" name="load all devices" postQueryString="false" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/device/all</con:endpoint>
+          <con:request/>
+          
+          
+          <con:assertion type="XPath Match" name="Expected number of devices returned"><con:configuration><path>count( //Response/e)</path><content>6</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="TYPE_F device returned 2 times"><con:configuration><path>count(//Response/e[devType="TYPE_F"])</path><content>2</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="TYPE_G device returned 2 times"><con:configuration><path>count(//Response/e[devType="TYPE_G"])</path><content>2</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="TYPE_GM device returned 2 times"><con:configuration><path>count(//Response/e[devType="TYPE_GM"])</path><content>2</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="&quot;networkOn&quot; property returned 6 times"><con:configuration><path>count(//Response/e[networkOn="false"])</path><content>6</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="&quot;dimMode = OFF&quot; property returned 2 times"><con:configuration><path>count(//Response/e[dimMode="OFF"])</path><content>2</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="&quot;ledOnColor = NONE&quot; property returned 4 times"><con:configuration><path>count(//Response/e[ledOnColor="NONE"])</path><content>4</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="delete 1.1" id="d338a591-8391-4eb3-8099-83a02e0e9fbc">
+        <con:settings/>
+        <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete 1.1" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/device/${device-1-1.key}</con:endpoint>
+          <con:request>{
+   "id":"",
+   "name":"updated contact",
+   "address":"updated address",
+   "gender":"F",
+   "dob":"2001-04-16",
+   "email":"updated-test@email.com",
+   "mobile":"5145145111",
+   "phone":"5145145121"
+}</con:request>
+          
+          
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code returned"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="delete 1.2">
+        <con:settings/>
+        <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete 1.2" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/device/${device-1-2.key}</con:endpoint>
+          <con:request>{
+   "id":"",
+   "name":"updated contact",
+   "address":"updated address",
+   "gender":"F",
+   "dob":"2001-04-16",
+   "email":"updated-test@email.com",
+   "mobile":"5145145111",
+   "phone":"5145145121"
+}</con:request>
+          
+          
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code returned"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="delete 2.1">
+        <con:settings/>
+        <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete 2.1" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/device/${device-2-1.key}</con:endpoint>
+          <con:request>{
+   "id":"",
+   "name":"updated contact",
+   "address":"updated address",
+   "gender":"F",
+   "dob":"2001-04-16",
+   "email":"updated-test@email.com",
+   "mobile":"5145145111",
+   "phone":"5145145121"
+}</con:request>
+          
+          
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code returned"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="delete 2.2">
+        <con:settings/>
+        <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete 2.2" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/device/${device-2-2.key}</con:endpoint>
+          <con:request>{
+   "id":"",
+   "name":"updated contact",
+   "address":"updated address",
+   "gender":"F",
+   "dob":"2001-04-16",
+   "email":"updated-test@email.com",
+   "mobile":"5145145111",
+   "phone":"5145145121"
+}</con:request>
+          
+          
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code returned"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="delete 3.2">
+        <con:settings/>
+        <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete 3.2" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/device/${device-3-2.key}</con:endpoint>
+          <con:request>{
+   "id":"",
+   "name":"updated contact",
+   "address":"updated address",
+   "gender":"F",
+   "dob":"2001-04-16",
+   "email":"updated-test@email.com",
+   "mobile":"5145145111",
+   "phone":"5145145121"
+}</con:request>
+          
+          
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code returned"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:testStep type="httprequest" name="delete 3.1">
+        <con:settings/>
+        <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete 3.1" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>${test.http.host.rest}/device/${device-3-1.key}</con:endpoint>
+          <con:request>{
+   "id":"",
+   "name":"updated contact",
+   "address":"updated address",
+   "gender":"F",
+   "dob":"2001-04-16",
+   "email":"updated-test@email.com",
+   "mobile":"5145145111",
+   "phone":"5145145121"
+}</con:request>
+          
+          
+          <con:assertion type="Valid HTTP Status Codes" name="Valid HTTP Status Code returned"><con:configuration><codes>204</codes></con:configuration></con:assertion><con:credentials>
+            <con:username>${app.username}</con:username>
+            <con:password>${app.password}</con:password>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:config>
+      </con:testStep><con:properties/>
+      <con:reportParameters/>
+      <con:breakPoints>
+        <con:testStepId>16cf45a0-c1af-4c33-8819-0a4ea8276756</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>1342966e-515f-4ec0-9a4c-9d7c51c48542</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>1fb764e4-1840-4cf8-af80-00f7f2c2ece6</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>3b800581-6387-44ff-b35b-945408787b7c</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>edfd8dac-0104-4730-8cc6-0428d656d0ad</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>6a97c497-6e1b-4cef-b11d-07bf8213303c</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>f90e9cac-ab42-46ea-98df-be81bfe12c6a</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>0d0d0e4d-ae89-44ba-8a1f-a351325fb2ac</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>335a9d86-8bef-4093-94b6-f118d2b94d26</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>8cc6b576-1299-4a62-a3cb-02dba18d783c</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>3d446bb9-7f2d-437d-ba9d-538c8544ebca</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>887ed9bf-ef65-4cd6-8d63-fe63059b6114</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>5e49a61f-6c85-495d-9b4a-4cb38df93a4c</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>ff9f7042-ba4f-437e-a043-8021225671b8</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>d76aa335-29eb-4aa2-91cd-16d24dbca2ba</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>679e8216-4253-4db8-8c5d-14aaa0c542fd</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>71a6c31e-5f1d-4b27-b2a7-44b62806bf64</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>5a75c453-48bd-46bc-b1f3-1987ee84ae9b</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>5acde369-b009-4471-a36a-146d0396a252</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>fd95a9ee-7a42-47ac-acef-a96cb56e687c</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>3b97c817-b31a-4a3f-b8ff-409f243cff67</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>e2cdbfdb-8bb7-4def-9ab4-51a9f9aa9b35</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>a461e16f-8295-44f1-8150-5ac5d8413f25</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>8c722f3e-448b-48cb-9417-916e6c71f2a4</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>b5ffe9da-6232-45b2-8878-ff6d59663ebd</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>f9f33afa-18df-4001-b902-af22172b09c9</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>f41cff6a-ef96-412a-88b1-035cd578ec10</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>bf010173-19fa-4baf-b5f4-0aa02758a4ca</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+      <con:breakPoints>
+        <con:testStepId>c9f13830-2d42-4ea7-afff-1a1c3960b124</con:testStepId>
+        <con:status>NONE</con:status>
+        <con:properties/>
+      </con:breakPoints>
+    <con:breakPoints><con:testStepId>18313ee5-9be5-461b-bbef-4ac16dc18a16</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>629d7ffd-2eeb-46e3-bb04-778428631c99</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c1469165-8392-4ede-ae0c-08bc0ba0118c</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>ad757a15-193d-485b-b74a-1df88eea7360</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>d338a591-8391-4eb3-8099-83a02e0e9fbc</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>31d2ccef-575f-4b86-b391-ba937e3603b5</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:properties/>
     <con:reportParameters/>
   </con:testSuite><con:testSuite name="Contact">
     <con:settings>

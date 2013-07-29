@@ -14,6 +14,7 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.QueryException;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -96,6 +97,28 @@ public class ExceptionResource
 		return vList;
 	}
 
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/**
+	 * encompasses both {@link JsonMappingException} and {@link JsonParseException}
+	 * but {@link JsonParseException} is hidden by {@link HttpMessageNotReadableException}
+	 */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(TypeMismatchException.class)
+	@ResponseBody
+	public ViolationList typeMismatchException(TypeMismatchException exception)
+	{
+		log.debug("Unexpected exception: " + exception.getClass().getName() + " reported as HttpStatus.BAD_REQUEST", exception);
+
+		ViolationList generateSingleViolation = generateSingleViolation(exception);
+		Violation violation = generateSingleViolation.getViolations().get(0);
+
+		violation.setMessage(exception.getCause().getMessage());
+		violation.setMessageKey(exception.getErrorCode());
+		violation.setExtendedInfo(exception.getClass().getName());
+
+		return generateSingleViolation;
+	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/**

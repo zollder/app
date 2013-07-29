@@ -1,6 +1,7 @@
 package com.app.domain.services.impl;
 
 import java.lang.reflect.Constructor;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class DeviceServiceImpl extends AbstractServiceImpl<Device, DeviceDao> im
     	return device;
     }
 
-    // --------------------------------------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------------------------------------
     @Transactional(readOnly = true)
     public Device loadWithDeviceMac(String mac)
     {
@@ -49,6 +50,18 @@ public class DeviceServiceImpl extends AbstractServiceImpl<Device, DeviceDao> im
 
     	return device;
     }
+
+    // --------------------------------------------------------------------------------------------------------------------------------
+    @Transactional(readOnly = true)
+	public List<Device> loadAllByType(String type)
+	{
+		if (type == null || type == "")
+			throw new IllegalArgumentException(String.format(getClazzName() + ": missing device type"));
+
+		List<Device> devices = getDao().findAllByType(type);
+
+		return devices;
+	}
 
 
     // --------------------------------------------------------------------------------------------------------------------------------
@@ -67,6 +80,7 @@ public class DeviceServiceImpl extends AbstractServiceImpl<Device, DeviceDao> im
 
 		// save device type instance, cast it to Device and return
 		Object savedInstance = entityDao.save(this.getDeviceTypeInstance(device));
+
 		return (Device) savedInstance;
 	}
 
@@ -85,6 +99,7 @@ public class DeviceServiceImpl extends AbstractServiceImpl<Device, DeviceDao> im
 
 		// update device type, cast updated instance to Device and return
 		Object savedInstance = entityDao.update(this.getDeviceTypeInstance(device));
+
 		return (Device) savedInstance;
 	}
 

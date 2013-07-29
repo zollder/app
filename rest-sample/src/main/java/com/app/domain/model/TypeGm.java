@@ -58,14 +58,14 @@ public class TypeGm extends Device
 	
 	@Basic
 	@Column(name = "ledOnColor")
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(value = EnumType.STRING)
 	@Documentation(caption = "LED color", comment = "Status LED color in ON state.")
 	@XmlElement
 	private LedOnColorEnum ledOnColor = LedOnColorEnum.NONE;
 
 	@Basic
 	@Column(name = "ledOffColor")
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(value = EnumType.STRING)
 	@Documentation(caption = "LED color", comment = "Status LED color in OFF state.")
 	@XmlElement
 	private LedOffColorEnum ledOffColor = LedOffColorEnum.NONE;
@@ -102,14 +102,14 @@ public class TypeGm extends Device
 
 	@Basic
 	@Column(name = "mode")
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(value = EnumType.STRING)
 	@Documentation(caption = "LED color", comment = "Status LED color in OFF state.")
 	@XmlElement
 	private GmModeEnum mode = GmModeEnum.AUTO_ON_OFF;
 
 	@Basic
 	@Column(name = "switchStatus")
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(value = EnumType.STRING)
 	@Documentation(caption = "Switch status", comment = "Device switch statuses (refer to TypeFSwitchStatus enum definition for details).")
 	@NotNull
 	@XmlElement
