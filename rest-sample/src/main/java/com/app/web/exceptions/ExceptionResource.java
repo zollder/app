@@ -308,10 +308,6 @@ public class ExceptionResource
 	{
 		log.fatal("Unexpected exception: " + exception.getClass().getName() + " reported as HttpStatus.INTERNAL_SERVER_ERROR",
 				exception);
-
-		// Default error case: 500
-		// builder.status(Response.Status.INTERNAL_SERVER_ERROR);
-		// builder.entity("An internal server error has occured. The source exception was logged.");
 	}
 
 
@@ -325,15 +321,4 @@ public class ExceptionResource
 
 		return generateViolationList(exception);
 	}
-
-	// --------------------------------------------------------------------------------------------------------------------------------
-//	@ResponseStatus(HttpStatus.BAD_REQUEST)
-//	@ExceptionHandler(InvalidRequestException.class)
-//	@ResponseBody
-//	public ViolationList invalidRequestExceptionHandler(InvalidRequestException exception)
-//	{
-//		log.debug("Unexpected exception: " + exception.getClass().getName() + " reported as HttpStatus.BAD_REQUEST", exception);
-//
-//		return generateViolationList(exception);
-//	}
 }

@@ -1,5 +1,8 @@
 package com.app.domain.model;
  
+import java.util.HashMap;
+import java.lang.Long;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,11 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
+import com.app.domain.model.enums.DeviceType;
 import com.app.domain.model.enums.DimModeEnum;
 import com.app.domain.model.enums.SwitchStatusEnum;
 import com.app.web.utils.Documentation;
@@ -22,8 +21,6 @@ import com.app.web.utils.Documentation;
 
 @Entity
 @Table(name="type_f")
-@XmlRootElement(name="type_f")
-@XmlAccessorType(XmlAccessType.FIELD)
 @Documentation(caption = "Type-F device", comment = "Type-F device: device ceiling mount oBIX variables.")
 public class TypeF extends Device
 {
@@ -33,49 +30,41 @@ public class TypeF extends Device
 	@Basic
 	@Column(name = "latchActive")
 	@Documentation(caption = "Latch status", comment = "Status of the latch: 1(active), 0(inactive).")
-	@XmlElement
-	private Boolean latchActive = Boolean.FALSE;
+	private Boolean latchActive = null;
 
 	@Basic
 	@Column(name = "bPressLapse")
 	@Documentation(caption = "Lapse", comment = "Button press delay (TODO: provide more details here).")
-	@XmlElement
 	private Integer bPressLapse = null;
 
 	@Basic
 	@Column(name = "flickWarn")
 	@Documentation(caption = "Flick warn", comment = "Flick warn (TODO: provide more details here).")
-	@XmlElement
-	private Boolean flickWarn = Boolean.FALSE;
+	private Boolean flickWarn = null;
 
 	@Basic
 	@Column(name = "flickReps")
 	@Documentation(caption = "Flick repetitions", comment = "Flick repetitions (TODO: provide more details here).")
-	@XmlElement
 	private Integer flickReps = null;
 
 	@Basic
 	@Column(name = "offDelay")
 	@Documentation(caption = "Turn-off delay", comment = "Time delay before the device is turned off.")
-	@XmlElement
 	private Integer offDelay = null;
 	
 	@Basic
 	@Column(name = "motionMuteDelay")
 	@Documentation(caption = "Motion mute delay", comment = "Time delay before the motion sensor is muted.")
-	@XmlElement
 	private Integer motionMuteDelay = null;
 
 	@Basic
 	@Column(name = "dim")
 	@Documentation(caption = "Dim level", comment = "Dim level of the device.")
-	@XmlElement
 	private Integer dim = null;
 
 	@Basic
 	@Column(name = "dimMin")
 	@Documentation(caption = "Minimal dim level", comment = "Minimal dim level of the device.")
-	@XmlElement
 	private Integer dimMin = null;
 
 	@Basic
@@ -83,13 +72,11 @@ public class TypeF extends Device
 	@Enumerated(value = EnumType.STRING)
 	@Documentation(caption = "Dim mode", comment = "Device dim modes (refer to TypeFDimMode enum definition for details).")
 	@NotNull
-	@XmlElement
 	private DimModeEnum dimMode = DimModeEnum.OFF;
 
 	@Basic
 	@Column(name = "input")
 	@Documentation(caption = "Input status", comment = "Device input status: 0(input off), 1(input on).")
-	@XmlElement
 	private Boolean input = null;
 
 	@Basic
@@ -97,14 +84,12 @@ public class TypeF extends Device
 	@Enumerated(value = EnumType.STRING)
 	@Documentation(caption = "Switch status", comment = "Device switch statuses (refer to TypeFSwitchStatus enum definition for details).")
 	@NotNull
-	@XmlElement
 	private SwitchStatusEnum switchStatus = SwitchStatusEnum.OFF;
 
 	@Basic
 	@Column(name = "networkOn")
 	@Documentation(caption = "Network status", comment = "Status of the network device is connected to: 0(off), 1(on).")
-	@XmlElement
-	private Boolean networkOn = Boolean.FALSE;
+	private Boolean networkOn = null;
 
 	
 	// --------------------------------------------------------------------------------------------------------------------------------
@@ -114,7 +99,7 @@ public class TypeF extends Device
 	public TypeF(){}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	// Custom device constructor: initializes superclass values before persisting device type object.
+	// Custom constructor: initializes superclass variables from {@link Device}.
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public TypeF(Device device)
 	{
@@ -126,7 +111,57 @@ public class TypeF extends Device
 		this.setDevType(device.getDevType());
 		this.setDevName(device.getDevName());
 		this.setDevLocation(device.getDevLocation());
+		this.setFirmwareVersion(device.getFirmwareVersion());
 		this.setDevDescription(device.getDevDescription());
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	// Custom constructor: initializes super/sub class variables from HashMap (update parameters).
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public TypeF(HashMap<String,String> params)
+	{
+		String value ="";
+
+		// map {@link Device} mandatory fields
+		this.setPrimaryKey(Long.valueOf(params.get("primaryKey").toString()));
+		this.setDevIp(params.get("devIp"));
+		this.setDevMac(params.get("devMac"));
+		this.setDevType(DeviceType.valueOf(params.get("devType")));
+		this.setDevName(params.get("devName"));
+
+		// map {@link Device} optional fields
+		value = params.get("devLocation");
+		if (value != null && value != "")	this.setDevLocation(value);
+		value = params.get("firmwareVersion");
+		if (value != null && value != "")	this.setFirmwareVersion(value);
+		value = params.get("devDescription");
+		if (value != null && value != "")	this.setDevDescription(value);
+
+		// map {@link TypeF} optional fields
+		value = params.get("latchActive");
+		if (value != null && value != "")	this.setLatchActive(Boolean.valueOf(value));
+		value = params.get("bPressLapse");
+		if (value != null && value != "")	this.setbPressLapse(Integer.valueOf(value));
+		value = params.get("flickWarn");
+		if (value != null && value != "")	this.setFlickWarn(Boolean.valueOf(value));
+		value = params.get("flickReps"); 
+		if (value != null && value != "")	this.setFlickReps(Integer.valueOf(value));
+		value = params.get("offDelay");
+		if (value != null && value != "")	this.setOffDelay(Integer.valueOf(value));
+		value = params.get("motionMuteDelay");
+		if (value != null && value != "")	this.setMotionMuteDelay(Integer.valueOf(value));
+		value = params.get("dim");
+		if (value != null && value != "")	this.setDim(Integer.valueOf(value));
+		value = params.get("dimMin");
+		if (value != null && value != "")	this.setDimMin(Integer.valueOf(value));
+		value = params.get("dimMode");
+		if (value != null && value != "")	this.setDimMode(DimModeEnum.valueOf(value));
+		value = params.get("input");
+		if (value != null && value != "")	this.setInput(Boolean.valueOf(value));
+		value = params.get("switchStatus"); 
+		if (value != null && value != "")	this.setSwitchStatus(SwitchStatusEnum.valueOf(value));
+		value = params.get("networkOn"); 
+		if (value != null && value != "")	this.setNetworkOn(Boolean.valueOf(value));
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------

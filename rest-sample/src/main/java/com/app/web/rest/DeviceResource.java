@@ -1,5 +1,6 @@
 package com.app.web.rest;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -38,21 +39,6 @@ public class DeviceResource
 
 		return device;
 	}
-
-	// --------------------------------------------------------------------------------------------------------------------------------
-	/** TODO: Retrieves {@link Device} resource associated to the given IP address.
-	 * Implement IP address decoder to decode incoming IP address from Integer into String (design) */
-	// --------------------------------------------------------------------------------------------------------------------------------
-/*	@RequestMapping(value = "/ip/{ip}", method = { RequestMethod.GET })
-	@ResponseBody
-	public Device loadWithDeviceIp(@PathVariable String ip)
-	{
-		logger.info("load device with device ip:" + ip);
-		Device device = deviceService.loadWithDeviceIp(ip);
-
-		return device;
-	}
-*/
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/** Retrieves {@link Device} resource associated to the given MAC address. */
@@ -131,6 +117,19 @@ public class DeviceResource
 		logger.info("update device with name:" + device.getDevName());
 		device.setPrimaryKey(key);
 		Device updatedDevice = deviceService.update(device);
+		deviceService.refresh(updatedDevice);
+
+		return updatedDevice;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Updates {@link Device} and its associated parameters. */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value = "/params", method = { RequestMethod.PUT })
+	@ResponseBody
+	public Device update(@RequestBody HashMap<String,String> params)
+	{
+		Device updatedDevice = deviceService.updateDeviceParameters(params);
 		deviceService.refresh(updatedDevice);
 
 		return updatedDevice;
