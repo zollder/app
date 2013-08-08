@@ -100,9 +100,9 @@ public class DeviceServiceImpl extends AbstractServiceImpl<Device, DeviceDao> im
 			throw new IllegalArgumentException(String.format(getClazzName() + ": missing device primaryKey"));
 
 		// update device type, cast updated instance to Device and return
-		Object savedInstance = entityDao.update(this.getDeviceTypeInstance(device));
+		Object updatedInstance = entityDao.update(this.getDeviceTypeInstance(device));
 
-		return (Device) savedInstance;
+		return (Device) updatedInstance;
 	}
 
     // --------------------------------------------------------------------------------------------------------------------------------
@@ -131,7 +131,9 @@ public class DeviceServiceImpl extends AbstractServiceImpl<Device, DeviceDao> im
 		catch (ReflectiveOperationException e)
 		{	e.printStackTrace();	}
 		catch (RuntimeException e)
-		{	e.printStackTrace();	}
+		{
+			throw new IllegalArgumentException(String.format(getClazzName() + ": error converting device HashMap"));
+		}
 
 		return instance;
 	}
@@ -166,11 +168,13 @@ public class DeviceServiceImpl extends AbstractServiceImpl<Device, DeviceDao> im
 		catch (ReflectiveOperationException e)
 		{	e.printStackTrace();	}
 		catch (RuntimeException e)
-		{	e.printStackTrace();	}
+		{
+			throw new IllegalArgumentException(String.format(getClazzName() + ": error converting device HashMap"));
+		}
 
 		// update device type, cast updated instance to Device and return
-		Object savedInstance = entityDao.update(instance);
+		Object updatedInstance = entityDao.update(instance);
 
-		return (Device) savedInstance;
+		return (Device) updatedInstance;
 	}
 }

@@ -17,7 +17,7 @@ import com.app.dao.UserDao;
 import com.app.dao.impl.UserDaoImpl;
 import com.app.domain.dto.PasswordReset;
 import com.app.domain.exceptions.DataNotFoundException;
-import com.app.domain.model.MockUser;
+import com.app.domain.model.mocks.MockUser;
 import com.app.domain.model.User;
 import com.app.domain.services.impl.UserServiceImpl;
 import com.app.security.PasswordEncoder;
