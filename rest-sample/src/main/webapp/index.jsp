@@ -44,6 +44,9 @@
 			([
 				"dojo/dom",
 				"dojo/parser",
+				"dojo/on",
+				"dojo/request",
+				"dojo/json",
 				"dijit/layout/BorderContainer",
 				"dijit/layout/TabContainer",
 				"dijit/layout/ContentPane",
@@ -53,12 +56,55 @@
 				'dijit/form/CheckBox',
 				'dijit/form/Form',
 				'dijit/form/TextBox',
+				'dijit/form/CheckBox',
+				'dijit/form/DropDownButton',
+				'dijit/TooltipDialog',
+				'dijit/Dialog',
 				'dojox/grid/DataGrid',
 				"dojo/domReady!"
 			],
-			function(dom, parser)
+			function(dom, parser, on, request, JSON)
 			{
 				parser.parse();	// manually invoke parser
+
+				// Attach the onsubmit event handler of the form
+				on( dom.byId("userContainer.insertUserDialog.save"), "click",
+					function()
+					{
+						var userDialogData = 
+						{
+							"primaryKey" : "",
+							"firstName" : dom.byId("userContainer.insertUserDialog.firstName").value,
+							"lastName" : dom.byId("userContainer.insertUserDialog.lastName").value,
+							"userName" : dom.byId("userContainer.insertUserDialog.userName").value,
+							"password" : dom.byId("userContainer.insertUserDialog.password").value,
+							"email" : dom.byId("userContainer.insertUserDialog.email").value,
+							"isEnabled" : dom.byId("userContainer.insertUserDialog.isEnabled").value,
+							"canLogin" : dom.byId("userContainer.insertUserDialog.canLogin").value,
+							"isAdmin" : dom.byId("userContainer.insertUserDialog.isAdmin").value
+						}
+
+						// Post user data to the server
+						request.post("user",
+						{
+							headers: { "Content-Type": 'application/json'},
+							handleAs : "json",
+							data : JSON.stringify(userDialogData)
+						}).then(
+						function(Response)
+						{
+							alert('Saved: ' + dojo.toJson(Response, true));
+						},
+						function(error)
+						{
+							alert("Your dialog data cannot be sent, try again.");
+						},
+						function(evt)
+						{
+
+						})
+					}
+				)
 			});
 		</script>
 
@@ -101,30 +147,117 @@
 					<!-- 2.1 Users container -->
 					<div id = "userContainer" title="Users"	data-dojo-type="dijit/layout/BorderContainer">
 						<!-- User search form container -->
-						<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'top',layoutPriority:1,splitter:true">
-							<!-- User search form -->
-							<form id="userContainer.userSearchForm" data-dojo-type="dijit.form.Form">
-								<table style="width:100%" cellpadding="0" cellspacing="2">
+						<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'top',layoutPriority:1">
+
+							<!-- Insert user button -->
+							<button
+								id="userContainer.insertUserButton"
+								data-dojo-type="dijit.form.Button"
+								type="button">
+								<img src="/rest-sample/images/insert.png" width="16" height="16" />Insert
+								<script type="dojo/method" data-dojo-event="onClick" data-dojo-args="evt">
+									dijit.byId("userContainer.insertUserDialog").show();
+								</script>
+							</button>
+
+							<!-- Insert user dialog portion -->
+							<div
+								id="userContainer.insertUserDialog"
+								data-dojo-type="dijit.Dialog"
+								title="Insert User"
+								execute="alert('submitted w/args:\n' + dojo.toJson(arguments[0], true));">
+
+								<table>
 									<tr>
-										<td style="text-align:right;padding-right:5px;height:22px;">User Code:</td>
-										<td><div id="userContainer.userSearchForm.userCode" data-dojo-type="dijit.form.TextBox" data-dojo-props="style:'min-width:4em;width:100%;'"></div></td>
-										<td style="text-align:right;padding-right:5px;height:22px;">User Name:</td>
-										<td><div id="userContainer.userSearchForm.userName" data-dojo-type="dijit.form.TextBox" data-dojo-props="style:'min-width:8em;width:100%;'"></div></td>
-										<td style="text-align:right;padding-right:5px;height:22px;">Email:</td>
-										<td><div id="userContainer.userSearchForm.email" data-dojo-type="dijit.form.TextBox" data-dojo-props="style:'min-width:8em;width:100%;'"></div></td>
-										<td style="width:60px;text-align:center;">
-											<button id="userContainer.searchButton" data-dojo-type="dijit.form.Button" type="button">
-												<img src="/rest-sample/images/search.png" width="16" height="16" />
+										<td><label for="firstName">First name: </label></td>
+										<td><input data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="firstName" id="userContainer.insertUserDialog.firstName"></td>
+									</tr>
+									<tr>
+										<td><label for="lastName">Last name: </label></td>
+										<td><input data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="lastName" id="userContainer.insertUserDialog.lastName"></td>
+									</tr>
+									<tr>
+										<td><label for="userName">Username: </label></td>
+										<td><input data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="userName" id="userContainer.insertUserDialog.userName"></td>
+									</tr>
+									<tr>
+										<td><label for="password">Password: </label></td>
+										<td><input data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="password" id="userContainer.insertUserDialog.password"></td>
+									</tr>
+									<tr>
+										<td><label for="email">Email: </label></td>
+										<td><input data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="email" id="userContainer.insertUserDialog.email"></td>
+									</tr>
+									<tr>
+										<td><label for="isEnabled">Is enabled: </label></td>
+										<td><input data-dojo-type="dijit.form.CheckBox" type="checkbox" name="isEnabled" value="true" id="userContainer.insertUserDialog.isEnabled"></td>
+									</tr>
+									<tr>
+										<td><label for="canLogin">Can login: </label></td>
+										<td><input data-dojo-type="dijit.form.CheckBox" type="checkbox" name="canLogin" value="true" id="userContainer.insertUserDialog.canLogin"></td>
+									</tr>
+									<tr>
+										<td><label for="isAdmin">Is admin: </label></td>
+										<td><input data-dojo-type="dijit.form.CheckBox" type="checkbox" name="isAdmin" value="true" id="userContainer.insertUserDialog.isAdmin"></td>
+									</tr>
+									<tr>
+										<td align="center" colspan="2">
+											<button
+												id="userContainer.insertUserDialog.save"
+												data-dojo-type="dijit.form.Button"
+												type="submit"
+												data-dojo-props="onClick:function(){ return dijit.byId('userContainer.insertUserDialog').isValid(); }">Save
+											</button>
+											<button
+												id="userContainer.insertUserDialog.cancel"
+												data-dojo-type="dijit.form.Button"
+												type="button"
+												data-dojo-props="onClick:function(){ dijit.byId('userContainer.insertUserDialog').hide(); }">Cancel
 											</button>
 										</td>
 									</tr>
 								</table>
-							</form>
+							</div>
+
+							<!-- Search user button -->
+							<div
+								id="userContainer.searchUserButton"
+								data-dojo-type="dijit/form/DropDownButton">
+								<!-- Button text-->
+								<span>Search</span>
+								<!-- The dialog portion -->
+								<div data-dojo-type="dijit/TooltipDialog" id="userContainer.searchUserDialog">
+									<label for="userContainer.userSearchForm.userCode" style="display:inline-block; width:100px;">Code:</label>
+									<div data-dojo-type="dijit/form/TextBox" id="userContainer.userSearchForm.userCode"></div>
+										<br />
+									<label for="userContainer.userSearchForm.userName" style="display:inline-block;width:100px;">Username:</label>
+									<div data-dojo-type="dijit/form/TextBox" id="userContainer.userSearchForm.userName"></div>
+										<br />
+									<label for="userContainer.userSearchForm.email" style="display:inline-block;width:100px;">Email:</label>
+									<div data-dojo-type="dijit/form/TextBox" id="userContainer.userSearchForm.email"></div>
+										<br />
+									<button
+										data-dojo-type="dijit/form/Button"
+										type="submit"
+										data-dojo-props="onClick:function(){alert('Searching ...')}">
+										Submit
+									</button>
+								</div>
+							</div>
 						</div>
+						<!-- User list (header with user-related menu items) -->
 						<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'top',layoutPriority:2,style:'border:1px solid #99CDFF;padding:5px;'">
 							<span id="userContainer.userListCount">Users List (0)</span>
-							<img src="/rest-sample/images/edit_Disabled.png" width="16" height="16" title="Edit" style="float:right;" />
+							<img src="/rest-sample/images/delete_Disabled.png" width="16" height="16" hspace="2" title="Delete" style="float:right;" />
+							<img src="/rest-sample/images/edit_Disabled.png" width="16" height="16" hspace="2" title="Edit" style="float:right;" />
+							<img
+								src="/rest-sample/images/insert.png"
+								width="16" height="16" hspace="2" title="Insert"
+								style="float:right;"
+								onclick=dijit.byId("userContainer.insertUserDialog").show();
+							/>
 						</div>
+						<!-- User list (table) -->
 						<table id="userContainer.userList" data-dojo-type="dojox.grid.DataGrid" data-dojo-props="region:'center',style:'min-height:120px;'">
 							<thead>
 								<tr>
