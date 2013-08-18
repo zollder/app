@@ -1,5 +1,7 @@
 package com.app.web.rest;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,6 +52,20 @@ public class UserResource
 	{
 		logger.info("load user with username:" + username);
 		User user = userService.loadWithUserName(username);
+
+		return user;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/**
+	 * Retrieves all Users. Returns a collection of {@link User} entities.
+	 */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value = "/all", method = { RequestMethod.GET })
+	@ResponseBody
+	public List<User> loadAll()
+	{
+		List<User> user = userService.findAll();
 
 		return user;
 	}
