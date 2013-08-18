@@ -18,6 +18,8 @@
 		<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
 		<link rel="stylesheet" href="/rest-sample/css/dashboard.css" media="screen" type="text/css">
 		<link rel="stylesheet" href="/toolkit/js/dojo/dijit/themes/claro/claro.css" media="screen" type="text/css">
+		<link rel="stylesheet" href="/toolkit/js/dojo/dojox/grid/resources/Grid.css" type="text/css" />
+		<link rel="stylesheet" href="/toolkit/js/dojo/dojox/grid/resources/claroGrid.css" type="text/css" />
 	</head>
 	<body class="claro">
 
@@ -43,31 +45,77 @@
 			require
 			([
 				"dojo/dom",
+				"dijit/registry",
 				"dojo/parser",
 				"dojo/on",
 				"dojo/request",
 				"dojo/json",
+				'dojox/grid/DataGrid',
+				"dojo/data/ObjectStore",
+				"dojo/store/Memory",
 				"dijit/layout/BorderContainer",
 				"dijit/layout/TabContainer",
 				"dijit/layout/ContentPane",
 				"dijit/layout/StackContainer",
 				"dijit/layout/StackController",
-				'dijit/form/Button',
-				'dijit/form/CheckBox',
-				'dijit/form/Form',
-				'dijit/form/TextBox',
-				'dijit/form/CheckBox',
-				'dijit/form/DropDownButton',
-				'dijit/TooltipDialog',
-				'dijit/Dialog',
-				'dojox/grid/DataGrid',
+				"dijit/form/Button",
+				"dijit/form/CheckBox",
+				"dijit/form/Form",
+				"dijit/form/TextBox",
+				"dijit/form/CheckBox",
+				"dijit/form/DropDownButton",
+				"dijit/TooltipDialog",
+				"dijit/Dialog",
 				"dojo/domReady!"
 			],
-			function(dom, parser, on, request, JSON)
+			function(dom, registry, parser, on, request, JSON, DataGrid, ObjectStore, Memory)
 			{
 				parser.parse();	// manually invoke parser
 
-				// Attach the onsubmit event handler of the form
+				var userGrid, userDataStore, deleteUserDialog, editUserDialog;
+
+				request.get("user/all",
+				{
+					headers: { "Content-Type": 'application/json'},
+					handleAs : "json"
+				}).then(
+				function(data)
+				{
+					var objectStore = new Memory({ data: data });
+
+					// global user store
+					userDataStore = new ObjectStore({ objectStore: objectStore});
+
+					// user grid structure
+					var userGridStructure = [
+						{ name: "primaryKey",	field: "primaryKey",	hidden: true },
+						{ name: "First Name",	field: "firstName",		width: "100px" },
+						{ name: "Last Name",	field: "lastName",		width: "100px" },
+						{ name: "Username",		field: "userName",		width: "100px" },
+						{ name: "password",		field: "password",		hidden: true },
+						{ name: "E-mail",		field: "email",			width: "100px" },
+						{ name: "isEnabled",	field: "isEnabled",		width: "100px" },
+						{ name: "canLogin",		field: "canLogin",		width: "100px" },
+						{ name: "isAdmin",		field: "isAdmin",		width: "100px" },
+						{ name: "newPassword",	field: "newPassword",	hidden: true },
+						{ name: "confirmPassword", field: "confirmPassword", hidden: true }
+					];
+
+					// create user grid
+					userGrid = new DataGrid(
+					{
+						store: userDataStore,
+						query: { id: "*" },
+						queryOptions: {},
+						selectionMode: "single",
+						structure: userGridStructure,
+					}, "userContainer.userGrid");
+
+					// render the table
+					userGrid.startup();
+				});
+
+				// Attach the onsubmit event handler of the user insert form
 				on( dom.byId("userContainer.insertUserDialog.save"), "click",
 					function()
 					{
@@ -91,21 +139,71 @@
 							handleAs : "json",
 							data : JSON.stringify(userDialogData)
 						}).then(
-						function(Response)
+						function(data)
 						{
-							alert('Saved: ' + dojo.toJson(Response, true));
+							userDataStore.newItem(data);
+							userDataStore.save();
 						},
 						function(error)
 						{
 							alert("Your dialog data cannot be sent, try again.");
 						},
 						function(evt)
-						{
-
-						})
+						{})
 					}
-				)
+				);
+
+				createDeleteDialog = function()
+				{
+					deleteUserDialog = new dijit.Dialog(
+					{
+						title: "Delete user(s)",
+						style: "width: 300px;",
+						content: "Confirm user removal." + "<br/><br/><button onclick='deleteUser();'>Delete</button><button onclick='closeDeleteDialog();'>Cancel</button>"
+					});
+
+					deleteUserDialog.show();
+				};
+
+				deleteUser = function()
+				{
+					var selectedRecord, primaryKey;
+					if (userGrid.selection.getSelectedCount() > 0)
+					{
+						selectedRecord = userGrid.selection.getSelected()[0];
+						primaryKey = selectedRecord.primaryKey;
+					}
+
+					if (primaryKey != null)
+					{
+						var target = "user/" + primaryKey;
+						// Post user data to the server
+						request.del(target,
+						{
+							headers: { "Content-Type": 'application/json'},
+							handleAs : "json"
+						}).then(
+						function(data)
+						{
+							this.closeDeleteDialog();
+							var selection = userGrid.selection.getSelected()[0];
+							userDataStore.deleteItem(selection);
+						},
+						function(error)
+						{
+							alert("User cannot be deleted, please try again.");
+						},
+						function(evt)
+						{})
+					}
+				};
+
+				closeDeleteDialog = function()
+				{
+					deleteUserDialog.hide();
+				}
 			});
+
 		</script>
 
 		<!-- main placeholder (border container) for inner layout containers -->
@@ -248,8 +346,17 @@
 						<!-- User list (header with user-related menu items) -->
 						<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'top',layoutPriority:2,style:'border:1px solid #99CDFF;padding:5px;'">
 							<span id="userContainer.userListCount">Users List (0)</span>
-							<img src="/rest-sample/images/delete_Disabled.png" width="16" height="16" hspace="2" title="Delete" style="float:right;" />
-							<img src="/rest-sample/images/edit_Disabled.png" width="16" height="16" hspace="2" title="Edit" style="float:right;" />
+							<img
+								src="/rest-sample/images/delete.png"
+								width="16" height="16" hspace="2" title="Delete"
+								style="float:right;"
+								onclick="createDeleteDialog();"
+							/>
+							<img
+								src="/rest-sample/images/edit.png"
+								width="16" height="16" hspace="2" title="Edit"
+								style="float:right;"
+								onclick="createEditDialog();"/>
 							<img
 								src="/rest-sample/images/insert.png"
 								width="16" height="16" hspace="2" title="Insert"
@@ -257,18 +364,11 @@
 								onclick=dijit.byId("userContainer.insertUserDialog").show();
 							/>
 						</div>
-						<!-- User list (table) -->
-						<table id="userContainer.userList" data-dojo-type="dojox.grid.DataGrid" data-dojo-props="region:'center',style:'min-height:120px;'">
-							<thead>
-								<tr>
-									<th field="lastName" width="20%">Last Name</th>
-									<th field="firstName" width="20%">First Name</th>
-									<th field="userName" width="20%">User Name</th>
-									<th field="email" width="20%">Email</th>
-									<th field="isAdmin" width="10%">Is Administrator</th>
-								</tr>
-							</thead>
-						</table>
+						<!-- User list (grid) -->
+						<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center',layoutPriority:2,style:'border:1px solid #99CDFF;padding:5px;'">
+							<div id="userContainer.userGrid"></div>
+						</div>
+
 					</div>
 
 					<!-- 2.2 Groups container -->
