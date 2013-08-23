@@ -62,17 +62,19 @@
 				"dijit/form/CheckBox",
 				"dijit/form/Form",
 				"dijit/form/TextBox",
+				"dijit/form/Textarea",
 				"dijit/form/CheckBox",
 				"dijit/form/DropDownButton",
 				"dijit/TooltipDialog",
 				"dijit/Dialog",
 				"dojo/domReady!"
 			],
-			function(dom, registry, parser, on, request, JSON, DataGrid, ObjectStore, Memory)
+			function(dom, registry, parser, on, request, JSON, DataGrid, ObjectStore, Memory, Button, Form, Textarea)
 			{
 				parser.parse();	// manually invoke parser
 
 				var userGrid, userDataStore, deleteUserDialog, editUserDialog;
+				var mainLayout = this;
 
 				request.get("user/all",
 				{
@@ -81,7 +83,7 @@
 				}).then(
 				function(data)
 				{
-					var objectStore = new Memory({ data: data });
+					var objectStore = new Memory({ data: data, idProperty: "primaryKey" });
 
 					// global user store
 					userDataStore = new ObjectStore({ objectStore: objectStore});
@@ -109,10 +111,30 @@
 						queryOptions: {},
 						selectionMode: "single",
 						structure: userGridStructure,
+						id: "primaryKey"
 					}, "userContainer.userGrid");
 
 					// render the table
 					userGrid.startup();
+
+					userGrid.on("RowClick",
+						function(evt)
+						{
+							var rowIndex = evt.rowIndex;
+							var rowData = userGrid.getItem(rowIndex);
+							document.getElementById("userContainer.rowClickResult").innerHTML = "You have clicked on " + rowData.firstName + ", " + rowData.lastName + ".";
+						}, true);
+
+					// invoke user edit dialog on double-click
+					userGrid.on
+					(
+						"RowDblClick",
+						function(evt)
+						{
+							createEditDialog();
+						},
+						true
+					);
 				});
 
 				// Attach the onsubmit event handler of the user insert form
@@ -130,7 +152,7 @@
 							"isEnabled" : dom.byId("userContainer.insertUserDialog.isEnabled").value,
 							"canLogin" : dom.byId("userContainer.insertUserDialog.canLogin").value,
 							"isAdmin" : dom.byId("userContainer.insertUserDialog.isAdmin").value
-						}
+						};
 
 						// Post user data to the server
 						request.post("user",
@@ -152,6 +174,83 @@
 						{})
 					}
 				);
+
+				// Attach the onsubmit event handler of the user edit form
+				on( dom.byId("userContainer.editUserDialog.update"), "click",
+					function()
+					{
+						var userDialogData = editUserDialog.getValues();
+						// checkboxes need special handling
+						userDialogData.isAdmin = userDialogData.isAdmin[0];
+						userDialogData.isEnabled = userDialogData.isEnabled[0];
+						userDialogData.canLogin = userDialogData.canLogin[0];
+
+						// Post user data to the server
+						var target = "user/" + userDialogData["primaryKey"];
+						request.put(target,
+						{
+							headers: { "Content-Type": 'application/json'},
+							handleAs : "json",
+							data : JSON.stringify(userDialogData)
+						}).then(
+						function(data)
+						{
+							if (!userDataStore.isItem(data))
+							{
+								// TODO: throw exception
+								alert("something wrong happend")
+							}
+
+							var objStore = userDataStore.objectStore;
+
+							if (objStore.getIdentity(data) == data.primaryKey)
+								objStore.put(data);
+							else
+								objStore.add(data)
+
+							userDataStore.save();
+							userGrid.setStore(userDataStore);
+						},
+						function(error)
+						{
+							alert("Your dialog data cannot be sent, try again.");
+						},
+						function(evt)
+						{})
+					}
+				);
+
+				createEditDialog = function()
+				{
+					var selectedRecord;
+
+					if (userGrid.selection.getSelectedCount() > 0)
+						selectedRecord = userGrid.selection.getSelected()[0];
+					else
+						return;
+
+					editUserDialog = dijit.byId('userContainer.editUserDialog');
+
+					// populate the form with selected values
+					var selectedTextboxValues =
+					{
+						primaryKey: selectedRecord.primaryKey,
+						firstName: selectedRecord.firstName,
+						lastName: selectedRecord.lastName,
+						userName: selectedRecord.userName,
+						email: selectedRecord.email
+					};
+
+					editUserDialog.setValues(selectedTextboxValues);
+
+					// populating checkboxes requires special handling
+					dijit.byId('editUserDialog.isAdmin').set("checked", selectedRecord.isAdmin);
+					dijit.byId('editUserDialog.isEnabled').set("checked", selectedRecord.isEnabled);
+					dijit.byId('editUserDialog.canLogin').set("checked", selectedRecord.canLogin);
+
+					// open the dialog
+					editUserDialog.show();
+				};
 
 				createDeleteDialog = function()
 				{
@@ -317,6 +416,62 @@
 								</table>
 							</div>
 
+							<!-- Edit user dialog portion -->
+							<div
+								id="userContainer.editUserDialog"
+								data-dojo-type="dijit.Dialog"
+								title="Edit User"
+								execute="alert('submitted w/args:\n' + dojo.toJson(arguments[0], true));">
+
+								<table>
+									<tr><td><input id="editUserDialog.primaryKey" data-dojo-type="dijit.form.TextBox" type="hidden" name="primaryKey"></td></tr>
+									<tr>
+										<td><label for="firstName">First name: </label></td>
+										<td><input id="editUserDialog.firstName" data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="firstName"></td>
+									</tr>
+									<tr>
+										<td><label for="lastName">Last name: </label></td>
+										<td><input id="editUserDialog.lastName" data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="lastName"></td>
+									</tr>
+									<tr>
+										<td><label for="userName">Username: </label></td>
+										<td><input id="editUserDialog.userName" data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="userName"></td>
+									</tr>
+									<tr>
+										<td><label for="email">Email: </label></td>
+										<td><input id="editUserDialog.email" data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="email"></td>
+									</tr>
+									<tr>
+										<td><label for="isEnabled">Is enabled: </label></td>
+										<td><input id="editUserDialog.isEnabled" data-dojo-type="dijit.form.CheckBox" type="checkbox" name="isEnabled" value="true"></td>
+									</tr>
+									<tr>
+										<td><label for="canLogin">Can login: </label></td>
+										<td><input id="editUserDialog.canLogin" data-dojo-type="dijit.form.CheckBox" type="checkbox" name="canLogin" value="true"></td>
+									</tr>
+									<tr>
+										<td><label for="isAdmin">Is admin: </label></td>
+										<td><input id="editUserDialog.isAdmin" data-dojo-type="dijit.form.CheckBox" type="checkbox" name="isAdmin" value="true"></td>
+									</tr>
+									<tr>
+										<td align="center" colspan="2">
+											<button
+												id="userContainer.editUserDialog.update"
+												data-dojo-type="dijit.form.Button"
+												type="submit"
+												data-dojo-props="onClick:function(){ return dijit.byId('userContainer.editUserDialog').isValid(); }">Update
+											</button>
+											<button
+												id="userContainer.editUserDialog.cancel"
+												data-dojo-type="dijit.form.Button"
+												type="button"
+												data-dojo-props="onClick:function(){ dijit.byId('userContainer.editUserDialog').hide(); }">Cancel
+											</button>
+										</td>
+									</tr>
+								</table>
+							</div>
+
 							<!-- Search user button -->
 							<div
 								id="userContainer.searchUserButton"
@@ -356,7 +511,8 @@
 								src="/rest-sample/images/edit.png"
 								width="16" height="16" hspace="2" title="Edit"
 								style="float:right;"
-								onclick="createEditDialog();"/>
+								onclick="createEditDialog();"
+							/>
 							<img
 								src="/rest-sample/images/insert.png"
 								width="16" height="16" hspace="2" title="Insert"
@@ -368,7 +524,10 @@
 						<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center',layoutPriority:2,style:'border:1px solid #99CDFF;padding:5px;'">
 							<div id="userContainer.userGrid"></div>
 						</div>
-
+						<!-- User selection result -->
+						<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'bottom',layoutPriority:2,style:'border:1px solid #99CDFF;padding:5px;'">
+							<div id="userContainer.rowClickResult" class="results"></div>
+						</div>
 					</div>
 
 					<!-- 2.2 Groups container -->

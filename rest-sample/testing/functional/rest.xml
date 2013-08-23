@@ -162,9 +162,9 @@
           <con:jmsPropertyConfig/>
           <con:parameters/>
         </con:config>
-      </con:testStep><con:testStep type="httprequest" name="delete contact">
+      </con:testStep><con:testStep type="httprequest" name="delete user">
         <con:settings/>
-        <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete contact" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <con:config method="DELETE" xsi:type="con:HttpRequest" name="delete user" postQueryString="false" mediaType="application/json" downloadIncludedResources="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
