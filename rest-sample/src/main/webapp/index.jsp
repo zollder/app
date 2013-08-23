@@ -201,15 +201,16 @@
 								alert("something wrong happend")
 							}
 
-							var objStore = userDataStore.objectStore;
+							var objStore = userGrid.store.objectStore;
 
 							if (objStore.getIdentity(data) == data.primaryKey)
 								objStore.put(data);
 							else
 								objStore.add(data)
 
-							userDataStore.save();
-							userGrid.setStore(userDataStore);
+							userGrid.store.save();
+							userGrid.store.close();
+							userGrid.render();
 						},
 						function(error)
 						{
