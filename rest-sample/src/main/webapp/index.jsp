@@ -111,30 +111,50 @@
 						queryOptions: {},
 						selectionMode: "single",
 						structure: userGridStructure,
-						id: "primaryKey"
+						id: "primaryKey",
+						onRowDblClick: function(evt)
+						{
+							createEditDialog();
+						},
+						onSelectionChanged: function()
+						{
+							if (userGrid.canEdit() && userGrid.canDelete())
+							{
+								document["userContainer.deleteUserImg"].src = "/rest-sample/images/delete.png";
+								document["userContainer.editUserImg"].src = "/rest-sample/images/edit.png"
+							}
+							else
+							{
+								document["userContainer.deleteUserImg"].src = "/rest-sample/images/delete_Disabled.png";
+								document["userContainer.editUserImg"].src = "/rest-sample/images/edit_Disabled.png"
+							}
+						},
+						canEdit: function()
+						{
+							if (userGrid.selection.getSelectedCount() > 0)
+								return true;
+							else
+								return false;
+						},
+						canDelete: function()
+						{
+							if (userGrid.selection.getSelectedCount() > 0)
+								return true;
+							else
+								return false;
+						}
 					}, "userContainer.userGrid");
 
 					// render the table
 					userGrid.startup();
 
 					userGrid.on("RowClick",
-						function(evt)
+					function(evt)
 						{
 							var rowIndex = evt.rowIndex;
 							var rowData = userGrid.getItem(rowIndex);
 							document.getElementById("userContainer.rowClickResult").innerHTML = "You have clicked on " + rowData.firstName + ", " + rowData.lastName + ".";
 						}, true);
-
-					// invoke user edit dialog on double-click
-					userGrid.on
-					(
-						"RowDblClick",
-						function(evt)
-						{
-							createEditDialog();
-						},
-						true
-					);
 				});
 
 				// Attach the onsubmit event handler of the user insert form
@@ -301,7 +321,7 @@
 				closeDeleteDialog = function()
 				{
 					deleteUserDialog.hide();
-				}
+				};
 			});
 
 		</script>
@@ -501,20 +521,23 @@
 						</div>
 						<!-- User list (header with user-related menu items) -->
 						<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'top',layoutPriority:2,style:'border:1px solid #99CDFF;padding:5px;'">
-							<span id="userContainer.userListCount">Users List (0)</span>
+							<span id="userContainer.userListCount">Users List</span>
 							<img
-								src="/rest-sample/images/delete.png"
+								id="userContainer.deleteUserImg"
+								src="/rest-sample/images/delete_Disabled.png"
 								width="16" height="16" hspace="2" title="Delete"
 								style="float:right;"
 								onclick="createDeleteDialog();"
 							/>
 							<img
-								src="/rest-sample/images/edit.png"
+								id="userContainer.editUserImg"
+								src="/rest-sample/images/edit_Disabled.png"
 								width="16" height="16" hspace="2" title="Edit"
 								style="float:right;"
 								onclick="createEditDialog();"
 							/>
 							<img
+								id="userContainer.insertUserImg"
 								src="/rest-sample/images/insert.png"
 								width="16" height="16" hspace="2" title="Insert"
 								style="float:right;"
