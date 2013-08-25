@@ -95,10 +95,10 @@
 						{ name: "Last Name",	field: "lastName",		width: "100px" },
 						{ name: "Username",		field: "userName",		width: "100px" },
 						{ name: "password",		field: "password",		hidden: true },
-						{ name: "E-mail",		field: "email",			width: "100px" },
-						{ name: "isEnabled",	field: "isEnabled",		width: "100px" },
-						{ name: "canLogin",		field: "canLogin",		width: "100px" },
-						{ name: "isAdmin",		field: "isAdmin",		width: "100px" },
+						{ name: "E-mail",		field: "email",			width: "150px" },
+						{ name: "isEnabled",	field: "isEnabled",		width: "75px" },
+						{ name: "canLogin",		field: "canLogin",		width: "75px" },
+						{ name: "isAdmin",		field: "isAdmin",		width: "75px" },
 						{ name: "newPassword",	field: "newPassword",	hidden: true },
 						{ name: "confirmPassword", field: "confirmPassword", hidden: true }
 					];
@@ -106,12 +106,12 @@
 					// create user grid
 					userGrid = new DataGrid(
 					{
+						autoWidth: true,
 						store: userDataStore,
 						query: { id: "*" },
 						queryOptions: {},
 						selectionMode: "single",
 						structure: userGridStructure,
-						id: "primaryKey",
 						onRowDblClick: function(evt)
 						{
 							createEditDialog();
@@ -375,17 +375,6 @@
 						<!-- User search form container -->
 						<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'top',layoutPriority:1">
 
-							<!-- Insert user button -->
-							<button
-								id="userContainer.insertUserButton"
-								data-dojo-type="dijit.form.Button"
-								type="button">
-								<img src="/rest-sample/images/insert.png" width="16" height="16" />Insert
-								<script type="dojo/method" data-dojo-event="onClick" data-dojo-args="evt">
-									dijit.byId("userContainer.insertUserDialog").show();
-								</script>
-							</button>
-
 							<!-- Insert user dialog portion -->
 							<div
 								id="userContainer.insertUserDialog"
@@ -553,7 +542,9 @@
 							/>
 						</div>
 						<!-- User list (grid) -->
-						<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center',layoutPriority:2,style:'border:1px solid #99CDFF;padding:5px;'">
+						<div
+							data-dojo-type="dijit.layout.ContentPane"
+							data-dojo-props="region:'center',layoutPriority:2, style:'border:1px solid #99CDFF; padding:5px;'">
 							<div id="userContainer.userGrid"></div>
 						</div>
 						<!-- User selection result -->
@@ -616,7 +607,7 @@
 					</p>
 				</div>
 
-				<!-- Scheduler pane -->
+				<!-- Reports pane -->
 				<div data-dojo-type="dijit/layout/ContentPane" title="Reports &amp; Graphs">
 					<h4>Reports &amp; Graphs</h4>
 					<p>
