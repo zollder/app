@@ -158,20 +158,20 @@
 				});
 
 				// Attach the onsubmit event handler of the user insert form
-				on( dom.byId("userContainer.insertUserDialog.save"), "click",
+				on(dom.byId("userContainer.insertUserDialog.save"), "click",
 					function()
 					{
 						var userDialogData = 
 						{
 							"primaryKey" : "",
-							"firstName" : dom.byId("userContainer.insertUserDialog.firstName").value,
-							"lastName" : dom.byId("userContainer.insertUserDialog.lastName").value,
-							"userName" : dom.byId("userContainer.insertUserDialog.userName").value,
-							"password" : dom.byId("userContainer.insertUserDialog.password").value,
-							"email" : dom.byId("userContainer.insertUserDialog.email").value,
-							"isEnabled" : dom.byId("userContainer.insertUserDialog.isEnabled").value,
-							"canLogin" : dom.byId("userContainer.insertUserDialog.canLogin").value,
-							"isAdmin" : dom.byId("userContainer.insertUserDialog.isAdmin").value
+							"firstName" : registry.byId("userContainer.insertUserDialog.firstName").value,
+							"lastName" : registry.byId("userContainer.insertUserDialog.lastName").value,
+							"userName" : registry.byId("userContainer.insertUserDialog.userName").value,
+							"password" : registry.byId("userContainer.insertUserDialog.password").value,
+							"email" : registry.byId("userContainer.insertUserDialog.email").value,
+							"isEnabled" : getCheckboxValue(registry.byId("userContainer.insertUserDialog.isEnabled")),
+							"canLogin" : getCheckboxValue(registry.byId("userContainer.insertUserDialog.canLogin")),
+							"isAdmin" : getCheckboxValue(registry.byId("userContainer.insertUserDialog.isAdmin"))
 						};
 
 						// Post user data to the server
@@ -196,14 +196,14 @@
 				);
 
 				// Attach the onsubmit event handler of the user edit form
-				on( dom.byId("userContainer.editUserDialog.update"), "click",
+				on(dom.byId("userContainer.editUserDialog.update"), "click",
 					function()
 					{
 						var userDialogData = editUserDialog.getValues();
 						// checkboxes need special handling
-						userDialogData.isAdmin = userDialogData.isAdmin[0];
-						userDialogData.isEnabled = userDialogData.isEnabled[0];
-						userDialogData.canLogin = userDialogData.canLogin[0];
+						userDialogData.isAdmin = getCheckboxValue(registry.byId("editUserDialog.isAdmin"));
+						userDialogData.isEnabled = getCheckboxValue(registry.byId("editUserDialog.isEnabled"));
+						userDialogData.canLogin = getCheckboxValue(registry.byId("editUserDialog.canLogin"));
 
 						// Post user data to the server
 						var target = "user/" + userDialogData["primaryKey"];
@@ -265,9 +265,9 @@
 					editUserDialog.setValues(selectedTextboxValues);
 
 					// populating checkboxes requires special handling
-					dijit.byId('editUserDialog.isAdmin').set("checked", selectedRecord.isAdmin);
-					dijit.byId('editUserDialog.isEnabled').set("checked", selectedRecord.isEnabled);
-					dijit.byId('editUserDialog.canLogin').set("checked", selectedRecord.canLogin);
+					registry.byId('editUserDialog.isAdmin').set("checked", selectedRecord.isAdmin);
+					registry.byId('editUserDialog.isEnabled').set("checked", selectedRecord.isEnabled);
+					registry.byId('editUserDialog.canLogin').set("checked", selectedRecord.canLogin);
 
 					// open the dialog
 					editUserDialog.show();
@@ -321,6 +321,14 @@
 				closeDeleteDialog = function()
 				{
 					deleteUserDialog.hide();
+				};
+
+				getCheckboxValue = function(checkboxReference)
+				{
+					if (checkboxReference.get("checked"))
+						return "true";
+					else
+						return "false";
 				};
 			});
 
@@ -408,15 +416,15 @@
 									</tr>
 									<tr>
 										<td><label for="isEnabled">Is enabled: </label></td>
-										<td><input data-dojo-type="dijit.form.CheckBox" type="checkbox" name="isEnabled" value="true" id="userContainer.insertUserDialog.isEnabled"></td>
+										<td><input data-dojo-type="dijit.form.CheckBox" type="checkbox" value="true" checked name="isEnabled" id="userContainer.insertUserDialog.isEnabled"></td>
 									</tr>
 									<tr>
 										<td><label for="canLogin">Can login: </label></td>
-										<td><input data-dojo-type="dijit.form.CheckBox" type="checkbox" name="canLogin" value="true" id="userContainer.insertUserDialog.canLogin"></td>
+										<td><input data-dojo-type="dijit.form.CheckBox" type="checkbox" value="false" name="canLogin" id="userContainer.insertUserDialog.canLogin"></td>
 									</tr>
 									<tr>
 										<td><label for="isAdmin">Is admin: </label></td>
-										<td><input data-dojo-type="dijit.form.CheckBox" type="checkbox" name="isAdmin" value="true" id="userContainer.insertUserDialog.isAdmin"></td>
+										<td><input data-dojo-type="dijit.form.CheckBox" type="checkbox" value="false" name="isAdmin" id="userContainer.insertUserDialog.isAdmin"></td>
 									</tr>
 									<tr>
 										<td align="center" colspan="2">
