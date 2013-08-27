@@ -80,7 +80,6 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserDao> implemen
 	}
 
     // --------------------------------------------------------------------------------------------------------------------------------
-	@Override
 	@Transactional(readOnly = true)
 	public List<User> loadWithCriteria(UserCriteria criteria)
 	{

@@ -2,16 +2,26 @@ package com.app.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Example;
 import org.junit.Test;
 
 import com.app.dao.impl.UserDaoImpl;
+import com.app.domain.dto.UserCriteria;
 import com.app.domain.model.User;
 
 public class UserDaoImplTest
@@ -33,7 +43,7 @@ public class UserDaoImplTest
 	/** Verify findByUserName */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	@Test
-	public void verifyFindByUserName()
+	public void testFindByUserName()
 	{
 		final User userEntity = new User();
 		String userName = "testUsername";
@@ -50,5 +60,38 @@ public class UserDaoImplTest
 		when(mockQuery.uniqueResult()).thenReturn(userEntity);
 
 		assertEquals(userEntity, spiedUserInstance.findByUserName(userName));
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Verify findByCriteria */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@Test
+	public void testFindByCriteria()
+	{
+		final UserCriteria userCriteria = new UserCriteria();
+		String userName = "testUsername";
+		userCriteria.setUserName(userName);
+
+		final User userEntity = new User();
+		userEntity.setUserName(userName);
+
+		final List<User> userList = new ArrayList<User>();
+		userList.add(userEntity);
+
+		SessionFactory mockSessionFactory = mock(SessionFactory.class);
+		Session mockSession = mock(Session.class);
+		UserDaoImpl spiedUserInstance = spy(new UserDaoImpl(mockSessionFactory));
+		final Criteria mockCriteria = mock(Criteria.class);
+
+		when(spiedUserInstance.getModelClass()).thenReturn(User.class);
+		when(spiedUserInstance.getCurrentSession()).thenReturn(mockSession);
+		when(mockSession.createCriteria(User.class)).thenReturn(mockCriteria);
+		when(mockCriteria.add((Example) anyObject())).thenReturn(mockCriteria);
+		when (mockCriteria.list()).thenReturn(userList);
+
+		assertEquals(userList, spiedUserInstance.findByCriteria(userCriteria));
+		verify(spiedUserInstance, times(1)).findByExample(any(User.class));
+		verify(spiedUserInstance, times(1)).findByExample(any(User.class), any(Criteria.class));
+		verify(mockCriteria, times(1)).add((Criterion) anyObject());
 	}
 }

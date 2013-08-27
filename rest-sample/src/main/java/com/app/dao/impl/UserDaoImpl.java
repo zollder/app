@@ -34,9 +34,9 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao
 		// TODO: revise the code: use criteria approach
 		Session session = this.getCurrentSession();
 		User user = (User) session.createQuery("from User usr where usr.userName = ?").setString(0, username).uniqueResult();
+
 		return user;
 	}
-
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public List<User> findByCriteria(UserCriteria userCriteria)
@@ -51,8 +51,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao
 		userExample.setCanLogin(userCriteria.getCanLogin());
 
 		List<User> userList = this.findByExample(userExample);
+
 		return userList;
 	}
-
-	
 }

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -17,9 +18,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Example;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -39,7 +43,7 @@ public class AbstractDaoImplTest
 		instance.setModelClass(User.class);
 		assertEquals(User.class, instance.getModelClass());
 	}
-
+	
 	// --------------------------------------------------------------------------------------------------------------------------------
 	/** Verify the loadByPrimaryKey for an independent object */
 	// --------------------------------------------------------------------------------------------------------------------------------
@@ -92,6 +96,72 @@ public class AbstractDaoImplTest
 		verify(mockSession, times(1)).createQuery(any(String.class));
 		verify(mockQuery, times(1)).list();
 
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Verify findByExample with Example and Criteria passed as parameters */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@Test
+	public void testFindByExampleI()
+	{
+		Long primaryKey = Long.valueOf(123456L);
+		User example = new User();
+		example.setPrimaryKey(primaryKey);
+
+		final List<User> userList = new ArrayList<User>();
+		userList.add(example);
+
+		final Criteria mockCriteria = mock(Criteria.class);
+		
+		SessionFactory mockSessionFactory = mock(SessionFactory.class);
+		Session mockSession = mock(Session.class);
+		AbstractDaoImpl<User> spiedInstance = spy(new AbstractDaoImpl<User>(mockSessionFactory){});
+
+		when(mockSession.createCriteria(User.class)).thenReturn(mockCriteria);
+		when(mockCriteria.list()).thenReturn(userList);
+		when(mockCriteria.add((Example) anyObject())).thenReturn(mockCriteria);
+		when(spiedInstance.getCurrentSession()).thenReturn(mockSession);
+		when(spiedInstance.getModelClass()).thenReturn(User.class);
+
+		List<User> returnedList = spiedInstance.findByExample(example);
+
+		assertEquals(userList, returnedList);
+		assertTrue(returnedList.contains(example));
+
+		verify(spiedInstance, times(1)).prepareCriteria();
+		verify(mockCriteria, times(1)).add((Criterion) anyObject());
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/** Verify findByExample with Example and Criteria passed as parameters */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@Test
+	public void testFindByExampleII()
+	{
+		Long primaryKey = Long.valueOf(123456L);
+		User example = new User();
+		example.setPrimaryKey(primaryKey);
+
+		final List<User> userList = new ArrayList<User>();
+		userList.add(example);
+
+		final Criteria mockCriteria = mock(Criteria.class);
+		
+		SessionFactory mockSessionFactory = mock(SessionFactory.class);
+		Session mockSession = mock(Session.class);
+		AbstractDaoImpl<User> spiedInstance = spy(new AbstractDaoImpl<User>(mockSessionFactory){});
+
+		when(mockCriteria.list()).thenReturn(userList);
+		when(mockCriteria.add((Example) anyObject())).thenReturn(mockCriteria);
+		when(spiedInstance.getCurrentSession()).thenReturn(mockSession);
+		when(spiedInstance.getModelClass()).thenReturn(User.class);
+
+		List<User> returnedList = spiedInstance.findByExample(example, mockCriteria);
+
+		assertEquals(userList, returnedList);
+		assertTrue(returnedList.contains(example));
+
+		verify(mockCriteria, times(1)).add((Criterion) anyObject());
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
