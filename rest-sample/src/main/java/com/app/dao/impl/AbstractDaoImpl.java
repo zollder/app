@@ -3,8 +3,11 @@ package com.app.dao.impl;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
 
 import com.app.dao.AbstractDao;
 
@@ -42,6 +45,12 @@ public abstract class AbstractDaoImpl<T extends Serializable>  implements Abstra
 	{
 		return sessionFactory.getCurrentSession();
 	}
+	
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Criteria prepareCriteria()
+	{
+		return getCurrentSession().createCriteria(getModelClass());
+	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public T loadWithPrimaryKey(Long key)
@@ -62,6 +71,24 @@ public abstract class AbstractDaoImpl<T extends Serializable>  implements Abstra
 		List<T> entities = getCurrentSession().createQuery("from " + getModelClass().getName()).list();
 
 		return entities;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public List<T> findByExample(T example)
+	{
+		Criteria criteria = prepareCriteria();
+		List<T> list = findByExample(example, criteria); 
+		return list;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
+	public List<T> findByExample(T example, Criteria criteria)
+	{
+		Example exmpl = Example.create(example).excludeZeroes().ignoreCase().enableLike(MatchMode.ANYWHERE);
+		criteria = criteria.add(exmpl);
+		List<T> list = criteria.list();
+		return list;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------

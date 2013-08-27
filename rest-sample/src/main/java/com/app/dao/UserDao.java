@@ -1,5 +1,8 @@
 package com.app.dao;
 
+import java.util.List;
+
+import com.app.domain.dto.UserCriteria;
 import com.app.domain.model.User;
 
 public interface UserDao extends AbstractDao<User>
@@ -10,7 +13,7 @@ public interface UserDao extends AbstractDao<User>
 	public User findByUserName(String username);
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** TODO: revise to make it generic. Loads given User by criteria. Returns fetched User. */
+	/** Loads a collection of users by specified criteria. */
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public User findByCriteria(String username);
+	public List<User> findByCriteria(UserCriteria userCriteria);
 }

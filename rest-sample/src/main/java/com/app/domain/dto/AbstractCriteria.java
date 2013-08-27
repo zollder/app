@@ -13,8 +13,11 @@ public class AbstractCriteria implements Serializable
 	private Long[] primaryKey;
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	//setters & getters
-	// --------------------------------------------------------------------------------------------------------------------------------
+	public static boolean isTrue(Boolean theBigBoolean)
+	{
+		return theBigBoolean != null && theBigBoolean.booleanValue();
+	}
+
 	public Long[] getPrimaryKey()
 	{
 		return primaryKey;

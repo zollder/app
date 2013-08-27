@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.app.domain.dto.PasswordReset;
+import com.app.domain.dto.UserCriteria;
 import com.app.domain.model.User;
 import com.app.domain.services.UserService;
 
@@ -54,6 +55,20 @@ public class UserResource
 		User user = userService.loadWithUserName(username);
 
 		return user;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	/**
+	 * Retrieves the {@link User} resources matching the given user search criteria in JSON.
+	 */
+	// --------------------------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value = "/criteria", method = { RequestMethod.POST })
+	@ResponseBody
+	public List<User> loadWithCriteria(@RequestBody UserCriteria criteria)
+	{
+		List<User> userList = userService.loadWithCriteria(criteria);
+
+		return userList;
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------

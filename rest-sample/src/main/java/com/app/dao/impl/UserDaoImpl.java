@@ -1,14 +1,15 @@
 package com.app.dao.impl;
  
-import org.hibernate.Criteria;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.app.dao.UserDao;
+import com.app.domain.dto.UserCriteria;
 import com.app.domain.model.User;
 
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -36,16 +37,22 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao
 		return user;
 	}
 
-	// --------------------------------------------------------------------------------------------------------------------------------
-	// TODO: revise to make it generic
-	public User findByCriteria(String username)
-	{
-		Session session = this.getCurrentSession();
-		Criteria criteria = session.createCriteria(User.class);
-		criteria.add(Restrictions.eq("userName", username));
-		criteria.setMaxResults(1);
 
-		User user = (User) criteria.uniqueResult();
-		return user;
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public List<User> findByCriteria(UserCriteria userCriteria)
+	{
+		User userExample = new User();
+		userExample.setFirstName(userCriteria.getFirstName());
+		userExample.setLastName(userCriteria.getLastName());
+		userExample.setUserName(userCriteria.getUserName());
+		userExample.setEmail(userCriteria.getEmail());
+		userExample.setIsAdmin(userCriteria.getIsAdmin());
+		userExample.setIsEnabled(userCriteria.getIsEnabled());
+		userExample.setCanLogin(userCriteria.getCanLogin());
+
+		List<User> userList = this.findByExample(userExample);
+		return userList;
 	}
+
+	
 }
