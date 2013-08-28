@@ -73,8 +73,7 @@
 			{
 				parser.parse();	// manually invoke parser
 
-				var userGrid, userDataStore, deleteUserDialog, editUserDialog;
-				var mainLayout = this;
+				var userGrid, userDataStore, deleteUserDialog, editUserDialog, searchUserForm;
 
 				request.get("user/all",
 				{
@@ -195,6 +194,38 @@
 					}
 				);
 
+				createEditDialog = function()
+				{
+					var selectedRecord;
+
+					if (userGrid.selection.getSelectedCount() > 0)
+						selectedRecord = userGrid.selection.getSelected()[0];
+					else
+						return;
+
+					editUserDialog = registry.byId('userContainer.editUserDialog');
+
+					// populate the form with selected values
+					var selectedTextboxValues =
+					{
+						primaryKey: selectedRecord.primaryKey,
+						firstName: selectedRecord.firstName,
+						lastName: selectedRecord.lastName,
+						userName: selectedRecord.userName,
+						email: selectedRecord.email
+					};
+
+					editUserDialog.setValues(selectedTextboxValues);
+
+					// populating checkboxes requires special handling
+					registry.byId('editUserDialog.isAdmin').set("checked", selectedRecord.isAdmin);
+					registry.byId('editUserDialog.isEnabled').set("checked", selectedRecord.isEnabled);
+					registry.byId('editUserDialog.canLogin').set("checked", selectedRecord.canLogin);
+
+					// open the dialog
+					editUserDialog.show();
+				};
+
 				// Attach the onsubmit event handler of the user edit form
 				on(dom.byId("userContainer.editUserDialog.update"), "click",
 					function()
@@ -241,37 +272,6 @@
 					}
 				);
 
-				createEditDialog = function()
-				{
-					var selectedRecord;
-
-					if (userGrid.selection.getSelectedCount() > 0)
-						selectedRecord = userGrid.selection.getSelected()[0];
-					else
-						return;
-
-					editUserDialog = dijit.byId('userContainer.editUserDialog');
-
-					// populate the form with selected values
-					var selectedTextboxValues =
-					{
-						primaryKey: selectedRecord.primaryKey,
-						firstName: selectedRecord.firstName,
-						lastName: selectedRecord.lastName,
-						userName: selectedRecord.userName,
-						email: selectedRecord.email
-					};
-
-					editUserDialog.setValues(selectedTextboxValues);
-
-					// populating checkboxes requires special handling
-					registry.byId('editUserDialog.isAdmin').set("checked", selectedRecord.isAdmin);
-					registry.byId('editUserDialog.isEnabled').set("checked", selectedRecord.isEnabled);
-					registry.byId('editUserDialog.canLogin').set("checked", selectedRecord.canLogin);
-
-					// open the dialog
-					editUserDialog.show();
-				};
 
 				createDeleteDialog = function()
 				{
@@ -330,6 +330,40 @@
 					else
 						return "false";
 				};
+
+				// Attach the onsubmit event handler of the user edit form
+				on(dom.byId("searchUserForm.search"), "click",
+					function()
+					{
+						searchUserForm = registry.byId('userContainer.searchUserForm');
+						var userDialogData = searchUserForm.getValues();
+
+						// Post user data to the server
+						var target = "user/criteria";
+						request.post(target,
+						{
+							headers: { "Content-Type": 'application/json'},
+							handleAs : "json",
+							data : JSON.stringify(userDialogData)
+						}).then(
+						function(data)
+						{
+							var objectStore = new Memory({ data: data, idProperty: "primaryKey" });
+							userDataStore = new ObjectStore({ objectStore: objectStore});
+
+							userGrid.setStore(userDataStore);
+							userGrid.store.save();
+							userGrid.store.close();
+							userGrid.render();
+						},
+						function(error)
+						{
+							alert("Your dialog data cannot be sent, try again.");
+						},
+						function(evt)
+						{})
+					}
+				);
 			});
 
 		</script>
@@ -367,154 +401,38 @@
 					id="adminContainer"
 					class="centerPanel"
 					title="Administration"
-					data-dojo-type="dijit/layout/TabContainer"
+					data-dojo-type="dijit.layout.TabContainer"
 					data-dojo-props="region:'center', tabPosition:'top'">
 
 					<!-- 2.1 Users container -->
-					<div id = "userContainer" title="Users"	data-dojo-type="dijit/layout/BorderContainer">
+					<div id = "userContainer" title="Users"	data-dojo-type="dijit.layout.BorderContainer" class="userBorderContainer">
 						<!-- User search form container -->
 						<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'top',layoutPriority:1">
-
-							<!-- Insert user dialog portion -->
-							<div
-								id="userContainer.insertUserDialog"
-								data-dojo-type="dijit.Dialog"
-								title="Insert User"
-								execute="alert('submitted w/args:\n' + dojo.toJson(arguments[0], true));">
-
+							<!-- Search user form -->
+							<form
+								id="userContainer.searchUserForm"
+								data-dojo-type="dijit.form.Form"
+								action="process.php" method="get">
 								<table>
 									<tr>
 										<td><label for="firstName">First name: </label></td>
-										<td><input data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="firstName" id="userContainer.insertUserDialog.firstName"></td>
-									</tr>
-									<tr>
+										<td><input id="userSearchForm.firstName" data-dojo-type="dijit.form.TextBox" type="text"  name="firstName"></td>
 										<td><label for="lastName">Last name: </label></td>
-										<td><input data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="lastName" id="userContainer.insertUserDialog.lastName"></td>
+										<td><input id="userSearchForm.lastName" data-dojo-type="dijit.form.TextBox" type="text" name="lastName"></td>
 									</tr>
 									<tr>
 										<td><label for="userName">Username: </label></td>
-										<td><input data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="userName" id="userContainer.insertUserDialog.userName"></td>
-									</tr>
-									<tr>
-										<td><label for="password">Password: </label></td>
-										<td><input data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="password" id="userContainer.insertUserDialog.password"></td>
-									</tr>
-									<tr>
+										<td><input id="userSearchForm.userName" data-dojo-type="dijit.form.TextBox" type="text" name="userName"></td>
 										<td><label for="email">Email: </label></td>
-										<td><input data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="email" id="userContainer.insertUserDialog.email"></td>
-									</tr>
-									<tr>
-										<td><label for="isEnabled">Is enabled: </label></td>
-										<td><input data-dojo-type="dijit.form.CheckBox" type="checkbox" value="true" checked name="isEnabled" id="userContainer.insertUserDialog.isEnabled"></td>
-									</tr>
-									<tr>
-										<td><label for="canLogin">Can login: </label></td>
-										<td><input data-dojo-type="dijit.form.CheckBox" type="checkbox" value="false" name="canLogin" id="userContainer.insertUserDialog.canLogin"></td>
-									</tr>
-									<tr>
-										<td><label for="isAdmin">Is admin: </label></td>
-										<td><input data-dojo-type="dijit.form.CheckBox" type="checkbox" value="false" name="isAdmin" id="userContainer.insertUserDialog.isAdmin"></td>
-									</tr>
-									<tr>
-										<td align="center" colspan="2">
-											<button
-												id="userContainer.insertUserDialog.save"
-												data-dojo-type="dijit.form.Button"
-												type="submit"
-												data-dojo-props="onClick:function(){ return dijit.byId('userContainer.insertUserDialog').isValid(); }">Save
-											</button>
-											<button
-												id="userContainer.insertUserDialog.cancel"
-												data-dojo-type="dijit.form.Button"
-												type="button"
-												data-dojo-props="onClick:function(){ dijit.byId('userContainer.insertUserDialog').hide(); }">Cancel
+										<td><input id="userSearchForm.email" data-dojo-type="dijit.form.TextBox" type="text" name="email"></td>
+										<td rowspan="2" style="width:60px;text-align:left;">
+											<button id="searchUserForm.search" data-dojo-type="dijit.form.Button" type="button">
+												<img src="/rest-sample/images/search.png" width="16" height="16" />
 											</button>
 										</td>
 									</tr>
 								</table>
-							</div>
-
-							<!-- Edit user dialog portion -->
-							<div
-								id="userContainer.editUserDialog"
-								data-dojo-type="dijit.Dialog"
-								title="Edit User"
-								execute="alert('submitted w/args:\n' + dojo.toJson(arguments[0], true));">
-
-								<table>
-									<tr><td><input id="editUserDialog.primaryKey" data-dojo-type="dijit.form.TextBox" type="hidden" name="primaryKey"></td></tr>
-									<tr>
-										<td><label for="firstName">First name: </label></td>
-										<td><input id="editUserDialog.firstName" data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="firstName"></td>
-									</tr>
-									<tr>
-										<td><label for="lastName">Last name: </label></td>
-										<td><input id="editUserDialog.lastName" data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="lastName"></td>
-									</tr>
-									<tr>
-										<td><label for="userName">Username: </label></td>
-										<td><input id="editUserDialog.userName" data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="userName"></td>
-									</tr>
-									<tr>
-										<td><label for="email">Email: </label></td>
-										<td><input id="editUserDialog.email" data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="email"></td>
-									</tr>
-									<tr>
-										<td><label for="isEnabled">Is enabled: </label></td>
-										<td><input id="editUserDialog.isEnabled" data-dojo-type="dijit.form.CheckBox" type="checkbox" name="isEnabled" value="true"></td>
-									</tr>
-									<tr>
-										<td><label for="canLogin">Can login: </label></td>
-										<td><input id="editUserDialog.canLogin" data-dojo-type="dijit.form.CheckBox" type="checkbox" name="canLogin" value="true"></td>
-									</tr>
-									<tr>
-										<td><label for="isAdmin">Is admin: </label></td>
-										<td><input id="editUserDialog.isAdmin" data-dojo-type="dijit.form.CheckBox" type="checkbox" name="isAdmin" value="true"></td>
-									</tr>
-									<tr>
-										<td align="center" colspan="2">
-											<button
-												id="userContainer.editUserDialog.update"
-												data-dojo-type="dijit.form.Button"
-												type="submit"
-												data-dojo-props="onClick:function(){ return dijit.byId('userContainer.editUserDialog').isValid(); }">Update
-											</button>
-											<button
-												id="userContainer.editUserDialog.cancel"
-												data-dojo-type="dijit.form.Button"
-												type="button"
-												data-dojo-props="onClick:function(){ dijit.byId('userContainer.editUserDialog').hide(); }">Cancel
-											</button>
-										</td>
-									</tr>
-								</table>
-							</div>
-
-							<!-- Search user button -->
-							<div
-								id="userContainer.searchUserButton"
-								data-dojo-type="dijit/form/DropDownButton">
-								<!-- Button text-->
-								<span>Search</span>
-								<!-- The dialog portion -->
-								<div data-dojo-type="dijit/TooltipDialog" id="userContainer.searchUserDialog">
-									<label for="userContainer.userSearchForm.userCode" style="display:inline-block; width:100px;">Code:</label>
-									<div data-dojo-type="dijit/form/TextBox" id="userContainer.userSearchForm.userCode"></div>
-										<br />
-									<label for="userContainer.userSearchForm.userName" style="display:inline-block;width:100px;">Username:</label>
-									<div data-dojo-type="dijit/form/TextBox" id="userContainer.userSearchForm.userName"></div>
-										<br />
-									<label for="userContainer.userSearchForm.email" style="display:inline-block;width:100px;">Email:</label>
-									<div data-dojo-type="dijit/form/TextBox" id="userContainer.userSearchForm.email"></div>
-										<br />
-									<button
-										data-dojo-type="dijit/form/Button"
-										type="submit"
-										data-dojo-props="onClick:function(){alert('Searching ...')}">
-										Submit
-									</button>
-								</div>
-							</div>
+							</form>
 						</div>
 						<!-- User list (header with user-related menu items) -->
 						<div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'top',layoutPriority:2,style:'border:1px solid #99CDFF;padding:5px;'">
@@ -540,6 +458,119 @@
 								style="float:right;"
 								onclick=dijit.byId("userContainer.insertUserDialog").show();
 							/>
+						</div>
+						<!-- Insert user dialog portion -->
+						<div
+							id="userContainer.insertUserDialog"
+							data-dojo-type="dijit.Dialog"
+							title="Insert User"
+							execute="alert('submitted w/args:\n' + dojo.toJson(arguments[0], true));">
+
+							<table>
+								<tr>
+									<td><label for="firstName">First name: </label></td>
+									<td><input data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="firstName" id="userContainer.insertUserDialog.firstName"></td>
+								</tr>
+								<tr>
+									<td><label for="lastName">Last name: </label></td>
+									<td><input data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="lastName" id="userContainer.insertUserDialog.lastName"></td>
+								</tr>
+								<tr>
+									<td><label for="userName">Username: </label></td>
+									<td><input data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="userName" id="userContainer.insertUserDialog.userName"></td>
+								</tr>
+								<tr>
+									<td><label for="password">Password: </label></td>
+									<td><input data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="password" id="userContainer.insertUserDialog.password"></td>
+								</tr>
+								<tr>
+									<td><label for="email">Email: </label></td>
+									<td><input data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="email" id="userContainer.insertUserDialog.email"></td>
+								</tr>
+								<tr>
+									<td><label for="isEnabled">Is enabled: </label></td>
+									<td><input data-dojo-type="dijit.form.CheckBox" type="checkbox" value="true" checked name="isEnabled" id="userContainer.insertUserDialog.isEnabled"></td>
+								</tr>
+								<tr>
+									<td><label for="canLogin">Can login: </label></td>
+									<td><input data-dojo-type="dijit.form.CheckBox" type="checkbox" value="false" name="canLogin" id="userContainer.insertUserDialog.canLogin"></td>
+								</tr>
+								<tr>
+									<td><label for="isAdmin">Is admin: </label></td>
+									<td><input data-dojo-type="dijit.form.CheckBox" type="checkbox" value="false" name="isAdmin" id="userContainer.insertUserDialog.isAdmin"></td>
+								</tr>
+								<tr>
+									<td align="center" colspan="2">
+										<button
+											id="userContainer.insertUserDialog.save"
+											data-dojo-type="dijit.form.Button"
+											type="submit"
+											data-dojo-props="onClick:function(){ return dijit.byId('userContainer.insertUserDialog').isValid(); }">Save
+										</button>
+										<button
+											id="userContainer.insertUserDialog.cancel"
+											data-dojo-type="dijit.form.Button"
+											type="button"
+											data-dojo-props="onClick:function(){ dijit.byId('userContainer.insertUserDialog').hide(); }">Cancel
+										</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+
+						<!-- Edit user dialog portion -->
+						<div
+							id="userContainer.editUserDialog"
+							data-dojo-type="dijit.Dialog"
+							title="Edit User">
+
+							<table>
+								<tr><td><input id="editUserDialog.primaryKey" data-dojo-type="dijit.form.TextBox" type="hidden" name="primaryKey"></td></tr>
+								<tr>
+									<td><label for="firstName">First name: </label></td>
+									<td><input id="editUserDialog.firstName" data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="firstName"></td>
+								</tr>
+								<tr>
+									<td><label for="lastName">Last name: </label></td>
+									<td><input id="editUserDialog.lastName" data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="lastName"></td>
+								</tr>
+								<tr>
+									<td><label for="userName">Username: </label></td>
+									<td><input id="editUserDialog.userName" data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="userName"></td>
+								</tr>
+								<tr>
+									<td><label for="email">Email: </label></td>
+									<td><input id="editUserDialog.email" data-dojo-type="dijit.form.TextBox" type="text" data-dojo-props="required:true" name="email"></td>
+								</tr>
+								<tr>
+									<td><label for="isEnabled">Is enabled: </label></td>
+									<td><input id="editUserDialog.isEnabled" data-dojo-type="dijit.form.CheckBox" type="checkbox" name="isEnabled" value="true"></td>
+								</tr>
+								<tr>
+									<td><label for="canLogin">Can login: </label></td>
+									<td><input id="editUserDialog.canLogin" data-dojo-type="dijit.form.CheckBox" type="checkbox" name="canLogin" value="true"></td>
+								</tr>
+								<tr>
+									<td><label for="isAdmin">Is admin: </label></td>
+									<td><input id="editUserDialog.isAdmin" data-dojo-type="dijit.form.CheckBox" type="checkbox" name="isAdmin" value="true"></td>
+								</tr>
+								<tr>
+									<td align="center" colspan="2">
+										<button
+											id="userContainer.editUserDialog.update"
+											data-dojo-type="dijit.form.Button"
+											type="submit"
+											data-dojo-props="onClick:function(){ return dijit.byId('userContainer.editUserDialog').isValid(); }">Update
+										</button>
+										<button
+											id="userContainer.editUserDialog.cancel"
+											data-dojo-type="dijit.form.Button"
+											type="button"
+											data-dojo-props="onClick:function(){ dijit.byId('userContainer.editUserDialog').hide(); }">Cancel
+										</button>
+									</td>
+								</tr>
+							</table>
 						</div>
 						<!-- User list (grid) -->
 						<div
