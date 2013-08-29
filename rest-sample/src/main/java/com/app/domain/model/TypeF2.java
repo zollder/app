@@ -1,5 +1,5 @@
 package com.app.domain.model;
- 
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,23 +13,27 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.app.domain.model.enums.DimModeEnum;
+import com.app.domain.model.enums.LightModeEnum;
 import com.app.domain.model.enums.SwitchStatusEnum;
+import com.app.domain.model.enums.DeviceAutoModeEnum;
 import com.app.web.utils.Documentation;
 
+
+
 //--------------------------------------------------------------------------------------------------------------------------------
-/** Type-F entity. */
+/** Type-F2 entity. */
 //--------------------------------------------------------------------------------------------------------------------------------
 
 @Entity
-@Table(name="type_f")
-@XmlRootElement(name="type_f")
+@Table(name="type_f2")
+@XmlRootElement(name="type_f2")
 @XmlAccessorType(XmlAccessType.FIELD)
-@Documentation(caption = "Type-F device", comment = "Type-F device: device ceiling mount oBIX variables.")
-public class TypeF extends Device
+@Documentation(caption = "Type-F2 device", comment = "Type-F2 device: device ceiling mount oBIX variables.")
+public class TypeF2 extends Device
 {
 	// Default serial version ID
 	private static final long serialVersionUID = 1L;
-
+	
 	@Basic
 	@Column(name = "latchActive")
 	@Documentation(caption = "Latch status", comment = "Status of the latch: ( true= closed Relay , false= Open Relay ).")
@@ -107,20 +111,67 @@ public class TypeF extends Device
 	@XmlElement
 	private Boolean networkOn = Boolean.FALSE;
 	
+	@Basic
+	@Column(name = "switchStatus2")
+	@Enumerated(value = EnumType.STRING)
+	@Documentation(caption = " Second Switch status", comment = "Device switch status 2: Read/Write (refer to TypeFSwitchStatus enum definition for details).")
+	@NotNull
+	@XmlElement
+	private SwitchStatusEnum switchStatus2 = SwitchStatusEnum.OFF;
+	
+	@Basic
+	@Column(name = "latchActive2")
+	@Documentation(caption = "Second Relay status", comment = "Status of the relay latch 2: Read/Write ( true= closed Relay , false= Open Relay ).")
+	@NotNull
+	@XmlElement
+	private Boolean latchActive2 = Boolean.FALSE;
+	
+	@Basic
+	@Column(name = "offDelay2")
+	@Documentation(caption = "Turn-off delay2", comment = "Turn-off delay2: Read/Write ( Amount of Seconds with no movement before lights turn OFF, min= 0 , max= 65535).")
+	@XmlElement
+	private Integer offDelay2 = null;
+	
+	@Basic
+	@Column(name = "flickWarn2")
+	@Documentation(caption = "Flick warn second relay", comment = "Flick warn 2: Read/Write (Perform a flick warn by toggling the relay, true = enable , false = disable ).")
+	@XmlElement
+	private Boolean flickWarn2 = Boolean.FALSE;
+
+	@Basic
+	@Column(name = "flickReps2")
+	@Documentation(caption = "Flick repetitions second flick warn", comment = "Flick repetitions 2: Read/Write ( Counter for the FlickWarn, min= 0 , max= 65535 ).")
+	@XmlElement
+	private Integer flickReps2 = 2;
+	
+	@Basic
+	@Column( name = "autoMode2")
+	@Documentation( caption = "device mode", comment = "Auto mode 2: Read/Write (refer to the deviceAutoMode enum definition for details).")
+	@NotNull
+	@XmlElement
+	private DeviceAutoModeEnum autoMode2 = DeviceAutoModeEnum.MAN;
+	
+	@Basic
+	@Column( name = "lightMode")
+	@Documentation( caption = "Light mode", comment = "Light Mode: Read/Write (refer to the typeFLightModeEnum enum definition for details).")
+	@NotNull
+	@XmlElement
+	private LightModeEnum lightMode = LightModeEnum.CALI24;
+	
 	// --------------------------------------------------------------------------------------------------------------------------------
 	// Default constructor.
 	// --------------------------------------------------------------------------------------------------------------------------------
 
-	public TypeF(){}
-
+	public TypeF2(){}
+	
 	// --------------------------------------------------------------------------------------------------------------------------------
 	// Custom device constructor: initializes superclass values before persisting device type object.
 	// --------------------------------------------------------------------------------------------------------------------------------
-	public TypeF(Device device)
+	public TypeF2(Device device)
 	{
 		if (device.getPrimaryKey() != null)
 			this.setPrimaryKey(device.getPrimaryKey());
-
+		
 		this.setDevIp(device.getDevIp());
 		this.setDevMac(device.getDevMac());
 		this.setDevType(device.getDevType());
@@ -132,7 +183,6 @@ public class TypeF extends Device
 	// --------------------------------------------------------------------------------------------------------------------------------
 	// Setters & getters
 	// --------------------------------------------------------------------------------------------------------------------------------
-
 	public Boolean getLatchActive()
 	{
 		return latchActive;
@@ -142,7 +192,7 @@ public class TypeF extends Device
 	{
 		this.latchActive = latchActive;
 	}
-
+	
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public Integer getbPressLapse()
 	{
@@ -165,7 +215,6 @@ public class TypeF extends Device
 		this.flickWarn = flickWarn;
 	}
 
-
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public Integer getFlickReps()
 	{
@@ -176,7 +225,6 @@ public class TypeF extends Device
 	{
 		this.flickReps = flickReps;
 	}
-
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public Integer getOffDelay()
@@ -189,7 +237,6 @@ public class TypeF extends Device
 		this.offDelay = offDelay;
 	}
 
-
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public Integer getMotionMuteDelay()
 	{
@@ -200,7 +247,6 @@ public class TypeF extends Device
 	{
 		this.motionMuteDelay = motionMuteDelay;
 	}
-
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public Integer getDim()
@@ -213,7 +259,6 @@ public class TypeF extends Device
 		this.dim = dim;
 	}
 
-
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public Integer getDimMin()
 	{
@@ -224,7 +269,6 @@ public class TypeF extends Device
 	{
 		this.dimMin = dimMin;
 	}
-
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public DimModeEnum getDimMode()
@@ -237,7 +281,6 @@ public class TypeF extends Device
 		this.dimMode = dimMode;
 	}
 
-
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public Boolean getInput()
 	{
@@ -248,7 +291,6 @@ public class TypeF extends Device
 	{
 		this.input = input;
 	}
-
 
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public SwitchStatusEnum getSwitchStatus()
@@ -261,7 +303,6 @@ public class TypeF extends Device
 		this.switchStatus = switchStatus;
 	}
 
-
 	// --------------------------------------------------------------------------------------------------------------------------------
 	public Boolean getNetworkOn()
 	{
@@ -272,4 +313,82 @@ public class TypeF extends Device
 	{
 		this.networkOn = networkOn;
 	}
-}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public SwitchStatusEnum getSwitchStatus2()
+	{
+		return switchStatus2;
+	}
+
+	public void setSwitchStatus2(SwitchStatusEnum switchStatus2)
+	{
+		this.switchStatus2 = switchStatus2;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Boolean getLatchActive2()
+	{
+		return latchActive2;
+	}
+
+	public void setLatchActive2(Boolean latchActive2)
+	{
+		this.latchActive2 = latchActive2;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Integer getOffDelay2()
+	{
+		return offDelay2;
+	}
+
+	public void setOffDelay2(Integer offDelay2)
+	{
+		this.offDelay2 = offDelay2;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Boolean getFlickWarn2()
+	{
+		return flickWarn2;
+	}
+
+	public void setFlickWarn2(Boolean flickWarn2)
+	{
+		this.flickWarn2 = flickWarn2;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public Integer getFlickReps2()
+	{
+		return flickReps2;
+	}
+
+	public void setFlickReps2(Integer flickReps2)
+	{
+		this.flickReps2 = flickReps2;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public DeviceAutoModeEnum getAutoMode2()
+	{
+		return autoMode2;
+	}
+
+	public void setAutoMode2(DeviceAutoModeEnum autoMode2)
+	{
+		this.autoMode2 = autoMode2;
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public LightModeEnum getLightMode()
+	{
+		return lightMode;
+	}
+
+	public void setLightMode(LightModeEnum lightMode)
+	{
+		this.lightMode = lightMode;
+	}
+	
+}//END

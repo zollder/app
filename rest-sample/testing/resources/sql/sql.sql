@@ -35,6 +35,31 @@ CREATE  TABLE IF NOT EXISTS `type_f` (
   CONSTRAINT `fk_type_f` FOREIGN KEY (`primaryKey`) REFERENCES `device` (`primaryKey`)
 );
 
+DROP TABLE IF EXISTS `type_f2`;
+CREATE  TABLE IF NOT EXISTS `type_f2` (
+  primaryKey int(10) unsigned NOT NULL,
+  latchActive boolean default NULL,
+  bPressLapse int unsigned default NULL ,
+  flickWarn boolean default NULL,
+  flickReps int unsigned default NULL,
+  offDelay int unsigned default NULL,
+  motionMuteDelay int unsigned default NULL,
+  dim int unsigned default NULL,
+  dimMin int unsigned default NULL,
+  dimMode varchar(6) NOT NULL,
+  input boolean default NULL,
+  switchStatus varchar(4) NOT NULL,
+  networkOn boolean default NULL,
+  switchStatus2 varchar(4) NOT NULL,
+  latchActive2 boolean default NULL,
+  offDelay2 int unsigned default NULL,
+  flickWarn2 boolean default NULL,
+  flickReps2 int unsigned default NULL,
+  autoMode2 varchar(4) NOT NULL,
+  lightMode varchar(4) NOT NULL,
+  CONSTRAINT `fk_type_f2` FOREIGN KEY (`primaryKey`) REFERENCES `device` (`primaryKey`)
+);
+
 DROP TABLE IF EXISTS `type_g`;
 CREATE  TABLE IF NOT EXISTS `type_g` (
   primaryKey int(10) unsigned NOT NULL,
@@ -71,8 +96,7 @@ CREATE  TABLE IF NOT EXISTS `type_gm` (
 
 -- Need to update with new version of contacts--
 DROP TABLE IF EXISTS `contacts`;
-CREATE TABLE  `contacts`
-(
+CREATE TABLE  `contacts`(
   id int(10) unsigned NOT NULL AUTO_INCREMENT,
   name varchar(45) NOT NULL,
   address varchar(45) DEFAULT NULL,
@@ -90,8 +114,7 @@ VALUES (1,'John','6750 Des Moines','M','2013-08-07 9:00:00','admin@email.com','5
 
 -- need to update with new version of user--
 DROP TABLE IF EXISTS `user`;
-CREATE TABLE  `user`
-(
+CREATE TABLE  `user`(
   primaryKey int(10) unsigned NOT NULL AUTO_INCREMENT,
   firstName varchar(45) NOT NULL,
   lastName varchar(45) NOT NULL,
