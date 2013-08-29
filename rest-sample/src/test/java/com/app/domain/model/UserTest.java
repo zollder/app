@@ -15,7 +15,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class UserTest
+import com.app.domain.model.mocks.MockUser;
+
+public class UserTest extends BaseTest
 {
 	private static Validator validator;
 
@@ -54,7 +56,7 @@ public class UserTest
 
 		Set<ConstraintViolation<User>> constraintViolations = validator.validate(freshUser);
 
-		// Expects 15 constraint violations
+		// Expects 8 constraint violations
 		assertEquals(8, constraintViolations.size());
 	}
 
@@ -71,7 +73,7 @@ public class UserTest
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Verifies a User without primakyKey is accepted (decorated with @NotNull) */
+	/** Verifies a User without primakyKey is accepted. */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	@Test
 	public void testUserWithoutPrimaryKey()
@@ -86,7 +88,7 @@ public class UserTest
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
-	/** Verifies a User without firstName is rejected (decorated with @NotNull) */
+	/** Verifies a User without firstName is rejected (decorated with @NotNull). */
 	// --------------------------------------------------------------------------------------------------------------------------------
 	@Test
 	public void testUserWithoutFirstName()

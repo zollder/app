@@ -1,5 +1,6 @@
-package com.app.domain.model;
+package com.app.domain.model.mocks;
 
+import com.app.domain.model.User;
 import com.app.security.SecurityPasswordEncoderMock;
 
 public class MockUser extends User

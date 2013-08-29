@@ -1,5 +1,7 @@
 package com.app.domain.model;
  
+import java.util.HashMap;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.app.domain.model.enums.DeviceType;
 import com.app.domain.model.enums.GmModeEnum;
 import com.app.domain.model.enums.LedOffColorEnum;
 import com.app.domain.model.enums.LedOnColorEnum;
@@ -36,7 +39,7 @@ public class TypeGm extends Device
 	@Column(name = "latchActive")
 	@Documentation(caption = "Latch status", comment = "Status of the latch: 1(active), 0(inactive).")
 	@XmlElement
-	private Boolean latchActive = Boolean.FALSE;
+	private Boolean latchActive = null;
 
 	@Basic
 	@Column(name = "bPressLapse")
@@ -48,7 +51,7 @@ public class TypeGm extends Device
 	@Column(name = "flickWarn")
 	@Documentation(caption = "Flick warn", comment = "Flick warn (TODO: provide more details here).")
 	@XmlElement
-	private Boolean flickWarn = Boolean.FALSE;
+	private Boolean flickWarn = null;
 
 	@Basic
 	@Column(name = "flickReps")
@@ -119,7 +122,7 @@ public class TypeGm extends Device
 	@Column(name = "networkOn")
 	@Documentation(caption = "Network status", comment = "Status of the network device is connected to: 0(off), 1(on).")
 	@XmlElement
-	private Boolean networkOn = Boolean.FALSE;
+	private Boolean networkOn = null;
 
 	
 	// --------------------------------------------------------------------------------------------------------------------------------
@@ -141,7 +144,61 @@ public class TypeGm extends Device
 		this.setDevType(device.getDevType());
 		this.setDevName(device.getDevName());
 		this.setDevLocation(device.getDevLocation());
+		this.setFirmwareVersion(device.getFirmwareVersion());
 		this.setDevDescription(device.getDevDescription());
+	}
+
+	// --------------------------------------------------------------------------------------------------------------------------------
+	// Custom constructor: initializes super/sub class variables from HashMap (update parameters).
+	// --------------------------------------------------------------------------------------------------------------------------------
+	public TypeGm(HashMap<String,String> params)
+	{
+		String value ="";
+
+		// map {@link Device} mandatory fields
+		this.setPrimaryKey(Long.valueOf(params.get("primaryKey").toString()));
+		this.setDevIp(params.get("devIp"));
+		this.setDevMac(params.get("devMac"));
+		this.setDevType(DeviceType.valueOf(params.get("devType")));
+		this.setDevName(params.get("devName"));
+
+		// map {@link Device} optional fields
+		value = params.get("devLocation");
+		if (value != null && value != "")	this.setDevLocation(value);
+		value = params.get("firmwareVersion");
+		if (value != null && value != "")	this.setFirmwareVersion(value);
+		value = params.get("devDescription");
+		if (value != null && value != "")	this.setDevDescription(value);
+
+		// map {@link TypeF} optional fields
+		value = params.get("latchActive");
+		if (value != null && value != "")	this.setLatchActive(Boolean.valueOf(value));
+		value = params.get("bPressLapse");
+		if (value != null && value != "")	this.setbPressLapse(Integer.valueOf(value));
+		value = params.get("flickWarn");
+		if (value != null && value != "")	this.setFlickWarn(Boolean.valueOf(value));
+		value = params.get("flickReps"); 
+		if (value != null && value != "")	this.setFlickReps(Integer.valueOf(value));
+		value = params.get("ledOnColor"); 
+		if (value != null && value != "")	this.setLedOnColor(LedOnColorEnum.valueOf(value));
+		value = params.get("ledOffColor"); 
+		if (value != null && value != "")	this.setLedOffColor(LedOffColorEnum.valueOf(value));
+		value = params.get("pirSens");
+		if (value != null && value != "")	this.setPirSens(Integer.valueOf(value));
+		value = params.get("motionMuteDelay");
+		if (value != null && value != "")	this.setMotionMuteDelay(Integer.valueOf(value));
+		value = params.get("noMotionTime");
+		if (value != null && value != "")	this.setNoMotionTime(Integer.valueOf(value));
+		value = params.get("luminosity");
+		if (value != null && value != "")	this.setLuminosity(Integer.valueOf(value));
+		value = params.get("lumFactor");
+		if (value != null && value != "")	this.setLumFactor(Integer.valueOf(value));
+		value = params.get("mode");
+		if (value != null && value != "")	this.setMode(GmModeEnum.valueOf(value));
+		value = params.get("switchStatus"); 
+		if (value != null && value != "")	this.setSwitchStatus(SwitchStatusEnum.valueOf(value));
+		value = params.get("networkOn"); 
+		if (value != null && value != "")	this.setNetworkOn(Boolean.valueOf(value));
 	}
 
 	// --------------------------------------------------------------------------------------------------------------------------------
